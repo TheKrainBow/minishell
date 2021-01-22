@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/15 23:48:03 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/17 20:36:47 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	write(1, &c, 1);
-}
+	t_list	*temp;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	if (lst && f)
 	{
-		ft_putchar(*str);
-		str++;
+		temp = lst->next;
+		f(lst->content);
+		if (temp)
+		{
+			while (temp != NULL)
+			{
+				temp = lst->next;
+				f(lst->content);
+				lst = temp;
+			}
+		}
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
 }

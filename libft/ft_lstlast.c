@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/15 21:47:48 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/17 20:34:07 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

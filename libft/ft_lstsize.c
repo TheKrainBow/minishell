@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/15 21:42:51 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/16 14:27:48 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+int	ft_lstsize(t_list *lst)
 {
-	write(1, &c, 1);
-}
+	int		size;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	size = 0;
+	if (lst)
 	{
-		ft_putchar(*str);
-		str++;
+		while (lst)
+		{
+			size++;
+			lst = lst->next;
+		}
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	return (size);
 }

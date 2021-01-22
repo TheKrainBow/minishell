@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/05 01:58:13 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/22 19:12:37 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+char	*ft_strdup(const char *s1)
 {
-	write(1, &c, 1);
-}
+	int		size;
+	char	*dest;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	size = 0;
+	while (s1[size])
+		size++;
+	if (!(dest = malloc((size + 1) * sizeof(char))))
+		return (0);
+	size = 0;
+	while (s1[size])
 	{
-		ft_putchar(*str);
-		str++;
+		dest[size] = s1[size];
+		size++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	dest[size] = 0;
+	return (&dest[0]);
 }

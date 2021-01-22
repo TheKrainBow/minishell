@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/07 03:28:04 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/17 22:13:56 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-void	ft_putchar(char c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	write(1, &c, 1);
-}
+	unsigned char	*buffer;
+	size_t			i;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	i = 0;
+	if (!(buffer = (unsigned char *)malloc(count * size)))
+		return (0);
+	while (i < count * size)
 	{
-		ft_putchar(*str);
-		str++;
+		buffer[i] = 0;
+		i++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	return (buffer);
 }

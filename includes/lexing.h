@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2021/01/12 03:08:55 by magostin          #+#    #+#             */
+/*   Updated: 2021/01/22 12:05:33 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSING_H
+# define PARSING_H
+# define CHAR_WSPACE 1
+# define CHAR_SEMI 2
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+void		pars_line(char *str);
+int			lex_line(t_data *data, char *line);
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
-}
+#endif

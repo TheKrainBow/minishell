@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/07 02:11:23 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/11 06:05:59 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <string.h>
 
-void	ft_putchar(char c)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	write(1, &c, 1);
-}
+	size_t			i;
+	unsigned char	*temp1;
+	unsigned char	*temp2;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	if (n == 0)
+		return (0);
+	temp1 = (unsigned char *)s1;
+	temp2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
 	{
-		ft_putchar(*str);
-		str++;
+		if (temp1[i] != temp2[i])
+			return (temp1[i] - temp2[i]);
+		i++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	return (0);
 }

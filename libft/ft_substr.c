@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/05 03:03:14 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/17 22:52:10 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	write(1, &c, 1);
-}
+	char			*dest;
+	size_t			i;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	i = 0;
+	if (!s)
+		return (0);
+	if (start >= (unsigned int)ft_strlen(s))
+		return (ft_strdup(""));
+	if (!(dest = malloc((len + 1) * sizeof(char))))
+		return (0);
+	while (s[i] && i < len)
 	{
-		ft_putchar(*str);
-		str++;
+		dest[i] = s[start + i];
+		i++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	dest[i] = 0;
+	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 11:08:28 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:26:11 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include "get_next_line.h"
-# include "parsing.h"
+# include "struct.h"
+# include "lexing.h"
+# include "libft.h"
 
 #endif

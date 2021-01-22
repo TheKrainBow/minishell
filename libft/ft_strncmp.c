@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/14 01:06:09 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/18 21:26:01 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
-void	ft_putchar(char c)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	write(1, &c, 1);
-}
+	size_t i;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s2[i] && i < n - 1 && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

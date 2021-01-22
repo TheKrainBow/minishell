@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/15 21:51:33 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/17 20:35:31 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	write(1, &c, 1);
-}
+	t_list *maillon;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	if (!alst || !new)
+		return ;
+	maillon = *alst;
+	if (!maillon)
 	{
-		ft_putchar(*str);
-		str++;
+		*alst = new;
+		return ;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	while (maillon->next != NULL)
+		maillon = maillon->next;
+	maillon->next = new;
+	new->next = NULL;
 }

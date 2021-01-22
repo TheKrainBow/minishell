@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
+/*   Updated: 2021/01/22 12:05:37 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef STRUCT_H
+# define STRUCT_H
+
 #include "minishell.h"
 
-void	ft_putchar(char c)
+typedef struct	s_gram
 {
-	write(1, &c, 1);
-}
+	char		*c;
+	int			s;
+	int			c_type;
+}				t_gram;
 
-void	ft_putstr(char *str)
+typedef struct		s_data
 {
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
-}
+	t_gram			*lex_dict;
+}					t_data;
+#endif

@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/05 03:11:06 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/11 07:01:29 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	write(1, &c, 1);
-}
+	int		size;
+	int		i;
+	int		j;
+	char	*dest;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	size = 0;
+	if (s1)
+		size += ft_strlen(s1);
+	if (s2)
+		size += ft_strlen(s2);
+	if (!(dest = malloc((size + 1) * sizeof(char))))
+		return (0);
+	i = -1;
+	if (s1)
+		while (s1[++i])
+			dest[i] = s1[i];
+	j = -1;
+	if (s2)
+		while (s2[++j])
+			dest[i + j] = s2[j];
+	dest[i + j] = 0;
+	return (dest);
 }

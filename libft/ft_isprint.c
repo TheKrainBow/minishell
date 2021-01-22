@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 03:08:55 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 10:05:09 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/04 12:28:13 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/11 06:09:36 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-typedef struct	s_gram
+int		ft_isprint(int c)
 {
-	char		*c;
-	int			s;
-	int			c_type;
-}				t_gram;
-
-void		pars_line(char *str);
-
-#endif
+	return (c >= 32 && c < 127);
+}

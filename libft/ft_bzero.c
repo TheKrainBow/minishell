@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/07 01:36:36 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/11 04:45:06 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <string.h>
 
-void	ft_putchar(char c)
+void	ft_bzero(void *s, size_t n)
 {
-	write(1, &c, 1);
-}
+	int				i;
+	unsigned char	*temp;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	temp = s;
+	i = 0;
+	while (i < (int)n)
 	{
-		ft_putchar(*str);
-		str++;
+		temp[i] = 0;
+		i++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	s = temp;
 }

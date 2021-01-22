@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/04 22:32:33 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/07 02:48:00 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdio.h>
 
-void	ft_putchar(char c)
+char	*ft_strchr(const char *s, int c)
 {
-	write(1, &c, 1);
-}
+	int i;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	i = 0;
+	while (s[i] && s[i] != c)
 	{
-		ft_putchar(*str);
-		str++;
+		i++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	if (s[i] == c)
+		return ((char *)(&s[i]));
+	return (0);
 }

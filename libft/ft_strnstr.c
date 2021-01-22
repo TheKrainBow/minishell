@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 12:27:32 by magostin         ###   ########.fr       */
+/*   Created: 2019/11/04 13:30:03 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/22 19:04:53 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	write(1, &c, 1);
-}
+	size_t i;
+	size_t j;
 
-void	ft_putstr(char *str)
-{
-	while (str && *str)
+	i = 0;
+	if (needle[0] == 0)
+		return ((char *)&haystack[0]);
+	while (haystack[i] && i < len)
 	{
-		ft_putchar(*str);
-		str++;
+		j = 0;
+		while (needle[j] && haystack[i + j] == needle[j] && (i + j) < len)
+			j++;
+		if (needle[j] == 0)
+			return ((char *)&haystack[i]);
+		i++;
 	}
-}
-
-int		main(void)
-{
-	t_data		data;
-	static t_gram		dict[4] = {
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
-	data.lex_dict = dict;
-	lex_line(&data, NULL);
-	return (42);
+	return (0);
 }
