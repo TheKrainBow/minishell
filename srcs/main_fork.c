@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test_fork.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:07:23 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/22 11:09:22 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/24 18:36:36 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int		main(void)
 	if (!fork_return)
 	{
 		execve("/bin/ls", arg, __environ);
-		exit(1);
+		exit(5);
 	}
 	else
 		waitpid(fork_return, &ret, 0);
 	if (WIFEXITED(ret))
-		printf("%d\n", WEXITSTATUS(ret));
+		printf("%d %d\n", WEXITSTATUS(ret), WIFEXITED(ret));
 	else
 		printf("Fatal Error\n");
+	return (0);
 }
