@@ -1,6 +1,3 @@
-SRCS_GNL	=	srcs/get_next_line.c					\
-				srcs/get_next_line_utils.c				
-
 SRCS_UTILS	=	srcs/main.c
 
 SRCS_PARS	=	srcs/parsing.c							\
@@ -9,7 +6,7 @@ SRCS_PARS	=	srcs/parsing.c							\
 INCLUDES	=	-Iincludes								\
 				-Ilibft
 
-SRCS		=	$(SRCS_GNL) $(SRCS_UTILS) $(SRCS_PARS)
+SRCS		=	$(SRCS_UTILS) $(SRCS_PARS)
 OBJS		=	$(SRCS:.c=.o)
 
 CC			=	clang
@@ -27,11 +24,11 @@ FLAGS		=	-Wall -Werror -Wextra $(INCLUDES) -D BUFFER_SIZE=4096 -g
 $(NAME):		clear_screen start_message $(LIBFT) $(OBJS)
 				@if [ "$?" = "clear_screen start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B";else echo -n "\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B"; fi
 				@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
-				@echo "\033[2D\033[1;32m✓\033[3A\033[1D✓\033[3B"
+				@echo "\033[2D\033[1;32m✓\033[3A\033[1D✓\033[3B\033[0m"
 
 $(LIBFT):		
 				@make -s -C libft -f Makefile
-				@echo -n "\033[2A\033[2D\033[1;32m✓\033[1C\033[2B"
+				@echo -n "\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[0m"
 
 
 all:			$(NAME)

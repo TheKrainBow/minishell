@@ -6,13 +6,13 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 19:59:17 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/24 19:29:27 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/24 20:33:29 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(char *content)
+t_list	*ft_lstnew(void *content)
 {
 	t_list	*maillon;
 
