@@ -18,7 +18,7 @@ NAME		=	minishell
 
 LIBFT		=	libft/libft.a
 
-LD_FLAGS	=	-g -Llibft -lft
+LD_FLAGS	=	-g -fsanitize=address -Llibft -lft
 FLAGS		=	-Wall -Werror -Wextra $(INCLUDES) -D BUFFER_SIZE=4096 -g
 
 .c.o:

@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2019/11/27 20:16:03 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/24 19:28:54 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct			s_list
 {
-	void				*content;
+	char				*content;
 	struct s_list		*next;
 }						t_list;
 

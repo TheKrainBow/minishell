@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/24 18:37:37 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/24 19:32:50 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_putstr(char *str)
 	}
 }
 
+char	*ft_strndup(const char *str, int start, int n);
 int		main(void)
 {
 	t_data		data;
@@ -35,6 +36,6 @@ int		main(void)
 		{"\t", 1, CHAR_WSPACE}
 	};
 	data.lex_dict = dict;
-	lex_line(&data, NULL);
+	lex_line(&data, "TEST   SALUT; salut azjeazjeia ; aozek");
 	return (42);
 }
