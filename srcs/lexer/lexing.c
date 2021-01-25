@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:12:47 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/24 21:03:52 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/25 09:48:55 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ char	*ft_strndup(const char *str, int start, int n)
 
 int		lex_line(t_data *data, char *line)
 {
-	t_list		*splited_line;
-	t_list		*split_temp;
+	t_lex		*splited_line;
+	t_lex		*split_temp;
 	char		*temp;
 	int			i;
 	int			j;
@@ -63,27 +63,31 @@ int		lex_line(t_data *data, char *line)
 	while (line && line[++i])
 	{
 		ret = find_char_in_dict(data, line[i]);
-		if (ret != ret_temp)
+		if (ret != ret_temp || ret != -1)
 		{
-			ret_temp = ret;
-			temp = ft_strndup(line, j, i - j);
-			ft_lstadd_back(&splited_line, ft_lstnew(temp));
-			while (line[i] && (ret = find_char_in_dict(data, line[i])) == CHAR_WSPACE)
-				i++;
-			j = i;
+			if (data->lex_dict[ret_temp].c_type != CHAR_WSPACE)
+			{
+				temp = ft_strndup(line, j, i - j);
+				if (temp)
+					ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[ret_temp].c_type));
+				while (line[i] && (data->lex_dict[ret = find_char_in_dict(data, line[i])].c_type) == CHAR_WSPACE)
+					i++;
+				j = i;
+			}
 		}
+		ret_temp = ret;
 	}
 	if (j < (int)ft_strlen(line))
 	{
 		temp = ft_strndup(line, j, i - j);
-		ft_lstadd_back(&splited_line, ft_lstnew(temp));
+		ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[ret_temp].c_type));
 	}
 	while (splited_line)
 	{
-		printf("|%s|\n", splited_line->content);
+		printf("%d %d |%s|\n", splited_line->content.s, splited_line->content.c_type, splited_line->content.c);
 		split_temp = splited_line;
 		splited_line = splited_line->next;
-		free(split_temp->content);
+		free(split_temp->content.c);
 		free(split_temp);
 	}
 	return (1);

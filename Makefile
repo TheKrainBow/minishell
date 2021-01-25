@@ -1,12 +1,14 @@
 SRCS_UTILS	=	srcs/main.c
 
+SRCS_LEX	=	srcs/lexer/lexing.c							\
+				srcs/lexer/linked_list.c
+
 SRCS_PARS	=	srcs/parsing.c							\
-				srcs/lexing.c
 
 INCLUDES	=	-Iincludes								\
 				-Ilibft
 
-SRCS		=	$(SRCS_UTILS) $(SRCS_PARS)
+SRCS		=	$(SRCS_UTILS) $(SRCS_PARS) $(SRCS_LEX)
 OBJS		=	$(SRCS:.c=.o)
 
 CC			=	clang

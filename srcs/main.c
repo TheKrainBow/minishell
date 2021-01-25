@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/24 20:41:45 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/25 09:45:40 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*ft_strndup(const char *str, int start, int n);
 int		main(int ac, char **av)
 {
 	t_data		data;
-	static t_gram		dict[4] = {
+	static t_gram		dict[5] = {
+		{"|", 1, CHAR_PIPE},
 		{";", 1, CHAR_SEMI},
 		{" ", 1, CHAR_WSPACE},
 		{"\t", 1, CHAR_WSPACE}
@@ -39,5 +40,5 @@ int		main(int ac, char **av)
 	(void)ac;
 	data.lex_dict = dict;
 	lex_line(&data, av[1]);
-	return (42);
+	return (1);
 }
