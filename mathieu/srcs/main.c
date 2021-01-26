@@ -6,27 +6,13 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 16:52:09 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/26 18:33:22 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
 char	*ft_strndup(const char *str, int start, int n);
+
 int		main(void)
 {
 	t_data				data;
@@ -47,7 +33,7 @@ int		main(void)
 	line = NULL;
 	while (ret)
 	{
-		ft_putstr("Minishell >: ");
+		ft_putstr_fd("Minishell >: ", 1);
 		ret = get_next_line(0, &line);
 		lex_line(&data, line);
 		free(line);

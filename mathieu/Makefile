@@ -3,12 +3,10 @@ SRCS_UTILS	=	srcs/main.c
 SRCS_LEX	=	srcs/lexer/lexing.c							\
 				srcs/lexer/linked_list.c
 
-SRCS_PARS	=	srcs/parsing.c							\
-
 INCLUDES	=	-Iincludes								\
 				-Ilibft
 
-SRCS		=	$(SRCS_UTILS) $(SRCS_PARS) $(SRCS_LEX)
+SRCS		=	$(SRCS_UTILS) $(SRCS_LEX)
 OBJS		=	$(SRCS:.c=.o)
 
 CC			=	clang
@@ -24,13 +22,13 @@ FLAGS		=	-Wall -Werror -Wextra $(INCLUDES) -D BUFFER_SIZE=4096 -g
 				@$(CC) -c $< -o $(<:.c=.o) $(FLAGS)
 
 $(NAME):		clear_screen start_message $(LIBFT) $(OBJS)
-				@if [ "$?" = "clear_screen start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[0m";else echo -n "\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[0m"; fi
+				@if [ "$?" = "clear_screen start_message" ]; then echo -n "\033[2A\033[30C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1D\033[1B✓\033[26D\033[2B";else echo -n "\033[2A\033[25C\033[1;32m✓\033[26D\033[2B"; fi
 				@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
-				@echo "\033[2D\033[1;32m✓\033[3A\033[1D✓\033[3B\033[0m"
+				@echo "\033[1A\033[25C\033[1;32m✓\033[3A\033[1D✓\033[3B"
 
 $(LIBFT):		
 				@make -s -C libft -f Makefile
-				@echo -n "\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[0m"
+				@echo -n "\033[3A\033[25C\033[1;32m✓\033[26D\033[3B\033[0m"
 
 
 all:			$(NAME)
@@ -56,11 +54,11 @@ start_message:
 				@echo "\033[0;33mMaking \033[1;31mMinishell\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]"
 				@echo "\033[1;32mCompiling libft\t\t\033[1;30m[\033[1;31mX\033[1;30m]\t\033[0;32m"
 				@echo "\033[1;32mCompiling objects\t\033[1;30m[\033[1;31mX\033[1;30m]\t\033[0;32m"
-				@echo -n "\033[1;32mLinking all objects\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0;32m"
+				@echo "\033[1;32mLinking all objects\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0;32m"
 
 re:				fclean start_message $(LIBFT) $(OBJS)
-				@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B";else echo -n "\033[1A\033[2D\033[1;32m✓\033[1C\033[1B"; fi
+				@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B";else echo -n "\033[2A\033[25C\033[1;32m✓\033[26D\033[2B"; fi
 				@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
-				@echo "\033[2D\033[1;32m✓\033[3A\033[1D✓\033[3B"
+				@echo "\033[1A\033[25C\033[1;32m✓\033[3A\033[1D✓\033[3B"
 
 .PHONY:			all clean fclean re
