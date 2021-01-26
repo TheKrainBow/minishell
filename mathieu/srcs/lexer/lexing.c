@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:12:47 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 17:21:30 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:46:43 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int		lex_line(t_data *data, char *line)
 	int			i;
 	int			j;
 	int			ret;
-	//int			ret_temp;
 
 	i = -1;
 	j = 0;
