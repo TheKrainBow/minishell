@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_fork.c                                        :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 11:07:23 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/24 19:59:45 by magostin         ###   ########.fr       */
+/*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
+/*   Updated: 2021/01/25 09:24:17 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int		main(void)
-{
-	char	*arg[] = {"/bin/ls", "./", NULL};
-	pid_t	fork_return;
-	int		ret;
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include "libft.h"
+# include "get_next_line.h"
+# include "struct.h"
+# include "lexing.h"
 
-	fork_return = fork();
-	if (!fork_return)
-	{
-		execve("/bin/ls", arg, __environ);
-		exit(5);
-	}
-	else
-		waitpid(fork_return, &ret, 0);
-	if (WIFEXITED(ret))
-		printf("%d %d\n", WEXITSTATUS(ret), WIFEXITED(ret));
-	else
-		printf("Fatal Error\n");
-	return (0);
-}
+#endif

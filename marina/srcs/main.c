@@ -6,28 +6,14 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 16:52:09 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/26 18:10:06 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	while (str && *str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-
 char	*ft_strndup(const char *str, int start, int n);
-int		main(void)
+/*int		main(void)
 {
 	t_data				data;
 	static t_gram		dict[6] = {
@@ -53,4 +39,4 @@ int		main(void)
 		free(line);
 	}
 	return (1);
-}
+}*/

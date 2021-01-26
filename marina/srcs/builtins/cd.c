@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marina <marina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:23:43 by marina            #+#    #+#             */
-/*   Updated: 2021/01/26 17:14:08 by marina           ###   ########.fr       */
+/*   Updated: 2021/01/26 18:08:39 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 #include <stdlib.h>
 /*#include "../../includes/minishell.h"*/
 
-char		**ft_split(char const *s, char c)
-
-
+char		**ft_split(char const *s, char c);
 int	pwd(void)
 {
 	char	*path;
