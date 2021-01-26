@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 16:25:03 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:11:38 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct				s_lex
 typedef struct				s_data
 {
 	t_gram					*lex_dict;
+	int						dict_size;
 	t_list					*lexed_line;
+	int						ret_temp;
 	char					quote;
 }							t_data;
 

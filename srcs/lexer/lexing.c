@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:12:47 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 16:48:39 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:21:30 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,20 @@ int		find_char_in_dict(t_data *data, char c)
 	int		i;
 
 	i = -1;
-	while (++i < 3)
+	while (++i < data->dict_size)
 	{
 		if (c == data->lex_dict[i].c[0])
+		{
+			if ((data->lex_dict[i].c_type == CHAR_WQUOTE ||
+			data->lex_dict[i].c_type == CHAR_SQUOTE) && !data->quote)
+				data->quote = c;
+			else if (c == data->quote)
+			{
+				data->quote = 0;
+				return (-2);
+			}
 			return (i);
+		}
 	}
 	return (-1);
 }
@@ -54,34 +64,34 @@ int		lex_line(t_data *data, char *line)
 	int			i;
 	int			j;
 	int			ret;
-	int			ret_temp;
+	//int			ret_temp;
 
 	i = -1;
 	j = 0;
 	data->quote = 0;
 	splited_line = NULL;
-	ret_temp = -1;
+	data->ret_temp = -1;
 	while (line && line[++i])
 	{
 		ret = find_char_in_dict(data, line[i]);
-		if (ret != ret_temp || ret != -1)
+		if ((ret != data->ret_temp || ret != -1) && !data->quote && ret != -2)
 		{
-			if (data->lex_dict[ret_temp].c_type != CHAR_WSPACE)
+			if (data->lex_dict[data->ret_temp].c_type != CHAR_WSPACE)
 			{
 				temp = ft_strndup(line, j, i - j);
 				if (temp)
-					ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[ret_temp].c_type));
+					ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[data->ret_temp].c_type));
 				while (line[i] && (data->lex_dict[ret = find_char_in_dict(data, line[i])].c_type) == CHAR_WSPACE)
 					i++;
 				j = i;
 			}
 		}
-		ret_temp = ret;
+		data->ret_temp = ret;
 	}
 	if (j < (int)ft_strlen(line))
 	{
 		temp = ft_strndup(line, j, i - j);
-		ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[ret_temp].c_type));
+		ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[data->ret_temp].c_type));
 	}
 	
 	while (splited_line)
