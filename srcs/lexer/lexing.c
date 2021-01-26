@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:12:47 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/25 09:48:55 by magostin         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:48:39 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		lex_line(t_data *data, char *line)
 
 	i = -1;
 	j = 0;
+	data->quote = 0;
 	splited_line = NULL;
 	ret_temp = -1;
 	while (line && line[++i])
@@ -82,6 +83,7 @@ int		lex_line(t_data *data, char *line)
 		temp = ft_strndup(line, j, i - j);
 		ft_lstadd_back_lexer(&splited_line, ft_lstnew_lexer(temp, (int)ft_strlen(temp), data->lex_dict[ret_temp].c_type));
 	}
+	
 	while (splited_line)
 	{
 		printf("%d %d |%s|\n", splited_line->content.s, splited_line->content.c_type, splited_line->content.c);

@@ -6,7 +6,7 @@ SRCS_TO		=	ft_atoi.c ft_itoa.c
 SRCS_MALLOC	=	ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_strmapi.c
 SRCS_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 SRCS_GNL	=	get_next_line.c get_next_line_utils.c
-SRCS		=	${SRCS_MEM} ${SRCS_STR} ${SRCS_PUTFD} ${SRCS_IS} ${SRCS_TO} ${SRCS_MALLOC} ${SRCS_BONUS}
+SRCS		=	${SRCS_MEM} ${SRCS_STR} ${SRCS_PUTFD} ${SRCS_IS} ${SRCS_TO} ${SRCS_MALLOC} ${SRCS_BONUS} ${SRCS_GNL}
 
 OBJS	=	${SRCS:.c=.o}
 

@@ -24,7 +24,7 @@ FLAGS		=	-Wall -Werror -Wextra $(INCLUDES) -D BUFFER_SIZE=4096 -g
 				@$(CC) -c $< -o $(<:.c=.o) $(FLAGS)
 
 $(NAME):		clear_screen start_message $(LIBFT) $(OBJS)
-				@if [ "$?" = "clear_screen start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B";else echo -n "\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B"; fi
+				@if [ "$?" = "clear_screen start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[0m";else echo -n "\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[0m"; fi
 				@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
 				@echo "\033[2D\033[1;32m✓\033[3A\033[1D✓\033[3B\033[0m"
 
