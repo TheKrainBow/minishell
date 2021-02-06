@@ -6,7 +6,7 @@
 /*   By: marina <marina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:23:43 by marina            #+#    #+#             */
-/*   Updated: 2021/01/26 21:37:03 by marina           ###   ########.fr       */
+/*   Updated: 2021/02/07 00:27:01 by marina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*dequote(char *arg, int first, int second)
 	free (arg);
 	return (new);
 }
-
+/*
 char	*quote_bin(char *arg)
 {
 	int		i;
@@ -87,6 +87,65 @@ char	*quote_bin(char *arg)
 		arg = quote_bin(arg);
 	}
 	return (arg);
+}*/
+
+char	*remove_char(char *string, int *a, int *b)
+{
+	int		i;
+	char	*new;
+
+	if (!(new = malloc(sizeof(char) * (strlen(string) - 1))))
+		return (NULL);
+	i = 0;
+	while (string && string[i] && i < *a)
+	{
+		new[i] = string[i];
+		i++;
+	}
+	while (string && string[i] && i + 1 < *b)
+	{
+		new[i] = string[i + 1];
+		i++;
+	}
+	while (string && string[i])
+	{
+		new[i] = string[i + 2];
+		i++;
+	}
+	new[i] = '\0';
+	*a = -1;
+	*b -= 2;
+	return (new);
+}
+
+char	*quote_bin(char *path)
+{
+	int		weak;
+	int		strong;
+	int		i;
+
+	weak = -1;
+	strong = -1;
+	i = 0;
+	while (path && path[i])
+	{
+		if (path[i] == '\'' && weak == -1)
+		{
+			if (strong >= 0)
+				path = remove_char(path, &strong, &i);
+			else
+				strong = i;
+		}
+		else if (path[i] == '"' && strong == -1)
+		{
+			if (weak >= 0)
+				path = remove_char(path, &weak, &i);
+			else
+				weak = i;
+		}
+		i++;
+	}
+	return (path);
 }
 
 int	cd(/*t_data *data,*/char *arg)
@@ -94,15 +153,17 @@ int	cd(/*t_data *data,*/char *arg)
 	char	*path;
 
 	pwd();
+	printf("avant         = |%s|\n", arg);
 	path = quote_bin(arg);
-	printf("res quote_bin = %s\n", path);
+	printf("res quote_bin = |%s|\n", path);
 	printf("%d\n",chdir(path));
 	pwd();
+	return (0);
 }
 
 int	main(void)
 {
-	char	*arg = ".'./'l'exer'";
+	char	*arg = "'\"'../l'e\"'''x\"er'\"'";
 	char	*path;
 	int		i;
 
