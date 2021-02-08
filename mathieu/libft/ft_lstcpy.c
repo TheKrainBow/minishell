@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 18:12:16 by magostin         ###   ########.fr       */
+/*   Created: 2021/01/27 15:22:12 by magostin          #+#    #+#             */
+/*   Updated: 2021/02/08 16:32:47 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "libft.h"
-# include "struct.h"
-# include "get_next_line.h"
-# include "lexing.h"
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*dest;
+	t_list	*temp;
 
-#endif
+	dest = NULL;
+	while (lst)
+	{
+		if (!(temp = ft_lstnew(f(lst->content))))
+		{
+			ft_lstclear(&dest, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&dest, temp);
+		lst = lst->next;
+	}
+	return (dest);
+}

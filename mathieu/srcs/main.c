@@ -6,12 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 18:33:22 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/08 18:45:00 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-char	*ft_strndup(const char *str, int start, int n);
 
 int		main(void)
 {
@@ -24,11 +23,18 @@ int		main(void)
 		{" ", 1, CHAR_WSPACE},
 		{"\t", 1, CHAR_WSPACE}
 	};
-	char				*line;
-	int					ret;
+	/*char				*line;
+	int					ret;*/
 
 	data.dict_size = 6;
 	data.lex_dict = dict;
+	ft_malloc_env();
+	ft_export_env("toto", "5");
+	ft_export_env("tata", "5");
+	ft_print_env();
+	ft_unset_env("toto");
+	ft_print_env();
+	/*
 	ret = 1;
 	line = NULL;
 	while (ret)
@@ -37,6 +43,7 @@ int		main(void)
 		ret = get_next_line(0, &line);
 		lex_line(&data, line);
 		free(line);
-	}
-	return (1);
+	}*/
+	ft_free_env();
+	exit (1);
 }

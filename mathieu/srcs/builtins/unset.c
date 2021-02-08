@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 18:11:58 by magostin         ###   ########.fr       */
+/*   Created: 2021/02/08 18:33:10 by magostin          #+#    #+#             */
+/*   Updated: 2021/02/08 18:43:04 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
-
 #include "minishell.h"
 
-typedef struct				s_gram
+void	ft_delete_env(int index)
 {
-	char					*c;
-	int						s;
-	int						c_type;
-}							t_gram;
+	int		i;
+	int		j;
+	char	**new_env;
 
-typedef struct				s_lex
+	if (!(new_env = malloc(sizeof(char *) * (ft_env_size()))))
+		return ;
+	i = -1;
+	j = 0;
+	while (__environ[++i])
+	{
+		if (i != index)
+			new_env[i - j] = ft_strdup(__environ[i]);
+		else
+			j++;
+	}
+	new_env[i - j] = NULL;
+	__environ = new_env;
+}
+
+int		ft_unset_env(char *name)
 {
-	t_gram					content;
-	struct s_lex			*next;
-}							t_lex;
+	int		index;
 
-typedef struct				s_data
-{
-	t_gram					*lex_dict;
-	int						dict_size;
-	t_list					*lexed_line;
-	int						ret_temp;
-	char					quote;
-	char					**env;
-}							t_data;
-
-#endif
+	if ((index = ft_find_in_env(name)) != -1)
+		ft_delete_env(index);
+	return (0);
+}

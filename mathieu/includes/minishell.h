@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/25 09:24:17 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/08 17:04:41 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include "get_next_line.h"
 # include "struct.h"
 # include "lexing.h"
+# include "builtins.h"
 
 #endif
