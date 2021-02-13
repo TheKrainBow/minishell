@@ -3,7 +3,11 @@ SRCS_UTILS	=	srcs/main.c
 SRCS_LEX	=	srcs/lexer/lexing.c						\
 				srcs/lexer/linked_list.c
 
-SRCS_BUILTS	=	srcs/builtins/pwd.c
+SRCS_BUILTS	=	srcs/builtins/pwd.c						\
+				srcs/builtins/cd.c						\
+				srcs/builtins/echo.c					\
+				../mathieu/srcs/builtins/export.c		\
+				../mathieu/srcs/builtins/env.c
 
 INCLUDES	=	-Iincludes								\
 				-I../mathieu/libft

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 18:10:06 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 22:38:30 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../mathieu/includes/minishell.h"
 
 char	*ft_strndup(const char *str, int start, int n);
 /*int		main(void)
@@ -40,3 +40,27 @@ char	*ft_strndup(const char *str, int start, int n);
 	}
 	return (1);
 }*/
+
+int		echo(t_cmd *cmd);
+
+int		main(void)
+{
+	t_cmd	cmd;
+	char	*input;
+	int		i;
+
+	ft_malloc_env();
+	input = NULL;
+	get_next_line(0, &input);
+	cmd.args = ft_split(input, ' ');
+	free(input);
+	echo(&cmd);
+	i = 0;
+	while (cmd.args[i])
+	{
+		free(cmd.args[i]);
+		i++;
+	}
+	free(cmd.args);
+	return (0);
+}
