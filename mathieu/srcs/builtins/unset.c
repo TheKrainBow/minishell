@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 18:33:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 18:47:50 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:23:54 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,21 @@ void	ft_delete_env(int index)
 	__environ = new_env;
 }
 
-int		ft_unset_env(char *name)
+int		ft_unset_name(char *name)
 {
 	int		index;
 
 	if ((index = ft_find_in_env(name)) != -1)
 		ft_delete_env(index);
+	return (0);
+}
+
+int		ft_unset_env(t_cmd	*cmd)
+{
+	int			i;
+
+	i = 0;
+	while (cmd->args[++i])
+		ft_unset_name(cmd->args[i]);
 	return (0);
 }

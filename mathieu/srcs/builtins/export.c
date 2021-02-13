@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:18:34 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 18:33:27 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/12 20:01:35 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_add_to_env(char *name, char *value)
 	__environ = new_env;
 }
 
-int		ft_export_env(char *name, char *value)
+int		ft_export_name(char *name, char *value)
 {
 	int		index;
 
@@ -67,5 +67,24 @@ int		ft_export_env(char *name, char *value)
 	}
 	else
 		ft_add_to_env(name, value);
+	return (0);
+}
+
+int		ft_export_env(t_cmd *cmd)
+{
+	char		*name;
+	char		*value;
+	int			i;
+	char		*sep;
+
+	i = 0;
+	while (cmd->args[++i])
+	{
+		sep = ft_strchr(cmd->args[i], '=');
+		value = sep + 1;
+		*sep = 0;
+		name = cmd->args[i];
+		ft_export_name(name, value);
+	}
 	return (0);
 }
