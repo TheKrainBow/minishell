@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 17:01:52 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 21:55:45 by magostin         ###   ########.fr       */
+/*   Created: 2021/02/13 21:24:48 by magostin          #+#    #+#             */
+/*   Updated: 2021/02/13 21:25:17 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "libft.h"
 
-int		ft_print_env(void);
-int		ft_export_env(t_cmd *cmd, t_data *data);
-int		ft_env_size(void);
-void	ft_malloc_env(void);
-void	ft_free_env(void);
-int		ft_find_in_env(char *name);
-int		ft_unset_env(t_cmd *cmd, t_data *data);
-void	ft_update_path(t_data *data);
+int		ft_strcmp(const char *s1, const char *s2)
+{
+	size_t i;
 
-void	ft_execve(t_cmd *cmd, t_data *data);
-void	ft_cmd(t_cmd *cmd, t_data *data);
-
-#endif
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}

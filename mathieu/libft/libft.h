@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/24 20:33:45 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 21:26:14 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,7 @@ void					ft_lstclear(t_list **lst, void (*del)(void*));
 void					ft_lstiter(t_list *lst, void (*f)(void *));
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 void (*del)(void *));
+
+int						ft_strcmp(const char *s1, const char *s2);
+void					ft_free_split(char **strs);
 #endif

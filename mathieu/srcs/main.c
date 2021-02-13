@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 20:39:19 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 22:01:07 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ int		main(void)
 
 	data.dict_size = 6;
 	data.lex_dict = dict;
+	data.path = NULL;
 	ft_malloc_env();
+	ft_update_path(&data);
 	t_cmd		cmd;
 
-	cmd.args = ft_split("/binaze/ls", ' ');
-	ft_execve(&cmd);
+	cmd.args = ft_split("ls", ' ');
+	ft_cmd(&cmd, &data);
+	ft_free_split(cmd.args);
 	ret = 1;
 	line = NULL;
 	while (ret)

@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:18:34 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 20:38:49 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 21:59:15 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_export_name(char *name, char *value)
 	return (0);
 }
 
-int		ft_export_env(t_cmd *cmd)
+int		ft_export_env(t_cmd *cmd, t_data *data)
 {
 	char		*name;
 	char		*value;
@@ -86,5 +86,6 @@ int		ft_export_env(t_cmd *cmd)
 		name = cmd->args[i];
 		ft_export_name(name, value);
 	}
+	(void)data;
 	return (0);
 }
