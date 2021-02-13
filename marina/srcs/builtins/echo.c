@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:15 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/13 22:39:45 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/13 22:51:00 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,19 @@ char	*get_name(char *word, int *i)
 {
 	char	*name;
 	int		size;
+	int		save;
 
 	size = 1;
-	while (word[*i] && ft_isalnum(word[*i]))
+	(*i)++;
+	save = *i;
+	while (word && word[*i] && ft_isalnum(word[*i]))
 	{
 		size++;
 		*i = *i + 1;
 	}
-	if (!(name = malloc(sizeof(char) * size )))
+	if (!(name = malloc(sizeof(char) * size)))
 		return (NULL);
-	ft_strlcpy(name, &word[*i], size);
+	ft_strlcpy(name, &word[save], size);
 	return (name);
 }
 
@@ -55,9 +58,10 @@ void	print_var(char *word, int *i)
 	if (!(name = get_name(word, i)))
 		return ;
 	number = ft_find_in_env(name);
+	free(name);
 	if (number < 0)
 		return ;
-	content = ft_strchr(__environ[number], '=');
+	content = ft_strchr(__environ[number], '=') + 1;
 	printf("%s", content++);
 }
 
