@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:07:23 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/26 18:13:12 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:39:25 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int		main(void)
 {

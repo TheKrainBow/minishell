@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:12:47 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/10 15:54:15 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:38:57 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int		find_char_in_dict(t_data *data, char c)
 {

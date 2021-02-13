@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 19:59:17 by magostin          #+#    #+#             */
-/*   Updated: 2021/01/25 09:38:47 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:39:00 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 
 void	ft_lstadd_back_lexer(t_lex **alst, t_lex *new)

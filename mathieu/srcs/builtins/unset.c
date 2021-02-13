@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 18:33:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/10 15:23:54 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:38:50 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_delete_env(int index)
 {

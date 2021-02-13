@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:18:34 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/12 20:01:35 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:38:49 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int		ft_find_in_env(char *name)
 {

@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/10 15:18:46 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:13:24 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct				s_data
 	t_list					*lexed_line;
 	int						ret_temp;
 	char					quote;
-	char					**env;
 }							t_data;
 
 #endif

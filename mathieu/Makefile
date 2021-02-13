@@ -12,7 +12,7 @@ SRCS_LEX		=	srcs/lexer/lexing.c						\
 INCLUDES		=	-Iincludes								\
 					-Ilibft
 
-SRCS			=	$(SRCS_UTILS) $(SRCS_LEX) $(SRCS_BUILTINS)
+SRCS			=	$(SRCS_UTILS) $(SRCS_LEX) $(SRCS_BUILTINS) $(SRCS_EXECVE)
 OBJS			=	$(SRCS:.c=.o)
 
 CC				=	clang

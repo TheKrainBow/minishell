@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:43:55 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 18:31:29 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:38:47 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int		ft_env_size(void)
 {

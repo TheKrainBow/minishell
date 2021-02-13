@@ -6,11 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/12 20:02:20 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:39:19 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int		main(void)
 {
@@ -31,9 +31,8 @@ int		main(void)
 	ft_malloc_env();
 	t_cmd		cmd;
 
-	cmd.args = ft_split("export toto=5 tata=7 titi=0", ' ');
-	ft_export_env(&cmd);
-	ft_print_env();
+	cmd.args = ft_split("/binaze/ls", ' ');
+	ft_execve(&cmd);
 	ret = 1;
 	line = NULL;
 	while (ret)

@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 17:04:41 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 20:27:23 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdlib.h>
+# include <dirent.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include "libft.h"
