@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 17:01:52 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/12 19:40:17 by magostin         ###   ########.fr       */
+/*   Created: 2021/02/12 19:36:14 by magostin          #+#    #+#             */
+/*   Updated: 2021/02/12 19:39:52 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-int		ft_print_env(void);
-int		ft_export_env(t_cmd *cmd);
-int		ft_env_size(void);
-void	ft_malloc_env(void);
-void	ft_free_env(void);
-int		ft_find_in_env(char *name);
-int		ft_unset_env(t_cmd *cmd);
+void		ft_execve(t_cmd *cmd)
+{
+	pid_t	fork_return;
+	int		ret;
 
-void		ft_execve(t_cmd *cmd);
-
-#endif
+	fork_return = fork();
+	if (!fork_return)
+	{
+		execve(cmd->args[0], cmd->args, __environ);
+		exit(5);
+	}
+	else
+		waitpid(fork_return, &ret, 0);
+	if (WIFEXITED(ret))
+		printf("%d %d\n", WEXITSTATUS(ret), WIFEXITED(ret));
+	else
+		printf("Fatal Error\n");
+}

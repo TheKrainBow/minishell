@@ -2,7 +2,9 @@ SRCS_UTILS		=	srcs/main.c
 
 SRCS_BUILTINS	=	srcs/builtins/env.c						\
 					srcs/builtins/export.c					\
-					srcs/builtins/unset.c					
+					srcs/builtins/unset.c					\
+
+SRCS_EXECVE		=	srcs/execve/execve.c					
 
 SRCS_LEX		=	srcs/lexer/lexing.c						\
 					srcs/lexer/linked_list.c
@@ -55,14 +57,14 @@ fclean:				clean
 					$(RM) $(NAME)
 
 start_message:
-					@echo "\033[0;33mMaking \033[1;31mMinishell\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]"
-					@echo "\033[1;32mCompiling libft\t\t\033[1;30m[\033[1;31mX\033[1;30m]\t\033[0;32m"
-					@echo "\033[1;32mCompiling objects\t\033[1;30m[\033[1;31mX\033[1;30m]\t\033[0;32m"
-					@echo "\033[1;32mLinking all objects\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0;32m"
+					@echo "\033[0;33mMaking \033[1;31mMinishell\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
+					@echo "\033[1;32mCompiling libft\t\t\033[1;30m[\033[1;31mX\033[1;30m]\t\033[0;32m\033[0m"
+					@echo "\033[1;32mCompiling objects\t\033[1;30m[\033[1;31mX\033[1;30m]\t\033[0;32m\033[0m"
+					@echo "\033[1;32mLinking all objects\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0;32m\033[0m"
 
 re:					fclean start_message $(LIBFT) $(OBJS)
-					@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B";else echo -n "\033[2A\033[25C\033[1;32m✓\033[26D\033[2B"; fi
+					@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[3C\033[0;33mAlready done\033[15D\033[1B\033[2A\033[2D\033[1;32m✓\033[1C\033[2B\033[1A\033[2D\033[1;32m✓\033[1C\033[1B\033[0m";else echo -n "\033[2A\033[25C\033[1;32m✓\033[26D\033[2B\033[0m"; fi
 					@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
-					@echo "\033[1A\033[25C\033[1;32m✓\033[3A\033[1D✓\033[3B"
+					@echo "\033[1A\033[25C\033[1;32m✓\033[3A\033[1D✓\033[3B\033[0m"
 
 .PHONY:				all clean fclean re

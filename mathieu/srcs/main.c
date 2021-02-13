@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/08 18:45:00 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/12 20:02:20 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@ int		main(void)
 		{" ", 1, CHAR_WSPACE},
 		{"\t", 1, CHAR_WSPACE}
 	};
-	/*char				*line;
-	int					ret;*/
+	char				*line;
+	int					ret;
 
 	data.dict_size = 6;
 	data.lex_dict = dict;
 	ft_malloc_env();
-	ft_export_env("toto", "5");
-	ft_export_env("tata", "5");
+	t_cmd		cmd;
+
+	cmd.args = ft_split("export toto=5 tata=7 titi=0", ' ');
+	ft_export_env(&cmd);
 	ft_print_env();
-	ft_unset_env("toto");
-	ft_print_env();
-	/*
 	ret = 1;
 	line = NULL;
 	while (ret)
@@ -43,7 +42,7 @@ int		main(void)
 		ret = get_next_line(0, &line);
 		lex_line(&data, line);
 		free(line);
-	}*/
+	}
 	ft_free_env();
 	exit (1);
 }
