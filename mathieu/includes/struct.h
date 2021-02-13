@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 21:47:02 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 23:18:31 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct				s_data
 	int						ret_temp;
 	char					quote;
 	char					**path;
+	int						wexitstatus;
+	int						wifexited;
 }							t_data;
 
 #endif

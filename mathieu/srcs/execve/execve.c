@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:36:14 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 21:44:53 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 23:33:25 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,24 @@
 #include <dirent.h>
 #include <sys/types.h>
 
+void		ft_create_new_path(t_cmd *cmd, char *dir)
+{
+	char			*temp;
+
+	if (dir[ft_strlen(dir) - 1] != '/')
+	{
+		temp = ft_strjoin(dir, "/");
+		dir = temp;
+	}
+	temp = ft_strjoin(dir, cmd->args[0]);
+	free(cmd->args[0]);
+	cmd->args[0] = temp;
+}
 
 int			find_cmd_in_dir(t_cmd *cmd, char *dir)
 {
 	DIR				*directory;
 	struct dirent	*dp;
-	char			*temp;
 
 	directory = opendir(dir);
 	while ((dp = readdir(directory)) != NULL)
@@ -28,9 +40,7 @@ int			find_cmd_in_dir(t_cmd *cmd, char *dir)
 		{
 			if (!ft_strcmp(dp->d_name, cmd->args[0]))
 			{
-				temp = ft_strjoin(dir, cmd->args[0]);
-				free(cmd->args[0]);
-				cmd->args[0] = temp;
+				ft_create_new_path(cmd, dir);
 				closedir(directory);
 				return (1);
 			}
@@ -40,16 +50,30 @@ int			find_cmd_in_dir(t_cmd *cmd, char *dir)
 	return (0);
 }
 
-void		ft_find_in_path(t_cmd *cmd)
+int			ft_find_in_path(t_cmd *cmd, t_data *data)
 {
-	find_cmd_in_dir(cmd, "./");
-	(void)cmd;
+	int			i;
+
+	i = 0;
+	ft_update_path(data);
+	if (!find_cmd_in_dir(cmd, "./"))
+	{
+		while (data->path && data->path[i] && !find_cmd_in_dir(cmd, data->path[i]))
+			i++;
+		if (!data->path[i])
+		{
+			printf("Minishell: command not found: %s\n", cmd->args[0]);
+			return (1);
+		}
+	}
+	return (0);
 }
 
 void		ft_cmd(t_cmd *cmd, t_data *data)
 {
 	if (!(ft_strchr(cmd->args[0], '/')))
-		ft_find_in_path(cmd);
+		if (ft_find_in_path(cmd, data))
+			return ;
 	ft_execve(cmd, data);
 }
 
@@ -58,17 +82,15 @@ void		ft_execve(t_cmd *cmd, t_data *data)
 	pid_t	fork_return;
 	int		ret;
 
-	printf("%s\n", cmd->args[0]);
 	fork_return = fork();
 	if (!fork_return)
-	{
 		exit(execve(cmd->args[0], cmd->args, __environ) * -127);
-	}
 	else
 		waitpid(fork_return, &ret, 0);
-	if (WIFEXITED(ret))
-		printf("WEXITSTATUS=%d WIFEXITED=%d ret=%d\n", WEXITSTATUS(ret), WIFEXITED(ret), ret);
-	else
-		printf("Fatal Error\n");
-	(void)data;
+	if (!(WIFEXITED(ret)))
+		printf("execve crashed :(\n");
+	data->wexitstatus = WEXITSTATUS(ret);
+	if (data->wexitstatus == 127)
+		printf("Minishell: no such file or directory: %s\n", cmd->args[0]);
+	data->wifexited = WIFEXITED(ret);
 }

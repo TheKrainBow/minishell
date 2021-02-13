@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:18:34 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 21:59:15 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/13 22:55:32 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int		ft_export_env(t_cmd *cmd, t_data *data)
 		name = cmd->args[i];
 		ft_export_name(name, value);
 	}
-	(void)data;
+	ft_update_path(data);
 	return (0);
 }
