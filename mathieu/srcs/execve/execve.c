@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:36:14 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 23:33:25 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 20:56:15 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		ft_execve(t_cmd *cmd, t_data *data)
 	if (!(WIFEXITED(ret)))
 		printf("execve crashed :(\n");
 	data->wexitstatus = WEXITSTATUS(ret);
+	data->wifexited = WIFEXITED(ret);
 	if (data->wexitstatus == 127)
 		printf("Minishell: no such file or directory: %s\n", cmd->args[0]);
-	data->wifexited = WIFEXITED(ret);
 }

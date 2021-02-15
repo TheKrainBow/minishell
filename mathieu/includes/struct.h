@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 19:49:05 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 21:46:47 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 typedef struct				s_cmd
 {
 	char					**args;
-	int						piped;
-	struct s_cmd			*next;
 }							t_cmd;
 
 typedef struct				s_debug
@@ -31,7 +29,6 @@ typedef struct				s_debug
 typedef struct				s_data
 {
 	t_debug					db;
-
 	int						dict_size;
 	t_list					*lexed_line;
 	t_list					*parsed_line;
