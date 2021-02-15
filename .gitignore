@@ -4,3 +4,4 @@ minishell
 libft/libft.a
 .vscode
 .gitignore
+main.c
