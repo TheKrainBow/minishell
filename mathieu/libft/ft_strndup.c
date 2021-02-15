@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing.h                                           :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 03:08:55 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 16:31:20 by magostin         ###   ########.fr       */
+/*   Created: 2021/02/15 13:29:09 by magostin          #+#    #+#             */
+/*   Updated: 2021/02/15 13:50:02 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-# define CHAR_WSPACE 1
-# define CHAR_SEMI 2
-# define CHAR_PIPE 3
-# define CHAR_SQUOTE 4
-# define CHAR_WQUOTE 5
+#include "libft.h"
 
-void		lex_line(char *line, t_data *data);
-void		pars_line(t_data *data);
-void		ft_print_pars_line(t_data *data);
+char	*ft_strndup(char *str, int start, int len)
+{
+	int		i;
+	char	*dest;
 
-#endif
+	if (!str || start > (int)ft_strlen(str) || len < 0)
+		return (NULL);
+	if (!(dest = malloc(sizeof(char) * (ft_min(len, (int)ft_strlen(str)) + 1))))
+		return (NULL);
+	i = -1;
+	while (i < len && str[++i + start])
+		dest[i] = str[i + start];
+	dest[i] = 0;
+	return (dest);
+}

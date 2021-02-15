@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 20:27:23 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 14:07:04 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <stdio.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include "struct.h"

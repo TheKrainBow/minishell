@@ -6,8 +6,8 @@ SRCS_BUILTINS	=	srcs/builtins/env.c						\
 
 SRCS_EXECVE		=	srcs/execve/execve.c					
 
-SRCS_LEX		=	srcs/lexer/lexing.c						\
-					srcs/lexer/linked_list.c
+SRCS_LEX		=	srcs/lexer_parser/lexing.c				\
+					srcs/lexer_parser/parsing.c				\
 
 INCLUDES		=	-Iincludes								\
 					-Ilibft

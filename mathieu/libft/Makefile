@@ -4,11 +4,12 @@ SRCS_PUTFD	=	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 SRCS_IS		=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c
 SRCS_TO		=	ft_atoi.c ft_itoa.c
 SRCS_MALLOC	=	ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_strmapi.c
-SRCS_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_free_split.c ft_strcmp.c
+SRCS_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SRCS_EXTRA	=	ft_free_split.c ft_strcmp.c ft_print_tab.c ft_print_tab_fd.c ft_strs_to_tab.c ft_strndup.c ft_min.c ft_max.c ft_lstprint.c ft_lst_to_tab.c
 SRCS_GNL	=	get_next_line.c get_next_line_utils.c
-SRCS		=	${SRCS_MEM} ${SRCS_STR} ${SRCS_PUTFD} ${SRCS_IS} ${SRCS_TO} ${SRCS_MALLOC} ${SRCS_BONUS} ${SRCS_GNL}
+SRCS		=	$(SRCS_MEM) $(SRCS_STR) $(SRCS_PUTFD) $(SRCS_IS) $(SRCS_TO) $(SRCS_MALLOC) $(SRCS_BONUS) $(SRCS_GNL) $(SRCS_EXTRA)
 
-OBJS	=	${SRCS:.c=.o}
+OBJS	=	$(SRCS:.c=.o)
 
 CC		=	clang
 RM		=	rm -f
@@ -17,19 +18,19 @@ NAME	=	libft.a
 FLAGS	=	-Wall -Werror -Wextra
 
 .c.o:
-			${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+			$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
-${NAME}:	${OBJS}
-			@ar rc ${NAME} ${OBJS}
-			@ranlib ${NAME}
+$(NAME):	$(OBJS)
+			@ar rc $(NAME) $(OBJS)
+			@ranlib $(NAME)
 
-all:		${NAME}
+all:		$(NAME)
 
 clean:
-			${RM} ${OBJS}
+			$(RM) $(OBJS)
 
 fclean:		clean
-			${RM} ${NAME}
+			$(RM) $(NAME)
 
 re:			fclean all
 

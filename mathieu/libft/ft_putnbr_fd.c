@@ -6,12 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 05:32:47 by magostin          #+#    #+#             */
-/*   Updated: 2019/11/17 20:33:16 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 13:08:35 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "libft.h"
 
 static int	ft_pow(int a, int b)
 {
@@ -26,11 +25,6 @@ static int	ft_pow(int a, int b)
 	if (b == 0)
 		return (1);
 	return (a);
-}
-
-static void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
 }
 
 static void	ft_putnbr_fd2(int i, int n, int neg, int fd)

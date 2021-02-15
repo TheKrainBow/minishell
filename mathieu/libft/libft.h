@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 21:26:14 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 17:55:28 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <stdio.h>
 
 typedef struct			s_list
 {
@@ -79,4 +81,14 @@ void (*del)(void *));
 
 int						ft_strcmp(const char *s1, const char *s2);
 void					ft_free_split(char **strs);
+
+void					ft_print_tab(char **strs);
+void					ft_print_tab_fd(char **strs, int fd);
+char					**ft_strs_to_tab(int n, ...);
+int						ft_max(int a, int b);
+int						ft_min(int a, int b);
+char					*ft_strndup(char *str, int start, int len);
+void					ft_lstprint(t_list *lst);
+void					ft_lstprint_fd(t_list *lst, int fd);
+char					**ft_lst_to_tab(t_list *lst);
 #endif

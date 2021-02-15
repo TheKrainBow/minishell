@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 23:43:20 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 20:27:15 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,24 @@
 int		main(void)
 {
 	t_data				data;
-	static t_gram		dict[6] = {
-		{"\'", 1, CHAR_SQUOTE},
-		{"\"", 1, CHAR_WQUOTE},
-		{"|", 1, CHAR_PIPE},
-		{";", 1, CHAR_SEMI},
-		{" ", 1, CHAR_WSPACE},
-		{"\t", 1, CHAR_WSPACE}
-	};
 	char				*line;
 	int					ret;
 
-	data.dict_size = 6;
-	data.lex_dict = dict;
+	data.db.term1 = open("/dev/pts/1", O_RDWR);
+	data.db.term2 = open("/dev/pts/2", O_RDWR);
 	data.path = NULL;
 	ft_malloc_env();
-	t_cmd		cmd;
-
-	ft_unset_env(&cmd, &data);
 	ret = 1;
 	line = NULL;
 	while (ret)
 	{
 		ft_putstr_fd("Minishell >: ", 1);
 		ret = get_next_line(0, &line);
-		lex_line(&data, line);
+		lex_line(line, &data);
+		ft_putstr_fd("\033c\033[3J\033[0;33mLexed line:\033[0m\n", data.db.term2);
+		ft_lstprint_fd(data.lexed_line, data.db.term2);
+		pars_line(&data);
+		ft_print_pars_line(&data);
 		free(line);
 	}
 	ft_free_env();
