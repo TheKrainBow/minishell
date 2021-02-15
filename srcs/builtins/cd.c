@@ -6,17 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:26 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/15 22:18:48 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/16 00:06:11 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <dirent.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-/*#include "../../includes/minishell.h"*/
+#include "../../includes/minishell.h"
 
 char	*remove_char(char *string, int *a, int *b)
 {

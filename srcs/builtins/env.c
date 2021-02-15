@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:43:55 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 23:09:37 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/16 00:03:31 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_update_path(t_data *data)
 	char		*str;
 	int			index;
 
-	ft_free_split(data->path);
+	ft_free_tab(data->path);
 	index = ft_find_in_env("PATH");
 	if (index == -1)
 		return ;

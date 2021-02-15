@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:15 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/15 20:59:57 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/16 00:05:37 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <dirent.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../../../mathieu/includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int		ft_find_in_env(char *name);
 

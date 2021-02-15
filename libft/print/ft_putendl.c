@@ -6,11 +6,16 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 05:31:55 by magostin          #+#    #+#             */
-/*   Updated: 2019/11/14 23:05:20 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 23:44:48 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	ft_putendl(char *s)
+{
+	ft_putendl_fd(s, 1);
+}
 
 void	ft_putendl_fd(char *s, int fd)
 {

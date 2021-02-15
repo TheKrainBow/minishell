@@ -6,13 +6,11 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:46 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/15 22:02:07 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/16 00:05:20 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "../../includes/minishell.h"
 
 int	pwd(void)
 {

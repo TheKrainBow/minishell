@@ -13,7 +13,7 @@ SRCS_LEX		=	srcs/lexer_parser/lexing.c				\
 					srcs/lexer_parser/parsing.c				\
 
 INCLUDES		=	-Iincludes								\
-					-Ilibft
+					-Ilibft/includes
 
 SRCS			=	$(SRCS_UTILS) $(SRCS_LEX) $(SRCS_BUILTINS) $(SRCS_EXECVE)
 OBJS			=	$(SRCS:.c=.o)

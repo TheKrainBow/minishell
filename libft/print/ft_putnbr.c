@@ -6,11 +6,16 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 05:32:47 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 13:08:35 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/15 23:44:56 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	ft_putnbr(int n)
+{
+	ft_putnbr_fd(n, 1);
+}
 
 static int	ft_pow(int a, int b)
 {
