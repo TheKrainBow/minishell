@@ -6,13 +6,12 @@
 /*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 22:38:30 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/15 21:00:55 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../mathieu/includes/minishell.h"
 
-char	*ft_strndup(const char *str, int start, int n);
 /*int		main(void)
 {
 	t_data				data;
@@ -41,20 +40,22 @@ char	*ft_strndup(const char *str, int start, int n);
 	return (1);
 }*/
 
-int		echo(t_cmd *cmd);
+int		echo(t_cmd *cmd, t_data *data);
 
 int		main(void)
 {
+	t_data	data;
 	t_cmd	cmd;
 	char	*input;
 	int		i;
 
+	data.wexitstatus = 1234;
 	ft_malloc_env();
 	input = NULL;
 	get_next_line(0, &input);
 	cmd.args = ft_split(input, ' ');
 	free(input);
-	echo(&cmd);
+	echo(&cmd, &data);
 	i = 0;
 	while (cmd.args[i])
 	{
