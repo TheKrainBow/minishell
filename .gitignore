@@ -2,3 +2,5 @@
 minishell
 .git
 libft/libft.a
+.vscode
+.gitignore
