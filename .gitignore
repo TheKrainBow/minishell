@@ -5,3 +5,4 @@ libft/libft.a
 .vscode
 .gitignore
 main.c
+srcs/main.c
