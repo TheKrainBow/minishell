@@ -6,7 +6,7 @@
 /*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:15 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/13 23:38:46 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/15 20:59:57 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 #include "../../../mathieu/includes/minishell.h"
 
 int		ft_find_in_env(char *name);
+
+int		ft_option(char *word)
+{
+	int		i;
+
+	if (!word || word[0] != '-')
+		return (0);
+	i = 1;
+	while (word[i] && word[i] == 'n')
+		i++;
+	if (i > 1 && word[i] == '\0')
+		return (1);
+	return (0);
+}
 
 int		print_esc(char *word, int *i)
 {
@@ -51,12 +65,18 @@ char	*get_name(char *word, int *i)
 	return (name);
 }
 
-int		print_var(char *word, int *i)
+int		print_var(char *word, int *i, t_data *data)
 {
 	char	*name;
 	int		number;
 	char	*content;
 
+	if (word[*i + 1] && word[*i + 1] == '?')
+	{
+		printf("%d", data->wexitstatus);
+		(*i) += 2;
+		return (1);
+	}
 	if (!(name = get_name(word, i)))
 		return (0) ;
 	number = ft_find_in_env(name);
@@ -68,7 +88,7 @@ int		print_var(char *word, int *i)
 	return(ft_strlen(content));
 }
 
-int		printing(char *word)
+int		printing(char *word, t_data *data)
 {
 	int		strong;
 	int		i;
@@ -87,7 +107,7 @@ int		printing(char *word)
 			i++;
 		}
 		if (!strong && word[i] == '$')
-			printed += print_var(&word[i], &i);
+			printed += print_var(&word[i], &i, data);
 		if (!strong && word[i] == '"')
 			i++;
 		if (word[i])
@@ -100,21 +120,25 @@ int		printing(char *word)
 	return (printed);
 }
 
-int		echo(t_cmd *cmd)
+int		echo(t_cmd *cmd, t_data *data)
 {
 	int		i;
 	int		printed;
+	int		n;
 
+	n = 0;
 	i = 1;
-	if (!ft_strncmp(cmd->args[1], "-n", 3))
+	while (ft_option(cmd->args[i]))
 		i++;
+	if (i != 1)
+		n = 1;
 	while (cmd->args[i])
 	{
-		printed = printing(cmd->args[i]);
+		printed = printing(cmd->args[i], data);
 		if (cmd->args[++i] && printed)
 			printf(" ");
 	}
-	if (ft_strncmp(cmd->args[1], "-n", 3))
+	if (!n)
 		printf("\n");
 	return (0);
 }
