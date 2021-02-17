@@ -1,0 +1,8 @@
+Utilisation:
+
+int		fds[2];
+
+pipe(fds);
+
+Cette commande prends en paramètre un tableau de 2 int. Elle les rempplis de deux fd. Le côté Lecteur (fds[0]) et le côté écriture de la pipe (fds[0])
+Le nombre de caractère dans une pipe est limité à 65536.

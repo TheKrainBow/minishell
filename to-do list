@@ -1,0 +1,10 @@
+Redirections > et >>
+Exemple: cmd > 1 >> 2 > 3
+
+étape 1:
+open(1) open(2) open(3) (avec options correspondante)
+pipe(fd[2])
+dup2(1, pipe_in)
+fork()
+cmd + vider pipe dans 1 2 et 3 simultané				<= étape du parsing?
+close(1) close(2) close(3) close(fd[0]) close(fd[1]) close(dup2) (étape très importante, pour la syncro des deux process)
