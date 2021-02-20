@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/16 00:09:40 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:39:42 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		main(void)
 		pars_line(&data);
 		ft_print_pars_line(&data);
 		free(line);
+		ft_node(&data);
+		ft_free_list(data.parsed_line);
 	}
 	ft_free_env();
 	exit (1);

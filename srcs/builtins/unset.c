@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 18:33:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/13 22:55:38 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:15:44 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_unset_name(char *name)
 	return (0);
 }
 
-int		ft_unset_env(t_cmd	*cmd, t_data *data)
+void		ft_unset_env(t_cmd	*cmd, t_data *data)
 {
 	int			i;
 
@@ -52,5 +52,4 @@ int		ft_unset_env(t_cmd	*cmd, t_data *data)
 	while (cmd->args[++i])
 		ft_unset_name(cmd->args[i]);
 	ft_update_path(data);
-	return (0);
 }

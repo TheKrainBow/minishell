@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:36:14 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 23:15:25 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/20 23:05:59 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,14 @@ void		ft_execve(t_cmd *cmd, t_data *data)
 {
 	pid_t	fork_return;
 	int		ret;
+	int		exec_ret;
 
 	fork_return = fork();
 	if (!fork_return)
-		exit(execve(cmd->args[0], cmd->args, __environ) * -127);
+	{
+		exec_ret = execve(cmd->args[0], cmd->args, __environ) * -127;
+		exit(exec_ret);
+	}
 	else
 		waitpid(fork_return, &ret, 0);
 	if (!(WIFEXITED(ret)))

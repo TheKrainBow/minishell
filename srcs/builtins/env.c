@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:43:55 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/16 00:03:31 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:15:36 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ void	ft_malloc_env(void)
 	__environ = new_env;
 }
 
-int		ft_print_env(void)
+void		ft_print_env(t_cmd *cmd, t_data *data)
 {
 	int			i;
 
+	(void)cmd;
+	(void)data;
 	i = -1;
 	while (__environ[++i])
 		printf("%s\n", __environ[i]);
-	return (0);
 }

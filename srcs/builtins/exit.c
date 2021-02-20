@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 22:32:33 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/20 22:58:19 by magostin         ###   ########.fr       */
+/*   Created: 2021/02/20 22:44:00 by magostin          #+#    #+#             */
+/*   Updated: 2021/02/20 22:48:06 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../../includes/minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+void		ft_exit(t_cmd *cmd, t_data *data)
 {
-	int i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i] && s[i] != c)
-		i++;
-	if (s[i] == c)
-		return ((char *)(&s[i]));
-	return (NULL);
+	ft_free_list(data->parsed_line);
+	ft_free_tab(cmd->args);
+	ft_free_env();
+	exit (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:26 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/20 20:45:37 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:13:16 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ char	*quote_bin(char *path)
 	return (path);
 }
 
-void	cd(char *arg, t_data *data)
+void	cd(t_cmd *cmd, t_data *data)
 {
 	char	*path;
 
-	path = quote_bin(arg);
+	path = quote_bin(cmd->args[1]);
 	data->wexitstatus = chdir(path);
 }
 

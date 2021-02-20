@@ -7,11 +7,14 @@ SRCS_BUILTINS	=	srcs/builtins/env.c						\
 					srcs/builtins/echo.c					\
 					srcs/builtins/echo2.c					\
 					srcs/builtins/pwd.c						\
+					srcs/builtins/exit.c					\
 
 SRCS_EXECVE		=	srcs/execve/execve.c					
 
 SRCS_LEX		=	srcs/lexer_parser/lexing.c				\
 					srcs/lexer_parser/parsing.c				\
+					srcs/lexer_parser/node_to_function.c	\
+					srcs/lexer_parser/free_lists.c			\
 
 INCLUDES		=	-Iincludes								\
 					-Ilibft/includes
