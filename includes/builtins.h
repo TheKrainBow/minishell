@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:01:52 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 22:22:21 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/16 14:11:32 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	ft_update_path(t_data *data);
 void	ft_execve(t_cmd *cmd, t_data *data);
 void	ft_cmd(t_cmd *cmd, t_data *data);
 
-int		cd(/*t_data *data,*/char *arg);
-int		echo(t_cmd *cmd, t_data *data);
-int		pwd(void);
+void	pwd(t_data *data);
+void	cd(char *arg, t_data *data);
+void	echo(t_cmd *cmd, t_data *data);
+int		print_esc(char *word, int *i);
+char	*get_name(char *word, int *i);
+int		print_var(char *word, int *i, t_data *data);
 
 #endif
