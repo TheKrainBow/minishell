@@ -8,8 +8,7 @@ SRCS_BUILTINS	=	srcs/builtins/env.c						\
 					srcs/builtins/echo2.c					\
 					srcs/builtins/pwd.c						\
 					srcs/builtins/exit.c					\
-
-SRCS_EXECVE		=	srcs/execve/execve.c					
+					srcs/builtins/execve.c					\
 
 SRCS_LEX		=	srcs/lexer_parser/lexing.c				\
 					srcs/lexer_parser/parsing.c				\
@@ -19,7 +18,7 @@ SRCS_LEX		=	srcs/lexer_parser/lexing.c				\
 INCLUDES		=	-Iincludes								\
 					-Ilibft/includes
 
-SRCS			=	$(SRCS_UTILS) $(SRCS_LEX) $(SRCS_BUILTINS) $(SRCS_EXECVE)
+SRCS			=	$(SRCS_UTILS) $(SRCS_LEX) $(SRCS_BUILTINS)
 OBJS			=	$(SRCS:.c=.o)
 
 CC				=	clang
