@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:46 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/16 14:10:04 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/20 21:22:52 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pwd(t_data *data)
 
 	path = NULL;
 	if ((path = getcwd(NULL, 0)) == NULL)
-		return (-1);
+		return ;
 	printf("%s\n", path);
 	free(path);
 	data->wexitstatus = 0;

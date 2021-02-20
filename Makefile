@@ -5,6 +5,7 @@ SRCS_BUILTINS	=	srcs/builtins/env.c						\
 					srcs/builtins/unset.c					\
 					srcs/builtins/cd.c						\
 					srcs/builtins/echo.c					\
+					srcs/builtins/echo2.c					\
 					srcs/builtins/pwd.c						\
 
 SRCS_EXECVE		=	srcs/execve/execve.c					
