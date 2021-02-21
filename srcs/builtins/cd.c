@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:26 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/20 22:13:16 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/21 19:38:10 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,26 @@ char	*quote_bin(char *path)
 	return (path);
 }
 
+char	*get_path_in_env(void)
+{
+	int		index;
+	char	*path;
+
+	path = NULL;
+	index = ft_find_in_env("HOME");
+	if (index >= 0)
+		path = ft_strchr( __environ[index], '=') + 1;
+	return (path);
+}
+
 void	cd(t_cmd *cmd, t_data *data)
 {
 	char	*path;
 
-	path = quote_bin(cmd->args[1]);
+	if (cmd->args[1] && (cmd->args[1][0] != '~' || cmd->args[1][1]))
+		path = quote_bin(cmd->args[1]);
+	else
+		path = get_path_in_env();
 	data->wexitstatus = chdir(path);
 }
 
