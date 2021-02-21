@@ -6,7 +6,7 @@
 /*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:26 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/21 19:38:10 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/21 20:14:15 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,56 @@ char	*quote_bin(char *path)
 	return (path);
 }
 
-char	*get_path_in_env(void)
+char	*get_path_in_env(char *var)
 {
 	int		index;
 	char	*path;
 
 	path = NULL;
-	index = ft_find_in_env("HOME");
+	index = ft_find_in_env(var);
 	if (index >= 0)
 		path = ft_strchr( __environ[index], '=') + 1;
 	return (path);
+}
+
+void	env_update(char *path, t_data *data)
+{
+	
+	char	*oldpath;
+	t_cmd	env_update;
+	
+	oldpath = getcwd(NULL, 0);
+	if (!(env_update.args = malloc(sizeof(char*) * 3)))
+		return ;
+	env_update.args[1] = ft_strjoin("OLDPWD=", oldpath);
+	env_update.args[2] = NULL;
+	ft_export_env(&env_update, data);
+	free(oldpath);
+	data->wexitstatus = chdir(path);
+	//free(path);
+	path = getcwd(NULL, 0);
+	free(env_update.args[1]);
+	env_update.args[1] = ft_strjoin("PWD=", path);
+	//free (path);
+	ft_export_env(&env_update, data);
+	free(env_update.args[1]);
+	free(env_update.args);
 }
 
 void	cd(t_cmd *cmd, t_data *data)
 {
 	char	*path;
 
-	if (cmd->args[1] && (cmd->args[1][0] != '~' || cmd->args[1][1]))
+	if (cmd->args[1] && ft_strcmp("~", cmd->args[1]))
+	{
 		path = quote_bin(cmd->args[1]);
+		if (!ft_strcmp("-", path))
+		{
+			//free(path);
+			path = get_path_in_env("OLDPWD");
+		}
+	}
 	else
-		path = get_path_in_env();
-	data->wexitstatus = chdir(path);
+		path = get_path_in_env("HOME");
+	env_update(path, data);
 }
-
-/*tester comment se comporte chdir avec path = "~" et path = NULL;*/

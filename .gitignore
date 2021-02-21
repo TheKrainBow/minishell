@@ -6,3 +6,4 @@ libft/libft.a
 .gitignore
 main.c
 srcs/main.c
+test*
