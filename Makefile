@@ -1,4 +1,5 @@
-SRCS_UTILS		=	srcs/main.c
+SRCS_UTILS		=	srcs/main.c								\
+					srcs/experience1.c						\
 
 SRCS_BUILTINS	=	srcs/builtins/env.c						\
 					srcs/builtins/export.c					\

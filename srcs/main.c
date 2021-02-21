@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/20 22:39:42 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/21 22:51:09 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int		main(void)
 {
 	t_data				data;
-	char				*line;
-	int					ret;
+	//char				*line;
+	//int					ret;
 
 	data.db.term1 = open("/dev/pts/1", O_RDWR);
 	data.db.term2 = open("/dev/pts/2", O_RDWR);
 	data.path = NULL;
 	ft_malloc_env();
-	ret = 1;
+	/*ret = 1;
 	line = NULL;
 	while (ret)
 	{
@@ -36,7 +36,9 @@ int		main(void)
 		free(line);
 		ft_node(&data);
 		ft_free_list(data.parsed_line);
-	}
+	}*/
+	
+	redirector(1, NULL);
 	ft_free_env();
 	exit (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 12:04:10 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 21:46:47 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/21 22:31:41 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,15 @@ typedef struct				s_data
 	int						wexitstatus;
 	int						wifexited;
 }							t_data;
+
+/*
+** type_open : '<', '>', '+' (= "">>""), '|'
+*/
+typedef struct		s_red
+{
+	char			*file_name;
+	char			type_open;
+	struct s_red	*next;
+}					t_red;
 
 #endif
