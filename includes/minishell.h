@@ -6,7 +6,7 @@
 /*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:47:00 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/21 22:31:22 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/22 20:08:26 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@
 # include "lexing.h"
 # include "builtins.h"
 
-void	redirector(int fd_default_output, t_red *outs);
+void	redirector(int fd_default_output, t_red *outs, t_data *data);
 
 #endif

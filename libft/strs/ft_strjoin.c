@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 03:11:06 by magostin          #+#    #+#             */
-/*   Updated: 2019/11/11 07:01:29 by magostin         ###   ########.fr       */
+/*   Updated: 2021/02/22 20:12:41 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s1)
 		while (s1[++i])
 			dest[i] = s1[i];
+	else
+		i = 0;
 	j = -1;
 	if (s2)
 		while (s2[++j])

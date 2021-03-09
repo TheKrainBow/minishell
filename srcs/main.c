@@ -6,7 +6,7 @@
 /*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/21 22:51:09 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/02/22 20:42:07 by mdelwaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int		main(void)
 	//char				*line;
 	//int					ret;
 
-	data.db.term1 = open("/dev/pts/1", O_RDWR);
-	data.db.term2 = open("/dev/pts/2", O_RDWR);
+	data.db.term1 = open("/dev/pts/0", O_RDWR);
+	data.db.term2 = open("/dev/pts/1", O_RDWR);
 	data.path = NULL;
 	ft_malloc_env();
 	/*ret = 1;
@@ -38,7 +38,7 @@ int		main(void)
 		ft_free_list(data.parsed_line);
 	}*/
 	
-	redirector(1, NULL);
+	redirector(1, NULL, &data);
 	ft_free_env();
 	exit (1);
 }
