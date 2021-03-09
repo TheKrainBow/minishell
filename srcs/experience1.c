@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   experience1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 19:41:14 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/22 20:43:58 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:25:36 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,17 @@ void	redirector(int fd_default_output, t_red *outs, t_data *data)
 	(void)outs;
 	string = NULL;
 	ret_child = dup2(fds[1], fd_default_output);
-	//ret_child = dup2(fds[1], copy_fd);
 	pid = fork();
 	//processus fils
 	if (!pid)
 	{
 		//lancer la fonction des builtins
+		dprintf(data->db.term2, "start printf\n");
 		printf("BLABLA :)");
+		dprintf(data->db.term2, "stop printf\n");
 		close(fds[0]);
 		close(fds[1]);
-		dprintf(data->db.term2, "fd closed\n");
+		dprintf(data->db.term2, "%d and %d closed\n", fds[0], fds[1]);
 		exit(1);
 	}
 	//processus pere
@@ -47,13 +48,9 @@ void	redirector(int fd_default_output, t_red *outs, t_data *data)
 			ret = read(fds[0], buf, 1);
 			buf[ret] = '\0';
 			string = ft_strjoin(string, buf);
-			dprintf(data->db.term2, "string = |%s|\n", string);
+			dprintf(data->db.term1, "s = |%s|\n", string);
 		}
-		//close(fds[0]);
-		close(ret_child);
-		printf("\nrecupere de la pipe : !%s!\n", string);
+		dprintf(data->db.term2, "\nrecupere de la pipe : !%s!\n", string);
 	}
-	printf("fin du processus %d\n", pid);
-//		waitpid(pid, &ret_child, 0);
-
+	dprintf(data->db.term2, "fin du processus %d\n", pid);
 }

@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 20:10:15 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/20 22:33:30 by magostin         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:36:38 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		printing(char *word, t_data *data)
 			i++;
 		if (word[i])
 		{
-			printf("%c", word[i]);
+			ft_putchar(word[i]);
 			printed++;
 			i++;
 		}
@@ -74,9 +74,9 @@ void	echo(t_cmd *cmd, t_data *data)
 	{
 		printed = printing(cmd->args[i], data);
 		if (cmd->args[++i] && printed)
-			printf(" ");
+			ft_putchar(' ');
 	}
 	if (!n)
-		printf("\n");
+		ft_putchar('\n');
 	data->wexitstatus = 0;
 }

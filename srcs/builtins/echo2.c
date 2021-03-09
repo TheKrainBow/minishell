@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:08:56 by mdelwaul          #+#    #+#             */
-/*   Updated: 2021/02/16 14:10:49 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:37:21 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		print_esc(char *word, int *i)
 {
 	if (word[*i + 1])
 	{
-		printf("%c", word[*i + 1]);
+		ft_putchar(word[*i + 1]);
 		*i += 2;
 		return (1);
 	}
@@ -51,7 +51,7 @@ int		print_var(char *word, int *i, t_data *data)
 
 	if (word[*i + 1] && word[*i + 1] == '?')
 	{
-		printf("%d", data->wexitstatus);
+		ft_putnbr(data->wexitstatus);
 		(*i) += 2;
 		return (1);
 	}
@@ -62,6 +62,6 @@ int		print_var(char *word, int *i, t_data *data)
 	if (number < 0)
 		return (0);
 	content = ft_strchr(__environ[number], '=') + 1;
-	printf("%s", content++);
+	ft_putstr(content++);
 	return(ft_strlen(content));
 }

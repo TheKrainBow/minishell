@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 03:11:06 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/22 20:12:41 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:01:54 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,16 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		size;
-	int		i;
-	int		j;
+	int		len_s1;
+	int		len_s2;
 	char	*dest;
 
-	size = 0;
-	if (s1)
-		size += ft_strlen(s1);
-	if (s2)
-		size += ft_strlen(s2);
-	if (!(dest = malloc((size + 1) * sizeof(char))))
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	if (!(dest = malloc((len_s1 + len_s2 + 1) * sizeof(char))))
 		return (0);
-	i = -1;
-	if (s1)
-		while (s1[++i])
-			dest[i] = s1[i];
-	else
-		i = 0;
-	j = -1;
-	if (s2)
-		while (s2[++j])
-			dest[i + j] = s2[j];
-	dest[i + j] = 0;
+	ft_strlcpy(dest, s1, len_s1 + 1);
+	ft_strlcpy(dest + len_s1, s2, len_s2 + 1);
+	dest[len_s1 + len_s2] = 0;
 	return (dest);
 }

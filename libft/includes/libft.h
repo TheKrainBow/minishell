@@ -6,7 +6,7 @@
 /*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/15 23:55:06 by magostin         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:35:45 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *s, int fd);
 void					ft_putendl_fd(char *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
+void					ft_putchar(char c);
+void					ft_putstr(char *s);
+void					ft_putendl(char *s);
+void					ft_putnbr(int n);
 
 t_list					*ft_lstnew(void *content);
 void					ft_lstadd_front(t_list **alst, t_list *new);

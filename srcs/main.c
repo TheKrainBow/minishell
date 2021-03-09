@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 02:10:59 by magostin          #+#    #+#             */
-/*   Updated: 2021/02/22 20:42:07 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2021/03/09 12:39:24 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 int		main(void)
 {
 	t_data				data;
-	//char				*line;
-	//int					ret;
+	char				*line;
+	int					ret;
 
-	data.db.term1 = open("/dev/pts/0", O_RDWR);
-	data.db.term2 = open("/dev/pts/1", O_RDWR);
+	data.db.term1 = open("/dev/pts/1", O_RDWR);
+	data.db.term2 = open("/dev/pts/2", O_RDWR);
 	data.path = NULL;
 	ft_malloc_env();
-	/*ret = 1;
+	ret = 1;
 	line = NULL;
 	while (ret)
 	{
-		ft_putstr_fd("Minishell >: ", 1);
+		ft_putstr_fd("\033[1;36mMinishell >:\033[0m ", 1);
 		ret = get_next_line(0, &line);
 		lex_line(line, &data);
 		ft_putstr_fd("\033c\033[3J\033[0;33mLexed line:\033[0m\n", data.db.term2);
@@ -36,9 +36,9 @@ int		main(void)
 		free(line);
 		ft_node(&data);
 		ft_free_list(data.parsed_line);
-	}*/
+	}
 	
-	redirector(1, NULL, &data);
+	//redirector(1, NULL, &data);
 	ft_free_env();
 	exit (1);
 }
