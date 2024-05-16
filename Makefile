@@ -21,7 +21,7 @@ $(NAME):		start_message $(OBJS)
 				$(CC) $(LD_FLAGS) $(FLAGS) $(OBJS) -o $(NAME)
 
 all:			$(NAME)
-
+ 
 bonus:			re
 
 clean:
