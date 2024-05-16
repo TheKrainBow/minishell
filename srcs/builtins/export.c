@@ -6,14 +6,14 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/16 15:56:43 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:35:26 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int 	ft_export(t_cmd *cmd)
+int	ft_export(t_cmd *cmd)
 {
-	(void)cmd;
+	printf("I'm %s!\n", cmd->name);
 	return (1);
 }

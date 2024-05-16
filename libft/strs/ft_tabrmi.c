@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strs_rmi.c                                      :+:      :+:    :+:   */
+/*   ft_tabrmi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 17:02:19 by magostin          #+#    #+#             */
-/*   Updated: 2021/06/25 13:40:40 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:54:02 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-char	**ft_strs_rmi(char **strs, int size, int index)
+char	**ft_tabrmi(char **strs, int index)
 {
 	char	**new_strs;
 	int		i;
 	int		j;
+	int		size;
 
-	new_strs = malloc((size) * sizeof(char *));
+	size = ft_tablen(strs);
+	new_strs = ft_calloc(size, sizeof(char *));
 	if (!(new_strs) || index < 0 || index > size)
 		return (NULL);
 	i = -1;

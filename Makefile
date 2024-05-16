@@ -4,6 +4,11 @@ SRCS_UTILS		=	main.c
 
 SRCS_BULTINS	=	cd.c									\
 					echo.c									\
+					env.c									\
+					exit.c									\
+					export.c								\
+					pwd.c									\
+					unset.c									\
 
 INCLUDES		=	-Iincludes								\
 					-Ilibft/includes

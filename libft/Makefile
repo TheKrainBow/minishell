@@ -64,7 +64,6 @@ SRCS_STRS	=	strs/ft_split.c							\
 				strs/ft_strndup.c						\
 				strs/ft_strnstr.c						\
 				strs/ft_strrchr.c						\
-				strs/ft_strs_rmi.c						\
 				strs/ft_strs_to_tab.c					\
 				strs/ft_strtrim.c						\
 				strs/ft_strtrunc.c						\
@@ -72,6 +71,8 @@ SRCS_STRS	=	strs/ft_split.c							\
 				strs/ft_sort_strs.c						\
 				strs/ft_tabjoin.c						\
 				strs/ft_tablen.c						\
+				strs/ft_tabrmi.c						\
+				strs/ft_tabcpy.c						\
 
 
 SRCS		=	$(SRCS_CHAR) $(SRCS_GNL) $(SRCS_LST) $(SRCS_MATH) $(SRCS_MEM) $(SRCS_PRINT) $(SRCS_STRS)
