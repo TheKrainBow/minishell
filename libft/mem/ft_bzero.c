@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: magostin <magostin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/16 14:27:14 by maagosti         ###   ########.fr       */
+/*   Created: 2019/11/07 01:36:36 by magostin          #+#    #+#             */
+/*   Updated: 2019/11/11 04:45:06 by magostin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include <string.h>
+
+void	ft_bzero(void *s, size_t n)
 {
-	return (1);
+	int				i;
+	unsigned char	*temp;
+
+	temp = s;
+	i = 0;
+	while (i < (int)n)
+	{
+		temp[i] = 0;
+		i++;
+	}
+	s = temp;
 }
