@@ -1,41 +1,55 @@
-SRCS_ALGO	=	srcs/main.c								\
+ALL_SRCS		=	$(addprefix utils/, $(SRCS_UTILS)) $(addprefix builtins/, $(SRCS_BULTINS))
 
-INCLUDES	=	-Iincludes								\
+SRCS_UTILS		=	main.c
 
+SRCS_BULTINS	=	cd.c									\
+					echo.c									\
 
-SRCS		=	$(SRCS_ALGO)
-OBJS		=	$(SRCS:.c=.o)
+INCLUDES		=	-Iincludes								\
+					-Ilibft/includes
 
-CC			=	@cc
-RM			=	@rm -f
-NAME		=	minishell
+LD_FLAGS		=	-Llibft -lft -ltermcap
 
-LD_FLAGS	=	
-FLAGS		=	-Wall -Werror -Wextra $(INCLUDES) -fsanitize=address -g
+NAME			=	pipex
+OBJS			=	$(addprefix srcs/, $(ALL_SRCS:.c=.o))
+
+CC				=	clang
+RM				=	@rm -f
+
+LIBFT			=	libft/libft.a
+
+FLAGS			=	-Wall -Werror -Wextra $(INCLUDES) -fsanitize=address -g
 
 .c.o:
-				@$(CC) -c $< -o $(<:.c=.o) $(FLAGS)
+					@$(CC) -c $< -o $(<:.c=.o) $(FLAGS)
 
-$(NAME):		start_message $(OBJS)
-				@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[30C\033[0;33mAlready done\033[15D\033[1B\033[1A\033[2D\033[1;32m✓\033[26D\033[1B\033[0m";else echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m"; fi
-				$(CC) $(LD_FLAGS) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME):			$(LIBFT) start_message $(OBJS)
+					@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[30C\033[0;33mAlready done\033[15D\033[1B\033[1A\033[2D\033[1;32m✓\033[26D\033[1B\033[0m";else echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m"; fi
+					@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
 
-all:			$(NAME)
+$(LIBFT):
+					@make -s -C libft -f Makefile
 
-bonus:			re
+
+all:				$(NAME)
+
+bonus:				re
 
 clean:
-				@echo "\033[0;33mCleaning \033[1;31m$(NAME)\033[0;33m's objects\033[0m"
-				$(RM) $(OBJS)
+					@make -s -C libft -f Makefile clean
+					@echo "\033[0;33mCleaning \033[1;31m$(NAME)\033[0;33m's objects\033[0m"
+					$(RM) $(OBJS)
 
-fclean:			clean
-				@echo "\033[0;33mRemoving \033[1;31m$(NAME)\033[0;33m.\033[0m"
-				$(RM) $(NAME)
+fclean:				clean
+					@make -s -C libft -f Makefile fclean
+					@echo "\033[0;33mRemoving \033[1;31m$(NAME)\033[0;33m.\033[0m"
+					$(RM) $(NAME)
 
 start_message:
-				@echo "\033[0;33mMaking \033[1;31m$(NAME)\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
+					@echo "\033[0;33mMaking \033[1;31m$(NAME)\033[0;33m\t\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
 
-re:				fclean $(NAME)
-				$(CC) $(LD_FLAGS) $(FLAGS) $(OBJS) -o $(NAME)
+re:					fclean $(LIBFT) start_message $(OBJS)
+					@if [ "$?" = "fclean start_message" ]; then echo -n "\033[1A\033[30C\033[0;33mAlready done\033[15D\033[1B\033[1A\033[2D\033[1;32m✓\033[26D\033[1B\033[0m";else echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m"; fi
+					@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
 
-.PHONY:			all clean fclean re
+.PHONY:				all clean fclean re
