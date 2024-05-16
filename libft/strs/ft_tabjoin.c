@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 18:36:20 by magostin          #+#    #+#             */
-/*   Updated: 2021/06/25 13:35:37 by mdelwaul         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:59:00 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**ft_tabjoin(char **s1, char **s2)
 	i = -1;
 	while (s2 && s2[++i])
 		size++;
-	dest = malloc(sizeof(char *) * (size + 1));
+	dest = ft_calloc(sizeof(char *), (size + 1));
 	size = -1;
 	i = -1;
 	while (s1 && s1[++i])
@@ -33,6 +33,5 @@ char	**ft_tabjoin(char **s1, char **s2)
 	i = -1;
 	while (s2 && s2[++i])
 		dest[++size] = ft_strdup(s2[i]);
-	dest[size + 1] = NULL;
 	return (dest);
 }

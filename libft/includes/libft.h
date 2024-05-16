@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/01 18:21:09 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:56:35 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,14 @@ char					*ft_strndup(char *str, int start, int len);
 char					*ft_strnstr(const char *haystack, const char *needle,
 							size_t len);
 char					*ft_strrchr(const char *s, int c);
-char					**ft_strs_rmi(char **strs, int size, int index);
-char					**ft_strs_to_tab(int n, ...);
-char					*ft_strtrim(char const *s1, char const *set);
-int						ft_strtrunc(char **line, int n);
 char					*ft_substr(char const *s,
 							unsigned int start, size_t len);
+char					**ft_strs_to_tab(int n, ...);
+char					*ft_strtrim(char const *s1, char const *set);
+char					**ft_tabrmi(char **strs, int index);
+int						ft_strtrunc(char **line, int n);
 char					**ft_tabjoin(char **s1, char **s2);
 int						ft_tablen(char **strs);
+char					**ft_tabcpy(char **strs);
 
 #endif

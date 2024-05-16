@@ -6,13 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/16 15:32:53 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:59:53 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int 	ft_cd(t_cmd *cmd)
+int	ft_cd(t_cmd *cmd)
 {
 	(void)cmd;
 	return (1);
