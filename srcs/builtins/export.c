@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+int	count_env_lines(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	return (i);
+}
+
 int	check_env_name(char *env_name)
 {
 	int	i;
@@ -35,29 +45,37 @@ int	check_env_name(char *env_name)
 
 void	put_line_in_env(t_cmd *cmd, int n)
 {
-	int i;
-	int	k;
+	int	size;
+	char	**new_env;
+	int	i;
 
 	i = 0;
-	k = 0;
-	char **tmp = ft_tabjoin(cmd->data->env, &cmd->args[n]);
+	size = count_env_lines(cmd->data->env);
+	new_env = malloc((size + 2) * sizeof(char *));
+	if (!new_env)
+		return ; // must be handled better..
+	
+	while (cmd->data->env[i] != NULL)
+	{
+		new_env[i] = ft_strdup(cmd->data->env[i]);
+		if (new_env[i] == NULL)
+		{
+			ft_free_tab(new_env);
+			printf("alloc faild");
+			return ; // must be handled
+		}
+		i++;
+	}
+	
+	new_env[i] = ft_strdup(cmd->args[n]);
+	if (!new_env[i])
+	{
+		printf(" alloc faild");
+		return;
+	}
+	new_env[i + 1] = NULL;
 	ft_free_tab(cmd->data->env);
-	cmd->data->env = tmp;
-	// while (cmd->data->env[i] != NULL)
-	// {
-	// 	printf("%s\n", cmd->data->env[i]);
-	// 	i++;
-	// }
-	// cmd->data->env[i] = malloc(sizeof(char) * ft_strlen(cmd->args[n]) + 1);
-	// if (!cmd->data->env[i])
-	// 	return ; //need to be handled better.
-	// while (cmd->args[n][k])
-	// {
-	// 	cmd->data->env[i][k] = cmd->args[n][k];
-	// 	k++;
-	// }
-	// cmd->data->env[i][k] = '\0';
-	// cmd->data->env[i + 1] = NULL; 
+	cmd->data->env = new_env;
 }
 
 int 	ft_export(t_cmd *cmd)
