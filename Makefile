@@ -1,6 +1,13 @@
-ALL_SRCS		=	$(addprefix utils/, $(SRCS_UTILS)) $(addprefix builtins/, $(SRCS_BULTINS))
+ALL_SRCS		=	$(addprefix parsing/, $(SRCS_PARSING)) $(addprefix utils/, $(SRCS_UTILS)) $(addprefix builtins/, $(SRCS_BULTINS))
 
 SRCS_UTILS		=	main.c
+
+SRCS_PARSING	=	parsing.c								\
+					memory.c								\
+					lst.c									\
+					lexer/lexer.c							\
+					lexer/quote.c							\
+					lexer/token.c							\
 
 SRCS_BULTINS	=	cd.c									\
 					echo.c									\

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/16 16:56:35 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 02:27:57 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_list
 int						ft_isalnum(int c);
 int						ft_isalpha(int c);
 int						ft_isascii(int c);
+int						ft_iswhitespace(int c);
 int						ft_isdigit(int c);
 int						ft_isprint(int c);
 int						ft_strmap(char *str, int (*f)(int));
@@ -55,8 +56,11 @@ void					ft_lstiter(t_list *lst, void (*f)(void *));
 void					ft_lstlast(t_list **lst);
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 							void (*del)(void *));
+void					ft_lstrmone(t_list *lst, void (*del)(void*));
 t_list					*ft_lstnew(void *content);
 int						ft_lstsize(t_list *lst);
+t_list					**ft_lstsplit(t_list *lst, int (*cmp)(void *), void (*del)(void *));
+char					**ft_lsttotab_if(t_list *lst, int (*cmp)(void *), char *(*conv)(void *));
 
 /*
 **				MATH

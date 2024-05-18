@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/16 17:45:25 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 03:03:59 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,26 @@ void	free_data(t_data *data)
 	free(data);
 }
 
+void	print_cmd(void *ptr)
+{
+	t_cmd *lexer = ptr;
+	printf("Command '%s':\n -> Args:\n", lexer->name);
+	for (int i = 0; lexer->args[i]; i++)
+		printf("  -> [%s]\n", lexer->args[i]);
+}
+
 int	main(int ac, char **av, char **environ)
 {
 	t_data	*data;
-	t_cmd	*cmd;
 
-	data = init_data(environ);
-	cmd = fake_cmd(data, ft_strs_to_tab(3, "export", "TEST=maagosti", "TOTO=tata"));
-	ft_export(cmd);
 	(void)ac;
 	(void)av;
+	data = init_data(environ);
+	parse_input(data, "echo test > toto < hihi | \"th'\"'<is is a\"n '\"exempletest\"\"\"");
+
+	ft_lstiter(data->cmds, &print_cmd);
+	ft_lstclear(&data->cmds, &free_cmd);
+
 	free_data(data);
-	ft_free_tab(cmd->args);
-	free(cmd);
 	return (1);
 }

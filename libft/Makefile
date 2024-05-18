@@ -3,6 +3,7 @@ SRCS_CHAR	=	char/ft_isalnum.c						\
 				char/ft_isascii.c						\
 				char/ft_isdigit.c						\
 				char/ft_isprint.c						\
+				char/ft_iswhitespace.c					\
 				char/ft_strmap.c						\
 				char/ft_tolower.c						\
 				char/ft_toupper.c						\
@@ -21,7 +22,10 @@ SRCS_LST	=	lst/ft_lst_to_tab.c						\
 				lst/ft_lstmap.c							\
 				lst/ft_lstnew.c							\
 				lst/ft_lstprint.c						\
-				lst/ft_lstsize.c
+				lst/ft_lstrmone.c						\
+				lst/ft_lstsplit.c						\
+				lst/ft_lsttotab_if.c					\
+				lst/ft_lstsize.c						\
 
 SRCS_MATH	=	math/ft_atoi.c							\
 				math/ft_itoa.c							\
@@ -79,7 +83,7 @@ SRCS		=	$(SRCS_CHAR) $(SRCS_GNL) $(SRCS_LST) $(SRCS_MATH) $(SRCS_MEM) $(SRCS_PRI
 
 OBJS		=	$(SRCS:.c=.o)
 
-CC			=	@clang
+CC			=	@cc
 RM			=	@rm -f
 NAME		=	libft.a
 

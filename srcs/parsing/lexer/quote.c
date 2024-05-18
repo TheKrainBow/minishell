@@ -1,19 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 01:19:45 by maagosti         ###   ########.fr       */
+/*   Created: 2024/05/18 03:01:15 by maagosti          #+#    #+#             */
+/*   Updated: 2024/05/18 03:02:03 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(t_cmd *cmd)
+int	ft_isquote(char c)
 {
-	(void)cmd;
-	return (1);
+	return (c == '"' || c == '\'');
+}
+
+static void	swap_quote(char *quote, char c)
+{
+	if (!ft_isquote(c))
+		return ;
+	if (*quote == 0)
+		*quote = c;
+	else if (c == *quote)
+		*quote = 0;
+}
+
+int	skip_quotes(char *input)
+{
+	char	quote;
+	int		i;
+
+	i = 0;
+	quote = *input;
+	input++;
+	while (quote && input[i])
+	{
+		swap_quote(&quote, input[i]);
+		i++;
+	}
+	return (i + 1);
 }

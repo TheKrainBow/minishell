@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lsttotab_if.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/15 23:48:03 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/16 18:54:48 by maagosti         ###   ########.fr       */
+/*   Created: 2021/02/15 17:51:11 by magostin          #+#    #+#             */
+/*   Updated: 2024/05/18 02:37:11 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+char	**ft_lsttotab_if(t_list *lst, int (*cmp)(void *), char *(*conv)(void *))
 {
-	t_list	*temp;
+	char	**dest;
+	int		i;
+	t_list	*tmp;
 
-	while (lst != NULL)
+	i = 0;
+	tmp = lst;
+	while (tmp)
 	{
-		temp = lst->next;
-		f(lst->content);
-		lst = temp;
+		if (cmp(tmp->content))
+			i++;
+		tmp = tmp->next;
 	}
+	dest = ft_calloc(sizeof(char *), (i + 1));
+	if (!(dest))
+		return (NULL);
+	i = 0;
+	while (lst)
+	{
+		if (cmp(lst->content))
+		{
+			dest[i] = conv(lst->content);
+			i++;
+		}
+		lst = lst->next;
+	}
+	return (dest);
 }

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_lstrmone.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 01:19:45 by maagosti         ###   ########.fr       */
+/*   Created: 2019/11/15 22:06:14 by magostin          #+#    #+#             */
+/*   Updated: 2024/05/18 01:11:01 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_cd(t_cmd *cmd)
+void	ft_lstrmone(t_list *lst, void (*del)(void*))
 {
-	(void)cmd;
-	return (1);
+	if (lst && del)
+	{
+		del(lst->content);
+		if (lst->prev)
+			lst->prev->next = lst->next;
+		if (lst->next)
+			lst->next->prev = lst->prev;
+		free(lst);
+	}
 }
