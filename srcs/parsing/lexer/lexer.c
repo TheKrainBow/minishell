@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:53:42 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:01:04 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 03:49:24 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_lexer	*new_token(char *str, int len, t_token token)
 {
-	t_lexer *dest;
+	t_lexer	*dest;
 
 	dest = ft_calloc(1, sizeof(t_lexer));
 	if (len == -1)

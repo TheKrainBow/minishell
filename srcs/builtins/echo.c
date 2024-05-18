@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 01:19:39 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 03:48:04 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	ft_echo(t_cmd *cmd)
 {
-	(void)cmd;
+	int	i;
+
+	i = 1;
+	while (cmd->args[i])
+		printf("%s ", cmd->args[i++]);
+	printf("\n");
 	return (1);
 }

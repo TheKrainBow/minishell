@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:03:59 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 03:54:02 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,65 @@ t_cmd	*fake_cmd(t_data *data, char **args)
 	return (dest);
 }
 
-t_data	*init_data(char **environ)
-{
-	t_data	*dest;
-
-	dest = ft_calloc(1, sizeof(t_data));
-	dest->env = ft_tabcpy(environ);
-	return (dest);
-}
-
-void	free_data(t_data *data)
-{
-	ft_free_tab(data->env);
-	free(data);
-}
-
 void	print_cmd(void *ptr)
 {
-	t_cmd *lexer = ptr;
+	t_cmd	*lexer;
+	int		i;
+
+	i = 0;
+	lexer = ptr;
 	printf("Command '%s':\n -> Args:\n", lexer->name);
-	for (int i = 0; lexer->args[i]; i++)
-		printf("  -> [%s]\n", lexer->args[i]);
+	while (lexer->args[i])
+		printf("  -> [%s]\n", lexer->args[i++]);
+}
+
+t_func_cmd	get_cmd(char *name)
+{
+	if (!ft_strcmp(name, "echo"))
+		return (&ft_echo);
+	if (!ft_strcmp(name, "cd"))
+		return (&ft_cd);
+	if (!ft_strcmp(name, "pwd"))
+		return (&ft_pwd);
+	if (!ft_strcmp(name, "unset"))
+		return (&ft_unset);
+	if (!ft_strcmp(name, "env"))
+		return (&ft_env);
+	if (!ft_strcmp(name, "export"))
+		return (&ft_export);
+	if (!ft_strcmp(name, "exit"))
+		return (&ft_exit);
+	return (NULL);
+}
+
+void	start_cmd(void *ptr)
+{
+	t_cmd		*cmd;
+	t_func_cmd	execute;
+
+	cmd = ptr;
+	execute = get_cmd(cmd->name);
+	if (execute != NULL)
+		execute(cmd);
+	else
+		printf("minishell: command not found: %s\n", cmd->name);
 }
 
 int	main(int ac, char **av, char **environ)
 {
 	t_data	*data;
 
-	(void)ac;
-	(void)av;
+	if (ac == 1)
+	{
+		printf("Add arguments\n");
+		return (0);
+	}
 	data = init_data(environ);
-	parse_input(data, "echo test > toto < hihi | \"th'\"'<is is a\"n '\"exempletest\"\"\"");
-
-	ft_lstiter(data->cmds, &print_cmd);
-	ft_lstclear(&data->cmds, &free_cmd);
-
+	if (parse_input(data, av[1]) == 1)
+	{
+		ft_lstiter(data->cmds, &start_cmd);
+		ft_lstclear(&data->cmds, &free_cmd);
+	}
 	free_data(data);
-	return (1);
+	return (0);
 }

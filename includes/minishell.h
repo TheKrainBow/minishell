@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:02:11 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 03:54:30 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		ft_exit(t_cmd *cmd);
 int		ft_export(t_cmd *cmd);
 int		ft_pwd(t_cmd *cmd);
 int		ft_unset(t_cmd *cmd);
-
 
 /*         Parsing                          */
 int		parse_input(t_data *data, char *input);
@@ -49,5 +48,7 @@ int		is_arg(void *content);
 /*       Parsing/memory.c                   */
 void	free_cmd(void *ptr);
 void	free_lexer(void *ptr);
+t_data	*init_data(char **environ);
+void	free_data(t_data *data);
 
 #endif

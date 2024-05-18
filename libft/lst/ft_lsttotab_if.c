@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 17:51:11 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/18 02:37:11 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/18 03:51:55 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ char	**ft_lsttotab_if(t_list *lst, int (*cmp)(void *), char *(*conv)(void *))
 	while (lst)
 	{
 		if (cmp(lst->content))
-		{
-			dest[i] = conv(lst->content);
-			i++;
-		}
+			dest[i++] = conv(lst->content);
 		lst = lst->next;
 	}
 	return (dest);
