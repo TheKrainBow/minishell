@@ -44,13 +44,28 @@ int	main(int ac, char **av, char **environ)
 	t_cmd	*cmd;
 
 	data = init_data(environ);
-	cmd = fake_cmd(data, ft_strs_to_tab(4, "export", "TEST=echo", "TOTO=tata", "_ET=2!a@#ff$"));
+	cmd = fake_cmd(data, ft_strs_to_tab(4, "export", "TEST+=echo", "TOTO=tata", "_ET=2!a@#ff$>;"));
 	ft_export(cmd);
-	ft_env(cmd);
-	(void)ac;
-	(void)av;
-	free_data(data);
 	ft_free_tab(cmd->args);
 	free(cmd);
+	
+	cmd = fake_cmd(data, ft_strs_to_tab(1, "env"));
+	ft_env(cmd);
+	ft_free_tab(cmd->args);
+	free(cmd);
+
+
+	cmd = fake_cmd(data, ft_strs_to_tab(2, "unset", "TOTO"));
+	ft_unset(cmd);
+	ft_free_tab(cmd->args);
+	free(cmd);
+
+	cmd = fake_cmd(data, ft_strs_to_tab(1, "env"));
+	ft_env(cmd);
+	ft_free_tab(cmd->args);
+	free(cmd);
+	
+	(void)ac;
+	(void)av;
 	return (1);
 }

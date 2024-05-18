@@ -12,14 +12,19 @@
 
 #include "minishell.h"
 
-int	count_env_lines(char **env)
+int	already_in_env(char *env_name, t_cmd *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (env[i] != NULL)
+	while (cmd->data->env[i] != NULL)
+	{
+
+		if (ft_strncmp(cmd->data->env[i], env_name, ft_strchr(env_name, '=') - env_name) == 0)
+			return (1);
 		i++;
-	return (i);
+	}
+	return (0);
 }
 
 int	check_env_name(char *env_name)
@@ -31,10 +36,12 @@ int	check_env_name(char *env_name)
 		return (0);
 	while (env_name[i] != '=')
 	{
+		if (env_name[i + 1] == '=' && env_name[i] == '+')
+			return (1);
 		if (!ft_isalpha(env_name[i]) && !ft_isdigit(env_name[i]))
 		{
 			if (env_name[i] != ' ' && env_name[i] != '_')
-				return (0);
+					return (0);
 		}
 		if (env_name[i] == '\0')
 			return (0);
@@ -43,18 +50,17 @@ int	check_env_name(char *env_name)
 	return (1);
 }
 
-void	put_line_in_env(t_cmd *cmd, int n)
+char	**expand_env(t_cmd *cmd)
 {
-	int	size;
+	int		size;
 	char	**new_env;
-	int	i;
+	int		i;
 
 	i = 0;
-	size = count_env_lines(cmd->data->env);
+	size = ft_tablen(cmd->data->env);
 	new_env = malloc((size + 2) * sizeof(char *));
 	if (!new_env)
-		return ; // must be handled better..
-	
+		return NULL; // must be handled better..
 	while (cmd->data->env[i] != NULL)
 	{
 		new_env[i] = ft_strdup(cmd->data->env[i]);
@@ -62,25 +68,102 @@ void	put_line_in_env(t_cmd *cmd, int n)
 		{
 			ft_free_tab(new_env);
 			printf("alloc faild");
-			return ; // must be handled
+			return NULL; // must be handled
 		}
 		i++;
 	}
-	
-	new_env[i] = ft_strdup(cmd->args[n]);
-	if (!new_env[i])
+	new_env[i] = NULL;
+	return (new_env);
+}
+
+void	handle_plus_env(t_cmd *cmd, int n, int sign)
+{
+	int	i;
+	int	k;
+	char	*new;
+
+	i = 0;
+	k = 0;
+	new = NULL;
+	while (cmd->args[n][i] != '=')
+		i++;
+	if (cmd->args[n][i - 1] != '+')
+		return;
+	if (sign == 0)
+	{
+		i = 0;
+		new = malloc(sizeof(char) * ft_strlen(cmd->args[n]));
+		while (cmd->args[n][i])
+		{
+			if (cmd->args[n][i] == '+' && cmd->args[n][i + 1] == '=')
+				i++;
+			new[k++] = cmd->args[n][i++];
+		}
+		new[k] = '\0';
+		free(cmd->args[n]);
+		cmd->args[n] = new;
+	}
+	if (sign == 1)
+	{
+		i = 0;
+		while (cmd->args[n][i] != '=')
+			i++;
+		i++;
+		new = ft_strjoin(cmd->args[n], &cmd->args[n][i]);
+		if (!new)
+			return;
+		free(cmd->args[n]);
+		cmd->args[n] = new;
+	}
+}
+
+void	put_line_in_env(t_cmd *cmd, int n)
+{
+	int	size;
+	char	**new_env;
+
+	size = ft_tablen(cmd->data->env);
+	new_env = expand_env(cmd);
+	new_env[size] = ft_strdup(cmd->args[n]);
+	if (!new_env[size])
 	{
 		printf(" alloc faild");
 		return;
 	}
-	new_env[i + 1] = NULL;
+	new_env[size + 1] = NULL;
 	ft_free_tab(cmd->data->env);
 	cmd->data->env = new_env;
 }
 
-int 	ft_export(t_cmd *cmd)
+void	new_val_for_env(t_cmd *cmd, int n)
 {
 	int	i;
+	char	*new_env;
+	
+	i = 0;
+	new_env = ft_strdup(cmd->args[n]);
+	if (new_env == NULL)
+	{
+		printf("alloc faild \n");
+		return ;
+	}
+	while (cmd->data->env[i] != NULL)
+	{
+		if (ft_strncmp(cmd->data->env[i], new_env, ft_strchr(new_env, '=') - new_env) == 0)
+		{
+			free(cmd->data->env[i]);
+			cmd->data->env[i] = new_env;
+			return;
+		}
+		i++;
+	}
+}
+
+
+
+int 	ft_export(t_cmd *cmd)
+{
+	int		i;
 
 	i = 1;
 	while (cmd->args[i] != NULL)
@@ -90,7 +173,16 @@ int 	ft_export(t_cmd *cmd)
 			printf("name is not valid\n");
 			return (0);
 		}
-		put_line_in_env(cmd, i);
+		else if (!already_in_env(cmd->args[i], cmd))
+		{
+			handle_plus_env(cmd, i, 0);
+			put_line_in_env(cmd, i);
+		}
+		else
+		{
+			handle_plus_env(cmd, i, 1);
+			new_val_for_env(cmd, i);
+		}
 		i++;
 	}
 	return (1);
