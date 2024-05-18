@@ -76,47 +76,6 @@ char	**expand_env(t_cmd *cmd)
 	return (new_env);
 }
 
-void	handle_plus_env(t_cmd *cmd, int n, int sign)
-{
-	int	i;
-	int	k;
-	char	*new;
-
-	i = 0;
-	k = 0;
-	new = NULL;
-	while (cmd->args[n][i] != '=')
-		i++;
-	if (cmd->args[n][i - 1] != '+')
-		return;
-	if (sign == 0)
-	{
-		i = 0;
-		new = malloc(sizeof(char) * ft_strlen(cmd->args[n]));
-		while (cmd->args[n][i])
-		{
-			if (cmd->args[n][i] == '+' && cmd->args[n][i + 1] == '=')
-				i++;
-			new[k++] = cmd->args[n][i++];
-		}
-		new[k] = '\0';
-		free(cmd->args[n]);
-		cmd->args[n] = new;
-	}
-	if (sign == 1)
-	{
-		i = 0;
-		while (cmd->args[n][i] != '=')
-			i++;
-		i++;
-		new = ft_strjoin(cmd->args[n], &cmd->args[n][i]);
-		if (!new)
-			return;
-		free(cmd->args[n]);
-		cmd->args[n] = new;
-	}
-}
-
 void	put_line_in_env(t_cmd *cmd, int n)
 {
 	int	size;
@@ -175,12 +134,10 @@ int 	ft_export(t_cmd *cmd)
 		}
 		else if (!already_in_env(cmd->args[i], cmd))
 		{
-			handle_plus_env(cmd, i, 0);
 			put_line_in_env(cmd, i);
 		}
 		else
 		{
-			handle_plus_env(cmd, i, 1);
 			new_val_for_env(cmd, i);
 		}
 		i++;

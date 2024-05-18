@@ -28,10 +28,8 @@ int	found(char *env_line, char *env_name)
 
 int	is_in_env(t_cmd *cmd, char *env_name)
 {
-	int	i;
 	int	size;
 
-	i = 0;
 	size = ft_tablen(cmd->data->env);
 	while (size)
 	{
