@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **environ)
 	t_cmd	*cmd;
 
 	data = init_data(environ);
-	cmd = fake_cmd(data, ft_strs_to_tab(4, "export", "TEST=echo", "TOTO=tata", "_ET=2!a@#ff$>;"));
+	cmd = fake_cmd(data, ft_strs_to_tab(4, "export", "TEST+=echo", "TEST=123e", "_TOTO+=1ad"));
 	ft_export(cmd);
 	ft_free_tab(cmd->args);
 	free(cmd);
@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **environ)
 	free(cmd);
 
 
-	cmd = fake_cmd(data, ft_strs_to_tab(2, "unset", "TOTO"));
+	cmd = fake_cmd(data, ft_strs_to_tab(3, "unset", "_TOTO", "TEST"));
 	ft_unset(cmd);
 	ft_free_tab(cmd->args);
 	free(cmd);
