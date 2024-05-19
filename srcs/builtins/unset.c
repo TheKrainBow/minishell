@@ -69,7 +69,7 @@ int	ft_unset(t_cmd *cmd)
 		}
 		else
 		{
-			printf("name is not valid\n");
+			printf("cant unset %s -> name is not valid\n", cmd->args[i]);
 			i++;
 		}
 	}

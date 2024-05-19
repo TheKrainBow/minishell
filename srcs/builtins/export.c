@@ -20,7 +20,8 @@ int	already_in_env(char *env_name, t_cmd *cmd)
 	while (cmd->data->env[i] != NULL)
 	{
 
-		if (ft_strncmp(cmd->data->env[i], env_name, ft_strchr(env_name, '=') - env_name) == 0)
+		if (ft_strncmp(cmd->data->env[i], env_name,
+					ft_strchr(env_name, '=') - env_name) == 0)
 			return (1);
 		i++;
 	}
@@ -108,7 +109,8 @@ void	new_val_for_env(t_cmd *cmd, int n)
 	}
 	while (cmd->data->env[i] != NULL)
 	{
-		if (ft_strncmp(cmd->data->env[i], new_env, ft_strchr(new_env, '=') - new_env) == 0)
+		if (ft_strncmp(cmd->data->env[i], new_env,
+					ft_strchr(new_env, '=') - new_env) == 0)
 		{
 			free(cmd->data->env[i]);
 			cmd->data->env[i] = new_env;
@@ -118,6 +120,55 @@ void	new_val_for_env(t_cmd *cmd, int n)
 	}
 }
 
+void	add_val_env(t_cmd *cmd, int n)
+{
+    int		i;
+    char	*new_value;
+	char 	*old_env;
+	char 	*combined_env;
+
+	i = 0;
+	new_value = ft_strchr(cmd->args[n], '=') + 1;
+	old_env = NULL;
+	combined_env = NULL;
+    while (cmd->data->env[i] != NULL)
+	{
+        if (ft_strncmp(cmd->data->env[i], cmd->args[n],
+					ft_strchr(cmd->args[n], '=') - cmd->args[n]) == 0)
+		{
+            old_env = cmd->data->env[i];
+            combined_env = ft_strjoin(old_env, new_value);
+            if (!combined_env)
+                return;
+            free(cmd->data->env[i]);
+            cmd->data->env[i] = combined_env;
+            return;
+        }
+        i++;
+    }
+}
+
+int	plus_in_name(char *env_name)
+{
+	int	i;
+
+	i = 0;
+	while (env_name[i] != '=')
+	{
+		if (env_name[i] == '+')
+			return (1);
+		if (env_name[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (0);
+}
+
+void	remove_plus(char *str) {
+    char *plus = ft_strchr(str, '+');
+    if (plus)
+        ft_memmove(plus, plus + 1, ft_strlen(plus));
+}
 
 
 int 	ft_export(t_cmd *cmd)
@@ -128,18 +179,19 @@ int 	ft_export(t_cmd *cmd)
 	while (cmd->args[i] != NULL)
 	{
 		if (!check_env_name(cmd->args[i]))
-		{
-			printf("name is not valid\n");
 			return (0);
+		if (plus_in_name(cmd->args[i]))
+		{
+			remove_plus(cmd->args[i]);
+			if (!already_in_env(cmd->args[i], cmd))
+				put_line_in_env(cmd, i);
+			else
+				add_val_env(cmd, i);
 		}
 		else if (!already_in_env(cmd->args[i], cmd))
-		{
 			put_line_in_env(cmd, i);
-		}
 		else
-		{
 			new_val_for_env(cmd, i);
-		}
 		i++;
 	}
 	return (1);
