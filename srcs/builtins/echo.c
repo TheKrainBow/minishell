@@ -58,7 +58,14 @@ int	ft_echo(t_cmd *cmd)
 	int	n_opt;
 
 	i = 1;
+	if (cmd->args[i] == NULL)
+	{
+		printf("\n");
+		return (1);
+	}
 	n_opt = check_echo_opt(cmd->args[i]);
+	if (n_opt == 1 && cmd->args[i + 1] == NULL)
+		return (1);
 	while (check_echo_opt(cmd->args[i]))
 		i++;
 	while (cmd->args[i] != NULL)
