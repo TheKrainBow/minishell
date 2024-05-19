@@ -25,6 +25,7 @@ SRCS_LST	=	lst/ft_lst_to_tab.c						\
 				lst/ft_lstrmone.c						\
 				lst/ft_lstsplit.c						\
 				lst/ft_lsttotab_if.c					\
+				lst/ft_lstrm_if.c						\
 				lst/ft_lstsize.c						\
 
 SRCS_MATH	=	math/ft_atoi.c							\

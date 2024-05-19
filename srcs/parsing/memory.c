@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:52:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:54:07 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 23:39:17 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	free_cmd(void *ptr)
 	cmd = ptr;
 	i = 0;
 	while (cmd->args[i])
-	{
 		free(cmd->args[i++]);
-	}
+	if (cmd->out)
+		ft_lstclear(&cmd->out, &free_lexer);
 	free(cmd->args);
 	free(cmd);
 }

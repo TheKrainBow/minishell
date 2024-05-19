@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:32:18 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:54:11 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		check_tokens(t_list **tokens);
 
 /*        Parsing/lexer/quote.c             */
 int		skip_quotes(char *input);
+void	swap_quote(char *quote, char c);
 int		ft_isquote(char c);
 
 /*        Parsing/lst.c                     */

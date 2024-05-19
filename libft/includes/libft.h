@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/18 03:51:28 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 23:20:59 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_list			**ft_lstsplit(t_list *lst, int (*cmp)(void *),
 					void (*del)(void *));
 char			**ft_lsttotab_if(t_list *lst, int (*cmp)(void *),
 					char *(*conv)(void *));
+void			ft_lstrm_if(t_list **lst, int (*cmp)(void *),
+					void (*del)(void*));
 
 /*
 **				MATH

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:40:06 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:50:01 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 23:21:36 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_cmd
 	char	*name;
 	char	**args;
 	t_data	*data;
-	char	*output_file;
+	t_list	*out;
 }	t_cmd;
 
 typedef int	(*t_func_cmd)(t_cmd *cmd);

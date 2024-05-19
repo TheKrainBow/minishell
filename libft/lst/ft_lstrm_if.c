@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrmone.c                                      :+:      :+:    :+:   */
+/*   ft_lstrm_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 22:06:14 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/19 23:37:59 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 23:38:37 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstrmone(t_list *lst, void (*del)(void*))
+void	ft_lstrm_if(t_list **lst, int (*cmp)(void *), void (*del)(void*))
 {
-	if (lst && del)
+	t_list	*node;
+	t_list	*next;
+
+	node = *lst;
+	while (node)
 	{
-		del(lst->content);
-		if (lst->prev)
-			lst->prev->next = lst->next;
-		if (lst->next)
-			lst->next->prev = lst->prev;
-		free(lst);
+		if (cmp(node->content))
+		{
+			next = node->next;
+			if (node == *lst)
+				*lst = next;
+			ft_lstrmone(node, del);
+			node = next;
+		}
 	}
 }

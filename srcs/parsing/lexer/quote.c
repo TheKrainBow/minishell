@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 03:01:15 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:02:03 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:54:00 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_isquote(char c)
 	return (c == '"' || c == '\'');
 }
 
-static void	swap_quote(char *quote, char c)
+void	swap_quote(char *quote, char c)
 {
 	if (!ft_isquote(c))
 		return ;
