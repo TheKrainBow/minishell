@@ -14,6 +14,13 @@
 
 int	ft_env(t_cmd *cmd)
 {
-	(void)cmd;
+	int i = 0;
+	while (cmd->data->env[i])
+	{
+		ft_putstr(cmd->data->env[i]);
+		//if (cmd->data->env[i + 1] != NULL)
+		ft_putchar('\n');
+		i++;
+	}
 	return (1);
 }
