@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:07:54 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:19:47 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	is_in_env(t_cmd *cmd, char *env_name)
 	{
 		size--;
 		if (found(cmd->data->env[size], env_name) == 1)
-		{
-			printf("\n\n[%d]\n\n", size);
+		// {
+			// printf("\n\n[%d]\n\n", size);
 			return (size);
-		}
+		// }
 	}
 	return (0);
 }

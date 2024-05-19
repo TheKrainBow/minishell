@@ -16,6 +16,7 @@ SRCS_BULTINS	=	cd.c									\
 					export.c								\
 					pwd.c									\
 					unset.c									\
+					execve.c								\
 
 INCLUDES		=	-Iincludes								\
 					-Ilibft/includes

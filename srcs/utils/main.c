@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 20:52:29 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:32:32 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_func_cmd	get_cmd(char *name)
 		return (&ft_export);
 	if (!ft_strcmp(name, "exit"))
 		return (&ft_exit);
-	return (NULL);
+	return (&ft_execve);
 }
 
 void	start_cmd(void *ptr)

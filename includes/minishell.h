@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:54:30 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:32:18 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		ft_exit(t_cmd *cmd);
 int		ft_export(t_cmd *cmd);
 int		ft_pwd(t_cmd *cmd);
 int		ft_unset(t_cmd *cmd);
+int		ft_execve(t_cmd *cmd);
 
 /*         Parsing                          */
 int		parse_input(t_data *data, char *input);
