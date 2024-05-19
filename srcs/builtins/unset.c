@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:47:20 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:07:54 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ int	is_in_env(t_cmd *cmd, char *env_name)
 		if (found(cmd->data->env[size], env_name) == 1)
 		{
 			printf("\n\n[%d]\n\n", size);
-			return size;
+			return (size);
 		}
 	}
-	return 0;
+	return (0);
 }
 
 int	ft_unset(t_cmd *cmd)
 {
-	int	i;
-	int	k;
+	int		i;
+	int		k;
+	char	**new_env;
 
 	k = 1;
-	i = 1;
-	char	**new_env;
+	i = 0;
 	new_env = NULL;
-	while (cmd->args[i] != NULL)
+	while (cmd->args[++i] != NULL)
 	{
 		k = is_in_env(cmd, cmd->args[i]);
 		if (k != 0)
@@ -61,17 +61,13 @@ int	ft_unset(t_cmd *cmd)
 			if (new_env == NULL)
 			{
 				printf("alloc failed for new_env");
-				return 0;
+				return (0);
 			}
 			ft_free_tab(cmd->data->env);
 			cmd->data->env = new_env;
-			i++;
 		}
 		else
-		{
 			printf("cant unset %s -> name is not valid\n", cmd->args[i]);
-			i++;
-		}
 	}
 	return (1);
 }

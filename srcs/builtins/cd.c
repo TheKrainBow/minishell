@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:46:35 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:11:41 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 int	ft_cd(t_cmd *cmd)
 {
 	(void)cmd;
+	printf("minishell: cd not implemented\n");
 	return (1);
 }

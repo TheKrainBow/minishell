@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 20:52:16 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:09:31 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@
 
 int	check_echo_opt(char *option)
 {
-	int i;
+	int	i;
 
-	i = 2;
 	if (option[0] != '-' || option[1] != 'n')
 		return (0);
-	while(option[i])
-	{
+	i = 1;
+	while (option[++i])
 		if (option[i] != 'n')
 			return (0);
-		i++;
-	}
 	return (1);
-}	
+}
 
 int	print_env(t_cmd *cmd, char *name)
 {
@@ -42,7 +39,7 @@ int	print_env(t_cmd *cmd, char *name)
 	while (cmd->data->env[i])
 	{
 		if (ft_strncmp(cmd->data->env[i], name,
-					ft_strchr(cmd->data->env[i], '=') - cmd->data->env[i]) == 0)
+				ft_strchr(cmd->data->env[i], '=') - cmd->data->env[i]) == 0)
 		{
 			printf("%s", ft_strchr(cmd->data->env[i], '=') + 1);
 			return (1);
@@ -52,7 +49,7 @@ int	print_env(t_cmd *cmd, char *name)
 	return (0);
 }
 
-int	ft_echo(t_cmd *cmd) 
+int	ft_echo(t_cmd *cmd)
 {
 	int	i;
 	int	n_opt;
