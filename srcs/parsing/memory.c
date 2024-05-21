@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:52:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 23:39:17 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/21 01:28:15 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_data	*init_data(char **environ)
 
 	dest = ft_calloc(1, sizeof(t_data));
 	dest->env = ft_tabcpy(environ);
+	dest->std_in = dup(STDIN_FILENO);
+	dest->std_out = dup(STDOUT_FILENO);
 	return (dest);
 }
 
