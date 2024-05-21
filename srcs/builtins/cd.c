@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:11:41 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/21 02:06:07 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	ft_cd(t_cmd *cmd)
 {
+	char	buffer[11];
+
 	(void)cmd;
-	printf("minishell: cd not implemented\n");
+	buffer[read(0, buffer, 1)] = 0;
+	buffer[0]++;
+	printf("%s\n", buffer);
 	return (1);
 }

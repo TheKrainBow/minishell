@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:54:11 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/21 02:07:02 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "struct.h"
 # include "libft.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 /*         Built-ins                       */
 int		ft_cd(t_cmd *cmd);
