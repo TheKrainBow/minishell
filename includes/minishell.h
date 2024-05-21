@@ -15,6 +15,8 @@
 
 # include "struct.h"
 # include "libft.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 /*         Built-ins                       */
 int		ft_cd(t_cmd *cmd);
@@ -25,6 +27,11 @@ int		ft_export(t_cmd *cmd);
 int		ft_pwd(t_cmd *cmd);
 int		ft_unset(t_cmd *cmd);
 int		ft_execve(t_cmd *cmd);
+
+int		plus_in_name(char *env_name);
+int		already_in_env(char *env_name, t_cmd *cmd);
+int		check_env_name(char *env_name);
+void	remove_plus(char *str);
 
 /*         Parsing                          */
 int		parse_input(t_data *data, char *input);

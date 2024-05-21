@@ -12,44 +12,6 @@
 
 #include "minishell.h"
 
-int	already_in_env(char *env_name, t_cmd *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd->data->env[i] != NULL)
-	{
-		if (ft_strncmp(cmd->data->env[i], env_name,
-				ft_strchr(env_name, '=') - env_name) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_env_name(char *env_name)
-{
-	int	i;
-
-	i = 1;
-	if (!ft_isalpha(env_name[0]) && env_name[0] != '_')
-		return (0);
-	while (env_name[i] != '=')
-	{
-		if (env_name[i + 1] == '=' && env_name[i] == '+')
-			return (1);
-		if (!ft_isalpha(env_name[i]) && !ft_isdigit(env_name[i]))
-		{
-			if (env_name[i] != ' ' && env_name[i] != '_')
-				return (0);
-		}
-		if (env_name[i] == '\0')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 char	**expand_env(t_cmd *cmd)
 {
 	int		size;
@@ -60,7 +22,7 @@ char	**expand_env(t_cmd *cmd)
 	size = ft_tablen(cmd->data->env);
 	new_env = malloc((size + 2) * sizeof(char *));
 	if (!new_env)
-		return (NULL); // must be handled better..
+		return (NULL);
 	while (cmd->data->env[i] != NULL)
 	{
 		new_env[i] = ft_strdup(cmd->data->env[i]);
@@ -68,7 +30,7 @@ char	**expand_env(t_cmd *cmd)
 		{
 			ft_free_tab(new_env);
 			printf("alloc faild");
-			return (NULL); // must be handled
+			return (NULL);
 		}
 		i++;
 	}
@@ -145,26 +107,6 @@ void	add_val_env(t_cmd *cmd, int n)
 		}
 		i++;
 	}
-}
-
-int	plus_in_name(char *env_name)
-{
-	int	i;
-
-	i = -1;
-	while (env_name[++i] && env_name[i] != '=')
-		if (env_name[i] == '+')
-			return (1);
-	return (0);
-}
-
-void	remove_plus(char *str)
-{
-	char	*plus;
-
-	plus = ft_strchr(str, '+');
-	if (plus)
-		ft_memmove(plus, plus + 1, ft_strlen(plus));
 }
 
 int	ft_export(t_cmd *cmd)

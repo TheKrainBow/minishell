@@ -35,10 +35,7 @@ int	is_in_env(t_cmd *cmd, char *env_name)
 	{
 		size--;
 		if (found(cmd->data->env[size], env_name) == 1)
-		// {
-			// printf("\n\n[%d]\n\n", size);
 			return (size);
-		// }
 	}
 	return (0);
 }
