@@ -6,7 +6,7 @@
 /*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 07:07:23 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/22 07:11:38 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,4 +158,5 @@ int	main(int ac, char **av, char **environ)
 		ft_lstclear(&data->cmds, &free_cmd);
 		free(line);
 	}
+	free_data(data);
 }
