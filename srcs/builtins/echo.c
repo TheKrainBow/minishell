@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:09:31 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/22 06:25:08 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_echo(t_cmd *cmd)
 	i = 1;
 	if (cmd->args[i] == NULL)
 	{
-		printf("\n");
+		ft_putstr("\n");
 		return (1);
 	}
 	n_opt = check_echo_opt(cmd->args[i]);
@@ -68,12 +68,12 @@ int	ft_echo(t_cmd *cmd)
 	while (cmd->args[i] != NULL)
 	{
 		if (!print_env(cmd, cmd->args[i]))
-			printf("%s", cmd->args[i]);
+			ft_putstr(cmd->args[i]);
 		if (cmd->args[i + 1] != NULL)
-			printf(" ");
+			ft_putstr(" ");
 		i++;
 	}
 	if (n_opt == 0)
-		printf("\n");
+		ft_putstr("\n");
 	return (1);
 }

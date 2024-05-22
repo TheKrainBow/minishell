@@ -6,13 +6,14 @@
 /*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:40:06 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/21 02:07:00 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/22 05:56:50 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 # include "libft.h"
+
 typedef enum e_token
 {
 	PIPE,
@@ -28,6 +29,7 @@ typedef struct s_lexer
 {
 	char	*str;
 	t_token	token;
+	int		fd;
 }			t_lexer;
 
 typedef struct s_data

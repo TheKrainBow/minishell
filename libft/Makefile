@@ -8,8 +8,8 @@ SRCS_CHAR	=	char/ft_isalnum.c						\
 				char/ft_tolower.c						\
 				char/ft_toupper.c						\
 
-SRCS_GNL	=	get_next_line/get_next_line.c			\
-				get_next_line/get_next_line_utils.c
+SRCS_FILE	=	file/get_next_line.c					\
+				file/store_file.c						\
 
 SRCS_LST	=	lst/ft_lst_to_tab.c						\
 				lst/ft_lstadd_back.c					\
@@ -80,7 +80,7 @@ SRCS_STRS	=	strs/ft_split.c							\
 				strs/ft_tabcpy.c						\
 
 
-SRCS		=	$(SRCS_CHAR) $(SRCS_GNL) $(SRCS_LST) $(SRCS_MATH) $(SRCS_MEM) $(SRCS_PRINT) $(SRCS_STRS)
+SRCS		=	$(SRCS_CHAR) $(SRCS_FILE) $(SRCS_LST) $(SRCS_MATH) $(SRCS_MEM) $(SRCS_PRINT) $(SRCS_STRS)
 
 OBJS		=	$(SRCS:.c=.o)
 

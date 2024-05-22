@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/19 23:20:59 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/22 07:04:15 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include "color.h"
-# include "get_next_line.h"
 # include "ft_printf.h"
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
 typedef struct s_list
 {
 	void				*content;
@@ -65,6 +67,13 @@ char			**ft_lsttotab_if(t_list *lst, int (*cmp)(void *),
 					char *(*conv)(void *));
 void			ft_lstrm_if(t_list **lst, int (*cmp)(void *),
 					void (*del)(void*));
+
+/*
+**				FILE
+*/
+
+char			*get_next_line(int fd);
+char			*store_file(int fd);
 
 /*
 **				MATH

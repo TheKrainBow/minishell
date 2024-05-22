@@ -6,7 +6,7 @@
 /*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/21 02:03:49 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/22 07:07:23 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,38 @@ t_func_cmd	get_cmd(char *name)
 	return (&ft_execve);
 }
 
+int	open_options(t_token token)
+{
+	if (token == OUT_APPEND)
+		return (O_WRONLY | O_APPEND | O_CREAT);
+	if (token == OUT_TRUNCATE)
+		return (O_WRONLY | O_TRUNC | O_CREAT);
+	if (token == IN)
+		return (O_RDONLY);
+	return (0);
+}
+
+void	handle_redirection(void *ptr)
+{
+	t_lexer	*content;
+
+	content = ptr;
+	content->fd = open(content->str, open_options(content->token), 0777);
+	dup2(content->fd, content->token != IN);
+}
+
+void	close_redirection(void *ptr)
+{
+	t_lexer	*content;
+
+	content = ptr;
+	close(content->fd);
+}
+
 void	pipe_prev(t_list *node)
 {
 	t_cmd	*prev_cmd;
-	t_cmd		*cmd;
+	t_cmd	*cmd;
 
 	cmd = node->content;
 	if (node->prev)
@@ -55,6 +83,7 @@ void	pipe_prev(t_list *node)
 		dup2(prev_cmd->pipe[0], STDIN_FILENO);
 		close(prev_cmd->pipe[0]);
 	}
+	ft_lstiter(cmd->out, &handle_redirection);
 	if (!get_cmd(cmd->name)(cmd))
 		printf("minishell: command not found: %s\n", cmd->name);
 }
@@ -75,6 +104,7 @@ void	pipe_next(t_list *node)
 	cmd->pid = fork();
 	if (!cmd->pid)
 	{
+		ft_lstiter(cmd->out, &handle_redirection);
 		if (!get_cmd(cmd->name)(cmd))
 			printf("minishell: command not found: %s\n", cmd->name);
 		exit(1);
@@ -85,6 +115,7 @@ void	pipe_next(t_list *node)
 void	start_cmds(t_data *data)
 {
 	t_list		*node;
+	int			ret;
 
 	node = data->cmds;
 	while (node)
@@ -97,11 +128,11 @@ void	start_cmds(t_data *data)
 		dup2(data->std_out, STDOUT_FILENO);
 		node = node->next;
 	}
-	int			ret;
 	node = data->cmds;
 	while (node)
 	{
 		waitpid(((t_cmd *)node->content)->pid, &ret, 0);
+		ft_lstiter(((t_cmd *)node->content)->out, &close_redirection);
 		node = node->next;
 	}
 }
@@ -109,15 +140,22 @@ void	start_cmds(t_data *data)
 int	main(int ac, char **av, char **environ)
 {
 	t_data	*data;
+	char	*line;
 
-	if (ac == 1)
-	{
-		printf("Add arguments\n");
-		return (0);
-	}
+	(void)ac;
+	(void)av;
 	data = init_data(environ);
-	if (parse_input(data, av[1]) != 1)
-		return (free_data(data), 0);
-	start_cmds(data);
-	ft_lstclear(&data->cmds, &free_cmd);
+	line = "";
+	while (line)
+	{
+		ft_putstr("minishell> ");
+		line = get_next_line(0);
+		if (line == NULL || !line[0])
+			continue ;
+		if (parse_input(data, line) != 1)
+			return (free_data(data), 0);
+		start_cmds(data);
+		ft_lstclear(&data->cmds, &free_cmd);
+		free(line);
+	}
 }
