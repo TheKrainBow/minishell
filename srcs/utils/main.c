@@ -6,7 +6,7 @@
 /*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 07:20:21 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/22 07:31:03 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,10 @@ void	pipe_next(t_list *node)
 		ft_lstiter(cmd->out, &handle_redirection);
 		if (!get_cmd(cmd->name)(cmd))
 			printf("minishell: %s: command not found:\n", cmd->name);
+		dup2(cmd->data->std_in, STDIN_FILENO);
+		dup2(cmd->data->std_out, STDOUT_FILENO);
 		exit(1);
 	}
-	close(1);
 }
 
 void	start_cmds(t_data *data)

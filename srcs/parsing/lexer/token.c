@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:57:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/18 03:58:22 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/22 07:42:28 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,28 @@ static void	remove_token(t_token token, t_list **node)
 
 int	check_tokens(t_list **tokens)
 {
-	t_list	*node;
+	t_list	*prev;
 	t_token	token;
 
-	node = *tokens;
-	while (node)
+	while (*tokens)
 	{
-		token = get_lexer(node->content)->token;
+		prev = (*tokens)->prev;
+		token = get_lexer((*tokens)->content)->token;
 		if (token == T_NONE)
 		{
-			node = node->next;
+			(*tokens) = (*tokens)->next;
 			continue ;
 		}
-		if (!node->next || get_lexer(node->next->content)->token != T_NONE)
+		if (!(*tokens)->next || get_lexer((*tokens)->next->content)->token != T_NONE)
 		{
 			printf("minishell: parse error near `%s'\n",
-				token_to_strs(get_lexer(node->content)->token));
+				token_to_strs(get_lexer((*tokens)->content)->token));
 			ft_lstclear(tokens, &free_lexer);
 			return (0);
 		}
-		remove_token(token, &node);
+		remove_token(token, tokens);
 	}
+	*tokens = prev;
+	ft_lstfirst(tokens);
 	return (1);
 }
