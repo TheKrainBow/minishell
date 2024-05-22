@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:32:07 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/22 07:14:36 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	ft_execve(t_cmd *cmd)
 		{
 			if (tmp_name != cmd->name)
 				free(tmp_name);
-			perror("execev");
 			return (0);
 		}
 	}

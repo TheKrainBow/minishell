@@ -6,7 +6,7 @@
 /*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 07:11:38 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/22 07:20:21 by krain            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pipe_prev(t_list *node)
 	}
 	ft_lstiter(cmd->out, &handle_redirection);
 	if (!get_cmd(cmd->name)(cmd))
-		printf("minishell: command not found: %s\n", cmd->name);
+		printf("minishell: %s: command not found:\n", cmd->name);
 }
 
 void	pipe_next(t_list *node)
@@ -106,7 +106,7 @@ void	pipe_next(t_list *node)
 	{
 		ft_lstiter(cmd->out, &handle_redirection);
 		if (!get_cmd(cmd->name)(cmd))
-			printf("minishell: command not found: %s\n", cmd->name);
+			printf("minishell: %s: command not found:\n", cmd->name);
 		exit(1);
 	}
 	close(1);
@@ -151,12 +151,16 @@ int	main(int ac, char **av, char **environ)
 		ft_putstr("minishell> ");
 		line = get_next_line(0);
 		if (line == NULL || !line[0])
+		{
+			free(line);
 			continue ;
+		}
 		if (parse_input(data, line) != 1)
 			return (free_data(data), 0);
 		start_cmds(data);
 		ft_lstclear(&data->cmds, &free_cmd);
 		free(line);
 	}
+	free(line);
 	free_data(data);
 }
