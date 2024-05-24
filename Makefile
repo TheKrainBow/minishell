@@ -32,7 +32,7 @@ RM				=	@rm -f
 
 LIBFT			=	libft/libft.a
 
-FLAGS			=	-Wall -Werror -Wextra $(INCLUDES) -fsanitize=address -g
+FLAGS			=	-Wall -Werror -Wextra $(INCLUDES) #-fsanitize=address -g
 
 .c.o:
 					@$(CC) -c $< -o $(<:.c=.o) $(FLAGS)

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:03:14 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 00:33:25 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	ft_exit(t_cmd *cmd)
 		}
 		ret = ft_atoi(cmd->args[1]);
 	}
+	free_data(cmd->data);
 	exit(ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:52:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/21 01:28:15 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/25 00:28:09 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,20 @@ void	free_cmd(void *ptr)
 
 t_data	*init_data(char **environ)
 {
-	t_data	*dest;
+	t_data	*data;
 
-	dest = ft_calloc(1, sizeof(t_data));
-	dest->env = ft_tabcpy(environ);
-	dest->std_in = dup(STDIN_FILENO);
-	dest->std_out = dup(STDOUT_FILENO);
-	return (dest);
+	data = ft_calloc(1, sizeof(t_data));
+	data->env = ft_tabcpy(environ);
+	data->std_in = dup(STDIN_FILENO);
+	data->std_out = dup(STDOUT_FILENO);
+	data->last_error = 0;
+	return (data);
 }
 
 void	free_data(t_data *data)
 {
+	if (data->cmds)
+		ft_lstclear(&data->cmds, &free_cmd);
 	ft_free_tab(data->env);
 	free(data);
 }

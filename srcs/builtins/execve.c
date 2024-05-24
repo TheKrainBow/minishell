@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/24 23:57:32 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 00:28:18 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,28 @@ char	*get_path(t_cmd *cmd)
 
 int	ft_execve(t_cmd *cmd)
 {
-	int		status;
+	int		ret;
 	int		pid;
 	char	*tmp_name;
 
-	status = 0;
+	ret = 0;
 	tmp_name = get_path(cmd);
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(tmp_name, cmd->args, cmd->data->env) == -1)
-		{
-			if (tmp_name != cmd->name)
-				free(tmp_name);
-			return (0);
-		}
-	}
-	else
-	{
+		ret = execve(tmp_name, cmd->args, cmd->data->env) * -127;
 		if (tmp_name != cmd->name)
 			free(tmp_name);
-		wait(&status);
+		free_data(cmd->data);
+		exit(ret);
+	}
+	waitpid(pid, &ret, 0);
+	free(tmp_name);
+	cmd->data->last_error = WEXITSTATUS(ret);
+	if (WEXITSTATUS(ret) == 127)
+	{
+		ft_putstr("Minishell: no such file or directory: ");
+		ft_putendl(cmd->args[0]);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/24 23:53:21 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 00:33:52 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	pipe_next(t_list *node)
 			printf("minishell: %s: command not found:\n", cmd->name);
 		dup2(cmd->data->std_in, STDIN_FILENO);
 		dup2(cmd->data->std_out, STDOUT_FILENO);
+		free_data(cmd->data);
 		exit(1);
 	}
 }
@@ -163,10 +164,11 @@ int	main(int ac, char **av, char **environ)
 		}
 		if (parse_input(data, line) != 1)
 			return (free_data(data), 0);
+		free(line);
 		start_cmds(data);
 		if (data->cmds)
 			ft_lstclear(&data->cmds, &free_cmd);
-		free(line);
+		data->cmds = NULL;
 	}
 	free(line);
 	free_data(data);
