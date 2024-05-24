@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 04:57:07 by magostin          #+#    #+#             */
-/*   Updated: 2024/05/22 07:04:15 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/25 00:02:08 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
+
 typedef struct s_list
 {
 	void				*content;

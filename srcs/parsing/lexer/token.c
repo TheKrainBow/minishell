@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:57:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/23 21:28:45 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 00:02:47 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int	check_tokens(t_list **tokens)
 			(*tokens) = (*tokens)->next;
 			continue ;
 		}
-		if (!(*tokens)->next || get_lexer((*tokens)->next->content)->token != T_NONE)
+		if (!(*tokens)->next || get_lexer((*tokens)->next->content)->token
+			!= T_NONE)
 		{
 			printf("minishell: parse error near `%s'\n",
 				token_to_strs(get_lexer((*tokens)->content)->token));
@@ -88,8 +89,7 @@ int	check_tokens(t_list **tokens)
 		}
 		remove_token(token, tokens);
 	}
-	if (prev)
-		*tokens = prev;
+	*tokens = prev;
 	ft_lstfirst(tokens);
 	return (1);
 }
