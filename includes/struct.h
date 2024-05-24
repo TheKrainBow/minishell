@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:40:06 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 05:56:50 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/23 21:07:00 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef enum e_token
 	HERE_DOC,
 	WHITESPACE,
 	T_NONE,
-}			t_token;
+}	t_token;
 
 typedef struct s_lexer
 {
@@ -39,7 +39,7 @@ typedef struct s_data
 	int			last_error;
 	int			std_in;
 	int			std_out;
-}			t_data;
+}				t_data;
 
 typedef struct s_cmd
 {
@@ -49,7 +49,7 @@ typedef struct s_cmd
 	t_list	*out;
 	int		pipe[2];
 	int		pid;
-}	t_cmd;
+}			t_cmd;
 
 typedef int	(*t_func_cmd)(t_cmd *cmd);
 

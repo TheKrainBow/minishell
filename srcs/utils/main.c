@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 07:31:03 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/24 23:53:21 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	handle_redirection(void *ptr)
 
 	content = ptr;
 	content->fd = open(content->str, open_options(content->token), 0777);
+	if (content->fd < 0)
+	{
+		dprintf(2, "minishell: no such file or directory: %s\n", content->str);
+		return ;
+	}
 	dup2(content->fd, content->token != IN);
 }
 
@@ -159,7 +164,8 @@ int	main(int ac, char **av, char **environ)
 		if (parse_input(data, line) != 1)
 			return (free_data(data), 0);
 		start_cmds(data);
-		ft_lstclear(&data->cmds, &free_cmd);
+		if (data->cmds)
+			ft_lstclear(&data->cmds, &free_cmd);
 		free(line);
 	}
 	free(line);

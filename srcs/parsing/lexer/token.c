@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:57:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 07:42:28 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/23 21:28:45 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	check_tokens(t_list **tokens)
 
 	while (*tokens)
 	{
-		prev = (*tokens)->prev;
 		token = get_lexer((*tokens)->content)->token;
 		if (token == T_NONE)
 		{
+			prev = (*tokens);
 			(*tokens) = (*tokens)->next;
 			continue ;
 		}
@@ -88,7 +88,8 @@ int	check_tokens(t_list **tokens)
 		}
 		remove_token(token, tokens);
 	}
-	*tokens = prev;
+	if (prev)
+		*tokens = prev;
 	ft_lstfirst(tokens);
 	return (1);
 }
