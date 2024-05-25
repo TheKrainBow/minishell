@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:19:47 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:47:46 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_in_env(t_cmd *cmd, char *env_name)
 	return (0);
 }
 
-int	ft_unset(t_cmd *cmd)
+void	ft_unset(t_cmd *cmd)
 {
 	int		i;
 	int		k;
@@ -58,7 +58,7 @@ int	ft_unset(t_cmd *cmd)
 			if (new_env == NULL)
 			{
 				printf("alloc failed for new_env");
-				return (0);
+				return ;
 			}
 			ft_free_tab(cmd->data->env);
 			cmd->data->env = new_env;
@@ -66,5 +66,4 @@ int	ft_unset(t_cmd *cmd)
 		else
 			printf("cant unset %s -> name is not valid\n", cmd->args[i]);
 	}
-	return (1);
 }

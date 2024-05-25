@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:40:06 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:14:03 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:56 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ typedef struct s_cmd
 	int		pid;
 }			t_cmd;
 
-typedef int	(*t_func_cmd)(t_cmd *cmd);
+typedef void	(*t_func_cmd)(t_cmd *cmd);
 
 #endif

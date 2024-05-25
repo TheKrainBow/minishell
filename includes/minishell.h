@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krain <krain@student.42.fr>                +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/22 05:54:35 by krain            ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:48 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,27 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <fcntl.h>
+# include <stdio.h>
+
 
 /*         Built-ins                       */
-int		ft_cd(t_cmd *cmd);
-int		ft_echo(t_cmd *cmd);
-int		ft_env(t_cmd *cmd);
-int		ft_exit(t_cmd *cmd);
-int		ft_export(t_cmd *cmd);
-int		ft_pwd(t_cmd *cmd);
-int		ft_unset(t_cmd *cmd);
-int		ft_execve(t_cmd *cmd);
+void	ft_cd(t_cmd *cmd);
+void	ft_echo(t_cmd *cmd);
+void	ft_env(t_cmd *cmd);
+void	ft_exit(t_cmd *cmd);
+void	ft_export(t_cmd *cmd);
+void	ft_pwd(t_cmd *cmd);
+void	ft_unset(t_cmd *cmd);
+void	ft_execve(t_cmd *cmd);
 
 int		plus_in_name(char *env_name);
 int		already_in_env(char *env_name, t_cmd *cmd);
 int		check_env_name(char *env_name);
 void	remove_plus(char *str);
+char	*get_var_from_env(char **env, char *var);
 
 /*         Parsing                          */
 int		parse_input(t_data *data, char *input);

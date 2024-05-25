@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:33:52 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:49:52 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ void	pipe_prev(t_list *node)
 		close(prev_cmd->pipe[0]);
 	}
 	ft_lstiter(cmd->out, &handle_redirection);
-	if (!get_cmd(cmd->name)(cmd))
-		printf("minishell: %s: command not found:\n", cmd->name);
+	get_cmd(cmd->name)(cmd);
 }
 
 void	pipe_next(t_list *node)
@@ -110,8 +109,7 @@ void	pipe_next(t_list *node)
 	if (!cmd->pid)
 	{
 		ft_lstiter(cmd->out, &handle_redirection);
-		if (!get_cmd(cmd->name)(cmd))
-			printf("minishell: %s: command not found:\n", cmd->name);
+		get_cmd(cmd->name)(cmd);
 		dup2(cmd->data->std_in, STDIN_FILENO);
 		dup2(cmd->data->std_out, STDOUT_FILENO);
 		free_data(cmd->data);
@@ -148,6 +146,7 @@ int	main(int ac, char **av, char **environ)
 {
 	t_data	*data;
 	char	*line;
+	unsigned long int		line_size;
 
 	(void)ac;
 	(void)av;
@@ -155,13 +154,15 @@ int	main(int ac, char **av, char **environ)
 	line = "";
 	while (line)
 	{
+		line = NULL;
 		ft_putstr("minishell> ");
-		line = get_next_line(0);
+		getline(&line, &line_size, stdin);
 		if (line == NULL || !line[0])
 		{
 			free(line);
 			continue ;
 		}
+		add_history(line);
 		if (parse_input(data, line) != 1)
 			return (free_data(data), 0);
 		free(line);

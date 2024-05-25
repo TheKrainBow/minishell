@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:08:34 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:22 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	print_env(t_cmd *cmd, char *name)
 	return (0);
 }
 
-int	ft_echo(t_cmd *cmd)
+void	ft_echo(t_cmd *cmd)
 {
 	int	i;
 	int	n_opt;
@@ -58,11 +58,11 @@ int	ft_echo(t_cmd *cmd)
 	if (cmd->args[i] == NULL)
 	{
 		ft_putstr("\n");
-		return (1);
+		return ;
 	}
 	n_opt = check_echo_opt(cmd->args[i]);
 	if (n_opt == 1 && cmd->args[i + 1] == NULL)
-		return (1);
+		return ;
 	while (check_echo_opt(cmd->args[i]))
 		i++;
 	while (cmd->args[i] != NULL)
@@ -76,5 +76,4 @@ int	ft_echo(t_cmd *cmd)
 	if (n_opt == 0)
 		ft_putstr("\n");
 	cmd->data->last_error = 0;
-	return (1);
 }

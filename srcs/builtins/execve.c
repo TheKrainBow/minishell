@@ -6,28 +6,26 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:28:18 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:07 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_path_from_env(char **env)
+char	*get_var_from_env(char **env, char *var)
 {
-	char	**path;
 	int		i;
 
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp("PATH=", env[i], 5) == 0)
+		if (ft_strncmp(var, env[i], ft_strlen(var)) == 0)
 			break ;
 		i++;
 	}
 	if (!env[i])
 		return (NULL);
-	path = ft_split(env[i] + 5, ':');
-	return (path);
+	return (env[i]);
 }
 
 char	*get_path(t_cmd *cmd)
@@ -38,7 +36,8 @@ char	*get_path(t_cmd *cmd)
 	char	*tmp;
 
 	i = 0;
-	path = get_path_from_env(cmd->data->env);
+	tmp = get_var_from_env(cmd->data->env, "PATH=");
+	path = ft_split(tmp + 5, ':');
 	tmp = ft_strjoin("/", cmd->name);
 	while (path && path[i])
 	{
@@ -57,7 +56,7 @@ char	*get_path(t_cmd *cmd)
 	return (NULL);
 }
 
-int	ft_execve(t_cmd *cmd)
+void	ft_execve(t_cmd *cmd)
 {
 	int		ret;
 	int		pid;
@@ -82,5 +81,5 @@ int	ft_execve(t_cmd *cmd)
 		ft_putstr("Minishell: no such file or directory: ");
 		ft_putendl(cmd->args[0]);
 	}
-	return (1);
+	return ;
 }

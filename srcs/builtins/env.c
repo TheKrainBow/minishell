@@ -6,13 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:08:48 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:09 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_cmd *cmd)
+void	ft_env(t_cmd *cmd)
 {
 	int	i;
 
@@ -24,5 +24,5 @@ int	ft_env(t_cmd *cmd)
 		i++;
 	}
 	cmd->data->last_error = 0;
-	return (1);
+	return ;
 }

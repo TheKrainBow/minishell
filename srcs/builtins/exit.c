@@ -6,13 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:33:25 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:03 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(t_cmd *cmd)
+void	ft_exit(t_cmd *cmd)
 {
 	int		ret;
 
@@ -28,7 +28,7 @@ int	ft_exit(t_cmd *cmd)
 		else if (cmd->args[2])
 		{
 			ft_printf("minishell: exit: too many arguments\n");
-			return (1);
+			return ;
 		}
 		ret = ft_atoi(cmd->args[1]);
 	}

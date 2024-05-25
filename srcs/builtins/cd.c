@@ -6,20 +6,27 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:08:46 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:48:17 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(t_cmd *cmd)
+void	ft_cd(t_cmd *cmd)
 {
-	char	buffer[11];
+	char	*path;
+	int		n_args;
 
-	(void)cmd;
-	buffer[read(0, buffer, 1)] = 0;
-	buffer[0]++;
-	printf("%s\n", buffer);
-	cmd->data->last_error = 0;
-	return (1);
+	n_args = ft_tablen(cmd->args);
+	if (n_args > 2)
+	{
+		ft_printf("minishell: cd: too many arguments\n");
+		cmd->data->last_error = 1;
+		return ;
+	}
+	if (n_args == 1)
+		path = get_var_from_env(cmd->data->env, "HOME=");
+	else
+		path = cmd->args[1];
+	cmd->data->last_error = chdir(path);
 }

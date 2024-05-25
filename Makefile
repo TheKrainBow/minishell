@@ -22,7 +22,7 @@ SRCS_BULTINS	=	cd.c									\
 INCLUDES		=	-Iincludes								\
 					-Ilibft/includes
 
-LD_FLAGS		=	-Llibft -lft -ltermcap
+LD_FLAGS		=	-Llibft -lft -ltermcap -lreadline
 
 NAME			=	minishell
 OBJS			=	$(addprefix srcs/, $(ALL_SRCS:.c=.o))
