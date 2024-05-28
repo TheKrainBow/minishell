@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:40:06 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:48:56 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:20:48 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,29 @@ typedef enum e_token
 
 typedef struct s_lexer
 {
-	char	*str;
-	t_token	token;
-	int		fd;
-}			t_lexer;
+	char			*str;
+	t_token			token;
+	int				fd;
+}					t_lexer;
 
 typedef struct s_data
 {
-	t_list		*cmds;
-	char		**env;
-	int			std_in;
-	int			std_out;
-	int			last_error;
-}				t_data;
+	t_list			*cmds;
+	char			**env;
+	int				std_in;
+	int				std_out;
+	int				last_error;
+}					t_data;
 
 typedef struct s_cmd
 {
-	char	*name;
-	char	**args;
-	t_data	*data;
-	t_list	*out;
-	int		pipe[2];
-	int		pid;
-}			t_cmd;
+	char			*name;
+	char			**args;
+	t_data			*data;
+	t_list			*out;
+	int				pipe[2];
+	int				pid;
+}					t_cmd;
 
 typedef void	(*t_func_cmd)(t_cmd *cmd);
 

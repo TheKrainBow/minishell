@@ -6,15 +6,14 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:48:48 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/28 23:36:37 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "struct.h"
-# include "libft.h"
+# include <termios.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
@@ -22,7 +21,8 @@
 # include <readline/history.h>
 # include <fcntl.h>
 # include <stdio.h>
-
+# include "struct.h"
+# include "libft.h"
 
 /*         Built-ins                       */
 void	ft_cd(t_cmd *cmd);

@@ -88,7 +88,7 @@ CC			=	@cc
 RM			=	@rm -f
 NAME		=	libft.a
 
-FLAGS		=	-Wall -Werror -Wextra -Iincludes
+FLAGS		=	-Wall -Werror -Wextra -Iincludes #-fsanitize=address -g
 
 .c.o:
 				$(CC) $(FLAGS) -c $< -o $(<:.c=.o)

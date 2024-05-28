@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:57:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 00:02:47 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:20:07 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ t_token	get_token(char *str)
 	return (T_NONE);
 }
 
-static t_lexer	*get_lexer(void *ptr)
-{
-	return (ptr);
-}
-
 static void	remove_token(t_token token, t_list **node)
 {
 	if (token == PIPE)
@@ -59,10 +54,28 @@ static void	remove_token(t_token token, t_list **node)
 		return ;
 	}
 	*node = (*node)->next;
-	get_lexer((*node)->content)->token = get_lexer((*node)->prev->content)
-	->token;
+	((t_lexer *)(*node)->content)->token = ((t_lexer *)(*node)->prev->content)
+		->token;
 	ft_lstrmone((*node)->prev, &free_lexer);
 	*node = (*node)->next;
+}
+
+int	token_error(t_list **tokens)
+{
+	if (!(*tokens)->next)
+	{
+		ft_printf("minishell: syntax error near unexpected"
+			" token `newline'\n");
+		return (ft_lstclear(tokens, &free_lexer), 0);
+	}
+	if (((t_lexer *)(*tokens)->next->content)->token
+		!= T_NONE)
+	{
+		ft_printf("minishell: syntax error near unexpected token `%s'\n",
+			token_to_strs(((t_lexer *)(*tokens)->next->content)->token));
+		return (ft_lstclear(tokens, &free_lexer), 0);
+	}
+	return (0);
 }
 
 int	check_tokens(t_list **tokens)
@@ -72,21 +85,16 @@ int	check_tokens(t_list **tokens)
 
 	while (*tokens)
 	{
-		token = get_lexer((*tokens)->content)->token;
+		token = ((t_lexer *)(*tokens)->content)->token;
 		if (token == T_NONE)
 		{
 			prev = (*tokens);
 			(*tokens) = (*tokens)->next;
 			continue ;
 		}
-		if (!(*tokens)->next || get_lexer((*tokens)->next->content)->token
-			!= T_NONE)
-		{
-			printf("minishell: parse error near `%s'\n",
-				token_to_strs(get_lexer((*tokens)->content)->token));
-			ft_lstclear(tokens, &free_lexer);
-			return (0);
-		}
+		if (!(*tokens)->next
+			|| ((t_lexer *)(*tokens)->next->content)->token != T_NONE)
+			return (token_error(tokens));
 		remove_token(token, tokens);
 	}
 	*tokens = prev;

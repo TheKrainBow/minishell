@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:49:52 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:19:19 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,26 +146,21 @@ int	main(int ac, char **av, char **environ)
 {
 	t_data	*data;
 	char	*line;
-	unsigned long int		line_size;
 
 	(void)ac;
 	(void)av;
 	data = init_data(environ);
-	line = "";
-	while (line)
+	while (1)
 	{
-		line = NULL;
-		ft_putstr("minishell> ");
-		getline(&line, &line_size, stdin);
-		if (line == NULL || !line[0])
+		line = readline("minishell> ");
+		if (line == NULL || line[0] == '\n' || line[0] == '\0')
 		{
 			free(line);
 			continue ;
 		}
 		add_history(line);
 		if (parse_input(data, line) != 1)
-			return (free_data(data), 0);
-		free(line);
+			continue ;
 		start_cmds(data);
 		if (data->cmds)
 			ft_lstclear(&data->cmds, &free_cmd);

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:48:07 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:19:14 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_execve(t_cmd *cmd)
 	cmd->data->last_error = WEXITSTATUS(ret);
 	if (WEXITSTATUS(ret) == 127)
 	{
-		ft_putstr("Minishell: no such file or directory: ");
+		ft_putstr("minishell: no such file or directory: ");
 		ft_putendl(cmd->args[0]);
 	}
 	return ;
