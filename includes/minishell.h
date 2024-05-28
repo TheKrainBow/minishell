@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/28 23:36:37 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:29:31 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int		already_in_env(char *env_name, t_cmd *cmd);
 int		check_env_name(char *env_name);
 void	remove_plus(char *str);
 char	*get_var_from_env(char **env, char *var);
+
+/*         Utils/signal.c                   */
+void	signals_main(void);
+void	signals_pipe(void);
 
 /*         Parsing                          */
 int		parse_input(t_data *data, char *input);

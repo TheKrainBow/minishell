@@ -6,35 +6,45 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 23:47:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:14:38 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:51:30 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ctrl_pipe(int signum)
+extern int	g_pid;
+
+void	pipe_sigint(int signum)
 {
-	if (g_pid == 0)
-		g_pid.exit_status = 0;
-	kill(g_pid, g_pid.exit_status);
-	g_pid.exit_status = signum + 128;
+	(void)signum;
+	ft_printf("\n");
 }
 
-void	stop_read(int signum)
+void	main_sigint(int signum)
 {
-	close(0);
-	ft_putendl("^C");
-	g_pid.exit_status = signum + 128;
+	(void)signum;
+	ft_printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_pid = 1;
+}
+
+void	main_sigquit(int signum)
+{
+	(void)signum;
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	signals_main(void)
 {
-	signal(SIGINT, stop_read);
+	signal(SIGINT, main_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
 
 void	signals_pipe(void)
 {
-	signal(SIGINT, ctrl_pipe);
-	signal(SIGQUIT, ctrl_pipe);
+	signal(SIGINT, pipe_sigint);
+	signal(SIGQUIT, pipe_sigint);
 }

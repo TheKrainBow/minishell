@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:19:19 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:50:37 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_pid;
 
 void	print_cmd(void *ptr)
 {
@@ -142,30 +144,42 @@ void	start_cmds(t_data *data)
 	}
 }
 
-int	main(int ac, char **av, char **environ)
+void	minishell(t_data *data)
 {
-	t_data	*data;
 	char	*line;
 
-	(void)ac;
-	(void)av;
-	data = init_data(environ);
+	line = NULL;
 	while (1)
 	{
+		free(line);
+		signals_main();
 		line = readline("minishell> ");
-		if (line == NULL || line[0] == '\n' || line[0] == '\0')
+		if (!line)
 		{
 			free(line);
-			continue ;
+			free_data(data);
+			printf("exit\n");
+			exit(1);
 		}
-		add_history(line);
 		if (parse_input(data, line) != 1)
 			continue ;
+		add_history(line);
+		signals_pipe();
 		start_cmds(data);
 		if (data->cmds)
 			ft_lstclear(&data->cmds, &free_cmd);
 		data->cmds = NULL;
 	}
-	free(line);
+}
+
+int	main(int ac, char **av, char **environ)
+{
+	t_data	*data;
+
+	(void)ac;
+	(void)av;
+	g_pid = 0;
+	data = init_data(environ);
+	minishell(data);
 	free_data(data);
 }

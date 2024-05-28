@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:08:54 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:07:14 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:46:41 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ int	parse_input(t_data *data, char *input)
 	t_list	**splitted_tokens;
 	int		i;
 
+	if (!input[0])
+		return (1);
 	tokens = input_lexer(input);
-	free(input);
 	if (check_tokens(&tokens) == 0)
 		return (0);
 	splitted_tokens = ft_lstsplit(tokens, &is_pipe, &free_lexer);
