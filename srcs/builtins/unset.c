@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giorgi <giorgi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 03:32:18 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:32:15 by giorgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	ft_unset(t_cmd *cmd)
 			new_env = ft_tabrmi(cmd->data->env, k);
 			if (new_env == NULL)
 			{
-				printf("alloc failed for new_env");
+				ft_printf("alloc failed for new_env");
 				return ;
 			}
 			ft_free_tab(cmd->data->env);
 			cmd->data->env = new_env;
 		}
 		else
-			printf("cant unset %s -> name is not valid\n", cmd->args[i]);
+			continue ;
 	}
 	cmd->data->last_error = 0;
 }

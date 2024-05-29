@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giorgi <giorgi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 03:32:04 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:34:06 by giorgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	**realloc_env(t_cmd *cmd)
 		if (new_env[i] == NULL)
 		{
 			ft_free_tab(new_env);
-			printf("alloc faild");
 			return (NULL);
 		}
 		i++;
@@ -47,10 +46,7 @@ void	put_line_in_env(t_cmd *cmd, int n)
 	new_env = realloc_env(cmd);
 	new_env[size] = ft_strdup(cmd->args[n]);
 	if (!new_env[size])
-	{
-		printf("alloc failed");
 		return ;
-	}
 	new_env[size + 1] = NULL;
 	ft_free_tab(cmd->data->env);
 	cmd->data->env = new_env;
@@ -64,10 +60,7 @@ void	new_val_for_env(t_cmd *cmd, int n)
 	i = 0;
 	new_env = ft_strdup(cmd->args[n]);
 	if (new_env == NULL)
-	{
-		printf("alloc faild \n");
 		return ;
-	}
 	while (cmd->data->env[i] != NULL)
 	{
 		if (ft_strncmp(cmd->data->env[i], new_env,
@@ -132,5 +125,7 @@ void	ft_export(t_cmd *cmd)
 			new_val_for_env(cmd, i);
 		i++;
 	}
+	if (cmd->args[1] == NULL)
+		export_oargs(cmd);
 	cmd->data->last_error = 0;
 }

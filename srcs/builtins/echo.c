@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giorgi <giorgi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 03:25:41 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:00:41 by giorgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//we can add one more int in ft_echo to track option position in args
-//if we need in case of " | "
 
 int	check_echo_opt(char *option)
 {

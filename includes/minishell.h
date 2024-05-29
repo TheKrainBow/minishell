@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giorgi <giorgi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:43:23 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:51:18 by giorgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		already_in_env(char *env_name, t_cmd *cmd);
 int		check_env_name(char *env_name);
 void	remove_plus(char *str);
 char	*get_var_from_env(char **env, char *var);
+void	export_oargs(t_cmd *cmd);
 
 /*         Utils/signal.c                   */
 void	signals_main(void);

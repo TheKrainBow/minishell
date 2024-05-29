@@ -22,6 +22,7 @@ SRCS_BULTINS	=	cd.c									\
 					unset.c									\
 					execve.c								\
 					bul_utils.c 							\
+					export_utils.c							\
 
 INCLUDES		=	-Iincludes								\
 					-Ilibft/includes
