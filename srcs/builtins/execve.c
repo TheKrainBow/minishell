@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:19:14 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 02:54:10 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*get_var_from_env(char **env, char *var)
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(var, env[i], ft_strlen(var)) == 0)
+		if (ft_strncmp(var, env[i], ft_strlen(var)) == 0
+			&& env[i][ft_strlen(var)] == '=')
 			break ;
 		i++;
 	}
@@ -36,7 +37,9 @@ char	*get_path(t_cmd *cmd)
 	char	*tmp;
 
 	i = 0;
-	tmp = get_var_from_env(cmd->data->env, "PATH=");
+	tmp = get_var_from_env(cmd->data->env, "PATH");
+	if (!tmp)
+		return (cmd->name);
 	path = ft_split(tmp + 5, ':');
 	tmp = ft_strjoin("/", cmd->name);
 	while (path && path[i])
@@ -78,8 +81,8 @@ void	ft_execve(t_cmd *cmd)
 	cmd->data->last_error = WEXITSTATUS(ret);
 	if (WEXITSTATUS(ret) == 127)
 	{
-		ft_putstr("minishell: no such file or directory: ");
-		ft_putendl(cmd->args[0]);
+		ft_putstr("minishell: command not found: ");
+		ft_putendl(cmd->name);
 	}
 	return ;
 }

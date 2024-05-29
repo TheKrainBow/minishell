@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 23:47:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:51:30 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:11:36 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ void	main_sigint(int signum)
 	ft_printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
-	g_pid = 1;
-}
-
-void	main_sigquit(int signum)
-{
-	(void)signum;
-	rl_on_new_line();
 	rl_redisplay();
 }
 

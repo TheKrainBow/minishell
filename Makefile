@@ -1,7 +1,7 @@
 ALL_SRCS		=	$(addprefix parsing/, $(SRCS_PARSING)) $(addprefix utils/, $(SRCS_UTILS)) $(addprefix builtins/, $(SRCS_BULTINS))
 
 SRCS_UTILS		=	main.c									\
-					signal.c
+					signal.c								\
 
 SRCS_PARSING	=	parsing.c								\
 					memory.c								\

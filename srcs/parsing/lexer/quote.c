@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 03:01:15 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/19 21:54:00 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:40:54 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ int	skip_quotes(char *input)
 		swap_quote(&quote, input[i]);
 		i++;
 	}
-	return (i + 1);
+	return (i);
 }

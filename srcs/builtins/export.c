@@ -6,13 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:48:32 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 02:04:11 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**expand_env(t_cmd *cmd)
+char	**realloc_env(t_cmd *cmd)
 {
 	int		size;
 	char	**new_env;
@@ -44,7 +44,7 @@ void	put_line_in_env(t_cmd *cmd, int n)
 	char	**new_env;
 
 	size = ft_tablen(cmd->data->env);
-	new_env = expand_env(cmd);
+	new_env = realloc_env(cmd);
 	new_env[size] = ft_strdup(cmd->args[n]);
 	if (!new_env[size])
 	{

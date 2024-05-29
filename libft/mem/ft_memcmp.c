@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdelwaul <mdelwaul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 02:11:23 by magostin          #+#    #+#             */
-/*   Updated: 2021/06/25 13:51:48 by mdelwaul         ###   ########.fr       */
+/*   Created: 2019/11/07 02:11:23 by maagosti          #+#    #+#             */
+/*   Updated: 2024/05/29 03:28:27 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *p1, const void *p2, size_t n)
 {
-	size_t			i;
-	unsigned char	*temp1;
-	unsigned char	*temp2;
+	const unsigned char	*s1;
+	const unsigned char	*s2;
+	size_t				i;
 
-	if (n == 0)
+	s1 = p1;
+	s2 = p2;
+	if ((!s1 && !s2) || n == 0)
 		return (0);
-	temp1 = (unsigned char *)s1;
-	temp2 = (unsigned char *)s2;
+	if (!s1)
+		return (*s2);
+	if (!s2)
+		return (*s1);
 	i = 0;
-	while (i < n)
-	{
-		if (temp1[i] != temp2[i])
-			return (temp1[i] - temp2[i]);
+	while (s1[i] == s2[i] && i < n - 1)
 		i++;
-	}
-	return (0);
+	return (s1[i] - s2[i]);
 }

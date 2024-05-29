@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:50:37 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:34:39 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,12 @@ void	start_cmds(t_data *data)
 		ft_lstiter(((t_cmd *)node->content)->out, &close_redirection);
 		node = node->next;
 	}
+	if (WIFEXITED(ret))
+		data->last_error = WEXITSTATUS(ret);
+	else if (WIFSIGNALED(ret))
+		data->last_error = 128 + WTERMSIG(ret);
+	else if (WIFSTOPPED(ret))
+		data->last_error = 128 + WSTOPSIG(ret);
 }
 
 void	minishell(t_data *data)
@@ -153,21 +159,20 @@ void	minishell(t_data *data)
 	{
 		free(line);
 		signals_main();
+		dup2(data->std_in, STDIN_FILENO);
+		dup2(data->std_out, STDOUT_FILENO);
 		line = readline("minishell> ");
+		signals_pipe();
 		if (!line)
 		{
-			free(line);
-			free_data(data);
 			printf("exit\n");
-			exit(1);
+			break ;
 		}
 		if (parse_input(data, line) != 1)
 			continue ;
 		add_history(line);
-		signals_pipe();
 		start_cmds(data);
-		if (data->cmds)
-			ft_lstclear(&data->cmds, &free_cmd);
+		ft_lstclear(&data->cmds, &free_cmd);
 		data->cmds = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:53:42 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/23 21:29:03 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:44:52 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_list	*input_lexer(char *input)
 	{
 		if (ft_isquote(input[i]))
 		{
-			i += skip_quotes(input + i);
+			i += skip_quotes(input + i) + 1;
 			continue ;
 		}
 		found_token = get_token(input + i);
