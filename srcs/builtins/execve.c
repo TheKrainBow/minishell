@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:21:23 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 04:36:49 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ char	*get_path(t_cmd *cmd)
 	{
 		dest = ft_strjoin(path[i], tmp);
 		if (access(dest, F_OK | X_OK) == 0)
-		{
-			free(tmp);
-			ft_free_tab(path);
-			return (dest);
-		}
+			return (free(tmp), ft_free_tab(path), dest);
 		free(dest);
 		i++;
 	}
@@ -80,14 +76,9 @@ void	ft_execve(t_cmd *cmd)
 	}
 	waitpid(pid, &ret, 0);
 	free(tmp_name);
+	cmd->data->last_error = 0;
 	if (WIFEXITED(ret))
 		cmd->data->last_error = WEXITSTATUS(ret);
-	else
-		cmd->data->last_error = 0;
 	if (cmd->data->last_error == 127)
-	{
-		ft_putstr_fd("minishell: command not found: ", 2);
-		ft_putendl_fd(cmd->name, 2);
-	}
-	return ;
+		ft_printf("minishell: command not found: %s\n", cmd->name);
 }

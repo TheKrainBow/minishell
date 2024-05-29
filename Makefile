@@ -2,10 +2,13 @@ ALL_SRCS		=	$(addprefix parsing/, $(SRCS_PARSING)) $(addprefix utils/, $(SRCS_UT
 
 SRCS_UTILS		=	main.c									\
 					signal.c								\
+					pipe.c									\
+					redirections.c							\
 
 SRCS_PARSING	=	parsing.c								\
 					memory.c								\
 					lst.c									\
+					env_expand.c							\
 					lexer/lexer.c							\
 					lexer/quote.c							\
 					lexer/token.c							\

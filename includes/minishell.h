@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:12:08 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 04:43:23 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,15 @@ char	*get_var_from_env(char **env, char *var);
 void	signals_main(void);
 void	signals_pipe(void);
 
+void	close_redirection(void *ptr);
+void	handle_redirection(void *ptr);
+
+void	pipe_prev(t_list *node);
+void	pipe_next(t_list *node);
+
 /*         Parsing                          */
 int		parse_input(t_data *data, char *input);
+void	expand_env(t_data *data, t_list *tokens);
 
 /*        Parsing/lexer/lexer.c             */
 t_list	*input_lexer(char *input);
