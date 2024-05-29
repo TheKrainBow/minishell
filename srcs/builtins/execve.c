@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 02:54:10 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 04:21:23 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ char	*get_path(t_cmd *cmd)
 	char	**path;
 	char	*tmp;
 
+	if (ft_strchr(cmd->name, '/'))
+		return (ft_strdup(cmd->name));
 	i = 0;
 	tmp = get_var_from_env(cmd->data->env, "PATH");
 	if (!tmp)
-		return (cmd->name);
+		return (ft_strdup(cmd->name));
 	path = ft_split(tmp + 5, ':');
 	tmp = ft_strjoin("/", cmd->name);
 	while (path && path[i])
@@ -78,11 +80,14 @@ void	ft_execve(t_cmd *cmd)
 	}
 	waitpid(pid, &ret, 0);
 	free(tmp_name);
-	cmd->data->last_error = WEXITSTATUS(ret);
-	if (WEXITSTATUS(ret) == 127)
+	if (WIFEXITED(ret))
+		cmd->data->last_error = WEXITSTATUS(ret);
+	else
+		cmd->data->last_error = 0;
+	if (cmd->data->last_error == 127)
 	{
-		ft_putstr("minishell: command not found: ");
-		ft_putendl(cmd->name);
+		ft_putstr_fd("minishell: command not found: ", 2);
+		ft_putendl_fd(cmd->name, 2);
 	}
 	return ;
 }

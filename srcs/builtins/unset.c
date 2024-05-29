@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:47:46 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 03:32:18 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ void	ft_unset(t_cmd *cmd)
 		else
 			printf("cant unset %s -> name is not valid\n", cmd->args[i]);
 	}
+	cmd->data->last_error = 0;
 }

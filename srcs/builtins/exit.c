@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/25 02:48:03 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 04:15:27 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_exit(t_cmd *cmd)
 		else if (cmd->args[2])
 		{
 			ft_printf("minishell: exit: too many arguments\n");
+			cmd->data->last_error = 1;
 			return ;
 		}
 		ret = ft_atoi(cmd->args[1]);

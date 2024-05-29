@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 01:34:39 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 04:12:13 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	pipe_prev(t_list *node)
 void	pipe_next(t_list *node)
 {
 	t_cmd	*cmd;
+	int		ret;
 
 	cmd = node->content;
 	pipe(cmd->pipe);
@@ -112,30 +113,23 @@ void	pipe_next(t_list *node)
 	{
 		ft_lstiter(cmd->out, &handle_redirection);
 		get_cmd(cmd->name)(cmd);
+		close(cmd->pipe[0]);
 		dup2(cmd->data->std_in, STDIN_FILENO);
 		dup2(cmd->data->std_out, STDOUT_FILENO);
+		ret = cmd->data->last_error;
 		free_data(cmd->data);
-		exit(1);
+		exit(ret);
 	}
 }
 
-void	start_cmds(t_data *data)
+void	wait_cmds(t_data *data)
 {
-	t_list		*node;
-	int			ret;
+	int		ret;
+	t_list	*node;
 
-	node = data->cmds;
-	while (node)
-	{
-		if (node->next)
-			pipe_next(node);
-		else
-			pipe_prev(node);
-		dup2(data->std_in, STDIN_FILENO);
-		dup2(data->std_out, STDOUT_FILENO);
-		node = node->next;
-	}
-	node = data->cmds;
+	if (ft_lstsize(data->cmds) <= 1)
+		return ;
+	node = data->cmds->next;
 	while (node)
 	{
 		waitpid(((t_cmd *)node->content)->pid, &ret, 0);
@@ -148,6 +142,24 @@ void	start_cmds(t_data *data)
 		data->last_error = 128 + WTERMSIG(ret);
 	else if (WIFSTOPPED(ret))
 		data->last_error = 128 + WSTOPSIG(ret);
+}
+
+void	start_cmds(t_data *data)
+{
+	t_list		*node;
+
+	node = data->cmds;
+	while (node)
+	{
+		if (node->next)
+			pipe_next(node);
+		else
+			pipe_prev(node);
+		dup2(data->std_in, STDIN_FILENO);
+		dup2(data->std_out, STDOUT_FILENO);
+		node = node->next;
+	}
+	wait_cmds(data);
 }
 
 void	minishell(t_data *data)

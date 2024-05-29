@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:08:54 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 03:25:52 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/05/29 04:27:36 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_var(t_lexer *token, t_data *data, int i)
 	}
 }
 
-void	expand_env(t_lexer *token, t_data *data)
+void	replace_env(t_lexer *token, t_data *data)
 {
 	int		i;
 	char	quote;
@@ -76,7 +76,7 @@ void	expand_env(t_lexer *token, t_data *data)
 	{
 		if (ft_isquote(token->str[i]))
 			swap_quote(&quote, token->str[i]);
-		else if (token->str[i] == '$' && quote != '\'')
+		else if (token->str[i] == '$' && quote != '\'' && token->str[i + 1])
 		{
 			handle_var(token, data, i);
 			i--;
@@ -109,11 +109,11 @@ void	remove_quotes(void *content)
 	}
 }
 
-void	test(t_data *data, t_list *tokens)
+void	expand_env(t_data *data, t_list *tokens)
 {
 	while (tokens)
 	{
-		expand_env(tokens->content, data);
+		replace_env(tokens->content, data);
 		tokens = tokens->next;
 	}
 }
@@ -123,7 +123,7 @@ void	create_cmd(t_data *data, t_list *tokens)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(sizeof(t_cmd), 1);
-	test(data, tokens);
+	expand_env(data, tokens);
 	ft_lstiter(tokens, &remove_quotes);
 	cmd->args = ft_lsttotab_if(tokens, &is_arg, &lst_conv);
 	ft_lstrm_if(&tokens, &is_arg, &free_lexer);
@@ -139,7 +139,7 @@ int	parse_input(t_data *data, char *input)
 	t_list	**splitted_tokens;
 	int		i;
 
-	if (!input[0])
+	if (ft_strmap(input, ft_iswhitespace) || !input[0])
 		return (1);
 	tokens = input_lexer(input);
 	if (check_tokens(&tokens) == 0)
