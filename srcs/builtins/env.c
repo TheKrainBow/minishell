@@ -6,13 +6,13 @@
 /*   By: giorgi <giorgi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/30 19:02:47 by giorgi           ###   ########.fr       */
+/*   Updated: 2024/05/30 21:29:38 by giorgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_env(t_cmd *cmd, char *env_name, char *env_val, int p)
+void	set_env(char **env, char *env_name, char *env_val, int p)
 {
 	int		i;
 	int		size;
@@ -36,22 +36,22 @@ void	set_env(t_cmd *cmd, char *env_name, char *env_val, int p)
 		new[i] = *env_val++;
 		i++;
 	}
-	free(cmd->data->env[p]);
-	cmd->data->env[p] = new;
+	free(env[p]);
+	env[p] = new;
 }
 
-void	set_env_var(t_cmd *cmd, char *env_name, char *env_val)
+void	set_env_var(char **env, char *env_name, char *env_val)
 {
 	int	name_size;
 	int	i;
 
 	i = 0;
 	name_size = ft_strlen(env_name);
-	while (cmd->data->env[i] != NULL)
+	while (env[i] != NULL)
 	{
-		if (ft_strncmp(cmd->data->env[i], env_name, name_size) == 0)
+		if (ft_strncmp(env[i], env_name, name_size) == 0)
 		{
-			set_env(cmd, env_name, env_val, i);
+			set_env(env, env_name, env_val, i);
 			return ;
 		}
 		i++;

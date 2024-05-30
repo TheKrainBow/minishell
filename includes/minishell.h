@@ -6,7 +6,7 @@
 /*   By: giorgi <giorgi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/30 19:03:06 by giorgi           ###   ########.fr       */
+/*   Updated: 2024/05/30 21:29:52 by giorgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		check_env_name(char *env_name);
 void	remove_plus(char *str);
 char	*get_var_from_env(char **env, char *var);
 void	export_oargs(t_cmd *cmd);
-void	set_env_var(t_cmd *cmd, char *env_name, char *env_val);
+void	set_env_var(char **env, char *env_name, char *env_val);
 
 /*         Utils/signal.c                   */
 void	signals_main(void);
