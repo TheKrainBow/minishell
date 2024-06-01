@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:52:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 01:09:56 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:28:38 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_data	*init_data(char **environ)
 
 	data = ft_calloc(1, sizeof(t_data));
 	data->env = ft_tabcpy(environ);
+	data->last_error = 0;
 	data->std_in = dup(STDIN_FILENO);
 	data->std_out = dup(STDOUT_FILENO);
-	data->last_error = 0;
 	return (data);
 }
 
@@ -54,4 +54,5 @@ void	free_data(t_data *data)
 		ft_lstclear(&data->cmds, &free_cmd);
 	ft_free_tab(data->env);
 	free(data);
+	rl_clear_history();
 }

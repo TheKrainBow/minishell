@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 21:31:43 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:36:49 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:58:42 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,12 @@ void	ft_execve(t_cmd *cmd)
 	}
 	waitpid(pid, &ret, 0);
 	free(tmp_name);
-	cmd->data->last_error = 0;
 	if (WIFEXITED(ret))
 		cmd->data->last_error = WEXITSTATUS(ret);
+	else if (WIFSIGNALED(ret))
+		cmd->data->last_error = 128 + WTERMSIG(ret);
+	else if (WIFSTOPPED(ret))
+		cmd->data->last_error = 128 + WSTOPSIG(ret);
 	if (cmd->data->last_error == 127)
 		ft_printf("minishell: command not found: %s\n", cmd->name);
 }

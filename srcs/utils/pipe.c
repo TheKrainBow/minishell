@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 04:41:09 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:44:02 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:53:47 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	pipe_prev(t_list *node)
 void	pipe_next(t_list *node)
 {
 	t_cmd	*cmd;
-	int		ret;
 
 	cmd = node->content;
 	pipe(cmd->pipe);
@@ -69,8 +68,7 @@ void	pipe_next(t_list *node)
 		close(cmd->pipe[0]);
 		dup2(cmd->data->std_in, STDIN_FILENO);
 		dup2(cmd->data->std_out, STDOUT_FILENO);
-		ret = cmd->data->last_error;
 		free_data(cmd->data);
-		exit(ret);
+		exit(cmd->data->last_error);
 	}
 }

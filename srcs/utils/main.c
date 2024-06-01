@@ -6,13 +6,11 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:42:10 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:28:35 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	g_pid;
 
 void	print_cmd(void *ptr)
 {
@@ -99,7 +97,6 @@ int	main(int ac, char **av, char **environ)
 
 	(void)ac;
 	(void)av;
-	g_pid = 0;
 	data = init_data(environ);
 	minishell(data);
 	free_data(data);

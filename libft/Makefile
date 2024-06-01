@@ -105,7 +105,7 @@ clean:
 				$(RM) $(OBJS)
 
 start_message:
-				@echo "\033[0;33mMaking \033[1;31m$(NAME)\033[0;33m\t\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
+				@echo "\033[0;33mMaking   \033[1;31m$(NAME)\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
 
 fclean:			
 				$(RM) $(NAME)

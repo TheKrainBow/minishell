@@ -37,19 +37,22 @@ RM				=	@rm -f
 
 LIBFT			=	libft/libft.a
 
-FLAGS			=	-Wall -Werror -Wextra $(INCLUDES) -fsanitize=address -g
+FLAGS			=	-Wall -Werror -Wextra $(INCLUDES) -g #-fsanitize=address
 
 .c.o:
 					@$(CC) -c $< -o $(<:.c=.o) $(FLAGS)
 
+
 $(NAME):			$(LIBFT) start_message $(OBJS)
 					@if [ "$?" = "start_message" ]; then echo -n "\033[1A\033[30C\033[0;33mAlready done\033[15D\033[1B\033[1A\033[2D\033[1;32m✓\033[26D\033[1B\033[0m";else echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m"; fi
 					@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
+					@$(MAKE) -s norm
+
+all:				$(NAME)
 
 $(LIBFT):
 					@make -s -C libft -f Makefile
 
-all:				$(NAME)
 
 bonus:				re
 
@@ -64,10 +67,20 @@ fclean:				clean
 					$(RM) $(NAME)
 
 start_message:
-					@echo "\033[0;33mMaking \033[1;31m$(NAME)\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
+					@echo "\033[0;33mMaking   \033[1;31m$(NAME)\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
 
 re:					fclean $(LIBFT) start_message $(OBJS)
 					@if [ "$?" = "fclean start_message" ]; then echo -n "\033[1A\033[30C\033[0;33mAlready done\033[15D\033[1B\033[1A\033[2D\033[1;32m✓\033[26D\033[1B\033[0m";else echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m"; fi
 					@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
+					@$(MAKE) -s norm
+
+norm:
+					@echo "\033[0;33mChecking \033[1;31mnorminette\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
+					@if norminette > norm.tmp; then\
+						echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m";\
+					else\
+						cat norm.tmp | grep Error;\
+					fi;
+					@rm norm.tmp
 
 .PHONY:				all clean fclean re

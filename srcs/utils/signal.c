@@ -6,13 +6,11 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 23:47:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 01:11:36 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:27:30 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int	g_pid;
 
 void	pipe_sigint(int signum)
 {
