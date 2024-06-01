@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:40:06 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:25:25 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:22:46 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_data
 	char			**env;
 	int				std_in;
 	int				std_out;
-	int				last_error;
 }					t_data;
 
 typedef struct s_cmd

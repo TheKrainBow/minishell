@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 15:09:14 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:24:16 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 int	check_echo_opt(char *option)
 {
@@ -50,5 +52,5 @@ void	ft_echo(t_cmd *cmd)
 	}
 	if (n_opt == 0)
 		ft_putstr("\n");
-	cmd->data->last_error = 0;
+	g_signum = 0;
 }

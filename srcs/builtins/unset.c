@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:27:24 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:24:40 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 int	found(char *env_line, char *env_name)
 {
@@ -66,5 +68,5 @@ void	ft_unset(t_cmd *cmd)
 		else
 			continue ;
 	}
-	cmd->data->last_error = 0;
+	g_signum = 0;
 }

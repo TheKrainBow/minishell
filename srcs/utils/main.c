@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:28:35 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:23:41 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_signum;
 
 void	print_cmd(void *ptr)
 {
@@ -39,11 +41,11 @@ void	wait_cmds(t_data *data)
 		node = node->next;
 	}
 	if (WIFEXITED(ret))
-		data->last_error = WEXITSTATUS(ret);
+		g_signum = WEXITSTATUS(ret);
 	else if (WIFSIGNALED(ret))
-		data->last_error = 128 + WTERMSIG(ret);
+		g_signum = 128 + WTERMSIG(ret);
 	else if (WIFSTOPPED(ret))
-		data->last_error = 128 + WSTOPSIG(ret);
+		g_signum = 128 + WSTOPSIG(ret);
 }
 
 void	start_cmds(t_data *data)
@@ -97,6 +99,7 @@ int	main(int ac, char **av, char **environ)
 
 	(void)ac;
 	(void)av;
+	g_signum = 0;
 	data = init_data(environ);
 	minishell(data);
 	free_data(data);

@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:27:19 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:34:01 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 char	**realloc_env(t_cmd *cmd)
 {
@@ -110,7 +112,11 @@ void	ft_export(t_cmd *cmd)
 	while (cmd->args[i] != NULL)
 	{
 		if (!check_env_name(cmd->args[i]))
-			return ;
+		{
+			ft_printf("bash: export: `%s': not a valid identifier\n", cmd->args[i]);
+			i++;
+			continue ;
+		}
 		if (plus_in_name(cmd->args[i]))
 		{
 			remove_plus(cmd->args[i]);
@@ -127,5 +133,5 @@ void	ft_export(t_cmd *cmd)
 	}
 	if (cmd->args[1] == NULL)
 		export_oargs(cmd);
-	cmd->data->last_error = 0;
+	g_signum = 0;
 }

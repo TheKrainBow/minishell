@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:27:17 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:24:27 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 void	ft_exit(t_cmd *cmd)
 {
@@ -28,11 +30,12 @@ void	ft_exit(t_cmd *cmd)
 		else if (cmd->args[2])
 		{
 			ft_printf("minishell: exit: too many arguments\n");
-			cmd->data->last_error = 1;
+			g_signum = 1;
 			return ;
 		}
 		ret = ft_atoi(cmd->args[1]);
 	}
 	free_data(cmd->data);
+	ft_printf("exit\n");
 	exit(ret);
 }

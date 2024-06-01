@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 04:41:09 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:53:47 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:25:46 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 static t_func_cmd	get_cmd(char *name)
 {
@@ -69,6 +71,6 @@ void	pipe_next(t_list *node)
 		dup2(cmd->data->std_in, STDIN_FILENO);
 		dup2(cmd->data->std_out, STDOUT_FILENO);
 		free_data(cmd->data);
-		exit(cmd->data->last_error);
+		exit(g_signum);
 	}
 }

@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:27:12 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:24:19 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 void	set_env(char **env, char *env_name, char *env_val, int p)
 {
@@ -69,6 +71,6 @@ void	ft_env(t_cmd *cmd)
 		ft_putchar('\n');
 		i++;
 	}
-	cmd->data->last_error = 0;
+	g_signum = 0;
 	return ;
 }

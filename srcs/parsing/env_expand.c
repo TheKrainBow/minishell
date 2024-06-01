@@ -6,11 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 04:38:40 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 14:26:54 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:24:44 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_signum;
 
 static char	*find_env_variable(char *str, t_data *data)
 {
@@ -50,7 +52,7 @@ static void	handle_var(t_lexer *token, t_data *data, int i)
 	tmp = NULL;
 	if (ft_strncmp(token->str + i, "$?", 2) == 0)
 	{
-		tmp = ft_itoa(data->last_error);
+		tmp = ft_itoa(g_signum);
 		ft_str_replace(&token->str, i, 2, tmp);
 		free(tmp);
 	}
