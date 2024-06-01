@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 15:23:41 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 17:14:04 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	minishell(t_data *data)
 		signals_main();
 		dup2(data->std_in, STDIN_FILENO);
 		dup2(data->std_out, STDOUT_FILENO);
-		line = readline("minishell> ");
+		line = readline(GREEN"minishell> "WHITE);
 		signals_pipe();
 		if (!line)
 		{

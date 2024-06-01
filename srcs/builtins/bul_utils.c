@@ -51,21 +51,26 @@ int	check_env_name(char *env_name)
 {
 	int	i;
 
-	i = 1;
 	if (!ft_isalpha(env_name[0]) && env_name[0] != '_')
+	{
+		ft_printf("minishell: export: `%s': not a valid identifier\n",
+			env_name);
 		return (0);
-	while (env_name[i] != '=')
+	}
+	i = 0;
+	while (env_name[++i] != '=' && env_name[i])
 	{
 		if (env_name[i + 1] == '=' && env_name[i] == '+')
 			return (1);
 		if (!ft_isalpha(env_name[i]) && !ft_isdigit(env_name[i]))
 		{
 			if (env_name[i] != ' ' && env_name[i] != '_')
+			{
+				ft_printf("minishell: export: `%s': not a valid identifier\n",
+					env_name);
 				return (0);
+			}
 		}
-		if (env_name[i] == '\0')
-			return (0);
-		i++;
 	}
-	return (1);
+	return (env_name[i] == '=');
 }

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 15:34:01 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 17:08:47 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,12 @@ void	ft_export(t_cmd *cmd)
 {
 	int	i;
 
-	i = 1;
-	while (cmd->args[i] != NULL)
+	i = 0;
+	while (cmd->args[++i] != NULL)
 	{
 		if (!check_env_name(cmd->args[i]))
-		{
-			ft_printf("bash: export: `%s': not a valid identifier\n", cmd->args[i]);
-			i++;
 			continue ;
-		}
-		if (plus_in_name(cmd->args[i]))
+		else if (plus_in_name(cmd->args[i]))
 		{
 			remove_plus(cmd->args[i]);
 			if (!already_in_env(cmd->args[i], cmd))
@@ -129,7 +125,6 @@ void	ft_export(t_cmd *cmd)
 			put_line_in_env(cmd, i);
 		else
 			new_val_for_env(cmd, i);
-		i++;
 	}
 	if (cmd->args[1] == NULL)
 		export_oargs(cmd);
