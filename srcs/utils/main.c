@@ -6,25 +6,13 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 17:14:04 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:56:34 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_signum;
-
-void	print_cmd(void *ptr)
-{
-	t_cmd	*lexer;
-	int		i;
-
-	i = 0;
-	lexer = ptr;
-	printf("Command '%s':\n -> Args:\n", lexer->name);
-	while (lexer->args[i])
-		printf("  -> [%s]\n", lexer->args[i++]);
-}
 
 void	wait_cmds(t_data *data)
 {
@@ -81,7 +69,7 @@ void	minishell(t_data *data)
 		signals_pipe();
 		if (!line)
 		{
-			printf("exit\n");
+			ft_printf("exit\n");
 			break ;
 		}
 		if (parse_input(data, line) != 1)
@@ -96,11 +84,17 @@ void	minishell(t_data *data)
 int	main(int ac, char **av, char **environ)
 {
 	t_data	*data;
+	char	*shlvl;
+	char	*tmp;
 
 	(void)ac;
 	(void)av;
 	g_signum = 0;
 	data = init_data(environ);
+	shlvl = get_var_from_env(data->env, "SHLVL");
+	tmp = ft_itoa(ft_atoi(shlvl + 6) + 1);
+	set_env_var(data->env, "SHLVL", tmp);
+	free(tmp);
 	minishell(data);
 	free_data(data);
 }

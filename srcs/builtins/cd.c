@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 16:48:14 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:02:33 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ static void	move_to_dir(char **env, char *path)
 	char	*newpwd;
 
 	oldpwd = getcwd(NULL, 0);
-	g_signum = chdir(path);
+	g_signum = -chdir(path);
 	if (g_signum)
+	{
+		ft_printf("minishell: cd: %s: No such file or directory\n", path);
 		return (free(oldpwd));
+	}
 	set_env_var(env, "OLDPWD", oldpwd);
 	free(oldpwd);
 	newpwd = getcwd(NULL, 0);
@@ -45,7 +48,10 @@ void	ft_cd(t_cmd *cmd)
 	if (n_args == 1)
 		path = get_var_from_env(cmd->data->env, "HOME") + 5;
 	else if (!ft_strcmp(cmd->args[1], "-"))
+	{
 		path = get_var_from_env(cmd->data->env, "OLDPWD") + 7;
+		ft_printf("%s\n", path);
+	}
 	else
 		path = cmd->args[1];
 	move_to_dir(cmd->data->env, path);

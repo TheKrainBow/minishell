@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern int	g_signum;
+
 int	plus_in_name(char *env_name)
 {
 	int	i;
@@ -55,7 +57,7 @@ int	check_env_name(char *env_name)
 	{
 		ft_printf("minishell: export: `%s': not a valid identifier\n",
 			env_name);
-		return (0);
+		return (!(g_signum = 1));
 	}
 	i = 0;
 	while (env_name[++i] != '=' && env_name[i])
@@ -68,7 +70,8 @@ int	check_env_name(char *env_name)
 			{
 				ft_printf("minishell: export: `%s': not a valid identifier\n",
 					env_name);
-				return (0);
+				g_signum = 1;
+				return (!(g_signum = 1));
 			}
 		}
 	}

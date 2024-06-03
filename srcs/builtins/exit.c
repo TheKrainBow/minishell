@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 15:24:27 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:12:20 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_exit(t_cmd *cmd)
 	int		ret;
 
 	ret = 0;
+	ft_printf("exit\n");
 	if (cmd->args[1])
 	{
 		if (!ft_strisint(cmd->args[1]))
@@ -36,6 +37,5 @@ void	ft_exit(t_cmd *cmd)
 		ret = ft_atoi(cmd->args[1]);
 	}
 	free_data(cmd->data);
-	ft_printf("exit\n");
 	exit(ret);
 }

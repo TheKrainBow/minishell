@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:29:31 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 17:08:47 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:31:40 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_export(t_cmd *cmd)
 	int	i;
 
 	i = 0;
+	g_signum = 0;
 	while (cmd->args[++i] != NULL)
 	{
 		if (!check_env_name(cmd->args[i]))
@@ -128,5 +129,4 @@ void	ft_export(t_cmd *cmd)
 	}
 	if (cmd->args[1] == NULL)
 		export_oargs(cmd);
-	g_signum = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 04:41:59 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 04:44:04 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:20:56 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	handle_redirection(void *ptr)
 	content->fd = open(content->str, open_options(content->token), 0777);
 	if (content->fd < 0)
 	{
-		dprintf(2, "minishell: no such file or directory: %s\n", content->str);
+		ft_printf("minishell: no such file or directory: %s\n", content->str);
 		return ;
 	}
 	dup2(content->fd, content->token != IN);

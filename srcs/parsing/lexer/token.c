@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:57:35 by maagosti          #+#    #+#             */
-/*   Updated: 2024/05/29 00:20:07 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/01 20:12:05 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ int	check_tokens(t_list **tokens)
 	while (*tokens)
 	{
 		token = ((t_lexer *)(*tokens)->content)->token;
-		if (token == T_NONE)
+		if (token == T_NONE
+			|| (token == PIPE
+				&& ((t_lexer *)(*tokens)->next->content)->token != T_NONE))
 		{
 			prev = (*tokens);
 			(*tokens) = (*tokens)->next;
