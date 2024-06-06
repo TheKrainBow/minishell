@@ -84,34 +84,57 @@ SRCS		=	$(SRCS_CHAR) $(SRCS_FILE) $(SRCS_LST) $(SRCS_MATH) $(SRCS_MEM) $(SRCS_PR
 
 OBJS		=	$(SRCS:.c=.o)
 
+NO_OF_FILES	=	$(words $(SRCS))
+FIRST_CALL	=	0
+I			=	0
+TMP = 0
+TMP2 = 20
+
 CC			=	@cc
 RM			=	@rm -f
 NAME		=	libft.a
 
 FLAGS		=	-Wall -Werror -Wextra -Iincludes #-fsanitize=address -g
 
-.c.o:
-				$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
-$(NAME):		start_message $(OBJS)
+.c.o:
+				$(eval I=$(shell echo $$(($(I)+1))))
+				@if [ "$(FIRST_CALL)" -eq "1" ]; then\
+					printf "\033[1A\033[2K";\
+					printf "\033[1A\033[2K";\
+					printf "\033[1A\033[2K";\
+				fi
+				@$(eval FIRST_CALL=$(shell echo 1))
+				@if [ "$(I)" -eq "$(NO_OF_FILES)" ]; then\
+					printf "╭─ %s ──────────╮\n" $(NAME);\
+					printf "│\033[0;32m████████████████████\033[0m│ %2d/%d compiled!\n" $(I) $(NO_OF_FILES);\
+					printf "╰────────────────────╯\n";\
+				else\
+					printf "╭─ %s ──────────╮\n" $(NAME);\
+					printf "│\033[0;32m%.*s%*c\033[0m│ %2d/%d %s\n" $(TMP) "████████████████████" $(TMP2) ' ' $(I) $(NO_OF_FILES) $<;\
+					printf "╰────────────────────╯\n";\
+				fi
+				$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+				$(eval TMP=$(shell echo $$(($(I) * 20 / $(NO_OF_FILES) * 3))))
+				$(eval TMP2=$(shell echo $$((20 - $(TMP) / 3))))
+
+$(NAME):		init_i $(OBJS)
 				@ar rc $(NAME) $(OBJS)
 				@ranlib $(NAME)
-				@echo "\033[1A\033[25C\033[1;32m✓\033[0m"
+
+init_i:
+				$(eval I=$(shell echo $$(find -name "*.o" | wc -l)))
 
 all:			$(NAME)
 
 clean:
-				@echo "\033[0;33mCleaning \033[1;31m$(NAME)\033[0;33m's objects\033[0m"
 				$(RM) $(OBJS)
-
-start_message:
-				@echo "\033[0;33mMaking   \033[1;31m$(NAME)\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
 
 fclean:			
 				$(RM) $(NAME)
 				$(RM) $(OBJS)
-				@echo "\033[0;33mRemoving \033[1;31m$(NAME)\033[0;33m.\033[0m"
 
 re:				fclean all
+
 
 .PHONY:			all clean fclean re

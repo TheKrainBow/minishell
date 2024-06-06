@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/06 11:31:55 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:26:15 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	set_env_var(char **env, char *env_name, char *env_val);
 /*         Utils/signal.c                   */
 void	signals_main(void);
 void	signals_pipe(void);
-void	signals_heredoc(void);
 
 void	close_redirection(void *ptr);
 void	handle_redirection(void *ptr);
