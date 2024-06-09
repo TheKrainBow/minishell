@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:00 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/06 14:17:55 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/08 22:16:24 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,12 @@ int	main(int ac, char **av, char **environ)
 	g_signum = 0;
 	data = init_data(environ);
 	shlvl = get_var_from_env(data->env, "SHLVL");
-	tmp = ft_itoa(ft_atoi(shlvl + 6) + 1);
-	set_env_var(data->env, "SHLVL", tmp);
-	free(tmp);
+	if (shlvl)
+	{
+		tmp = ft_itoa(ft_atoi(shlvl + 6) + 1);
+		set_env_var(data->env, "SHLVL", tmp);
+		free(tmp);
+	}
 	minishell(data);
 	free_data(data);
 }

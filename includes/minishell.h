@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:28:21 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/06 14:26:15 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/09 03:26:00 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	signals_main(void);
 void	signals_pipe(void);
 
 void	close_redirection(void *ptr);
-void	handle_redirection(void *ptr);
+void	handle_redirection(t_cmd *cmd);
 
 void	pipe_prev(t_list *node);
 void	pipe_next(t_list *node);

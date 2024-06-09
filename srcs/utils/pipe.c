@@ -6,7 +6,7 @@
 /*   By: maagosti <maagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 04:41:09 by maagosti          #+#    #+#             */
-/*   Updated: 2024/06/01 15:25:46 by maagosti         ###   ########.fr       */
+/*   Updated: 2024/06/09 03:25:54 by maagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	pipe_prev(t_list *node)
 		dup2(prev_cmd->pipe[0], STDIN_FILENO);
 		close(prev_cmd->pipe[0]);
 	}
-	ft_lstiter(cmd->out, &handle_redirection);
+	handle_redirection(cmd);
 	get_cmd(cmd->name)(cmd);
 }
 
@@ -62,10 +62,10 @@ void	pipe_next(t_list *node)
 		dup2(((t_cmd *)node->prev->content)->pipe[0], STDIN_FILENO);
 		close(((t_cmd *)node->prev->content)->pipe[0]);
 	}
+	handle_redirection(cmd);
 	cmd->pid = fork();
 	if (!cmd->pid)
 	{
-		ft_lstiter(cmd->out, &handle_redirection);
 		get_cmd(cmd->name)(cmd);
 		close(cmd->pipe[0]);
 		dup2(cmd->data->std_in, STDIN_FILENO);

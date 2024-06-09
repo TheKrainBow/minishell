@@ -73,7 +73,7 @@ init:
 				$(eval I=$(shell echo $$(find -name "*.o" | grep srcs | wc -l)))
 				$(eval NB_OF_FILES=$(shell echo $$(find -name "*.c" | grep srcs | wc -l)))
 
-all:				$(NAME) norm
+all:				$(NAME) norme
 
 $(LIBFT):
 					@make -s -C libft -f Makefile
@@ -92,7 +92,7 @@ fclean:				clean
 re:					fclean all
 					@$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
 
-norm:
+norme:
 					@echo "\033[0;33mChecking \033[1;31mnorminette\033[0;33m\t\033[1;30m[\033[1;31mX\033[1;30m]\033[0m"
 					@if norminette > norm.tmp; then\
 						echo -n "\033[1A\033[25C\033[1;32m✓\033[26D\033[1B\033[0m";\
