@@ -106,11 +106,11 @@ FLAGS		=	-Wall -Werror -Wextra -Iincludes #-fsanitize=address -g
 				fi
 				@$(eval FIRST_CALL=$(shell echo 1))
 				@if [ "$(I)" -eq "$(NO_OF_FILES)" ]; then\
-					printf "╭─ %s ──────────╮\n" $(NAME);\
+					printf "╭─ libft ────────────╮\n";\
 					printf "│\033[0;32m████████████████████\033[0m│ %2d/%d compiled!\n" $(I) $(NO_OF_FILES);\
 					printf "╰────────────────────╯\n";\
 				else\
-					printf "╭─ %s ──────────╮\n" $(NAME);\
+					printf "╭─ libft ────────────╮\n";\
 					printf "│\033[0;32m%.*s%*c\033[0m│ %2d/%d %s\n" $(TMP) "████████████████████" $(TMP2) ' ' $(I) $(NO_OF_FILES) $<;\
 					printf "╰────────────────────╯\n";\
 				fi
